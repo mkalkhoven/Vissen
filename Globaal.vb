@@ -1,5 +1,5 @@
 ﻿Module Globaal
-    Public IsStarted = false 
+    Public IsStarted = false
     Public Sub Verbergid(dgv As DataGridView)
 
             dgv.Columns(0).Visible = false

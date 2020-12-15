@@ -3,6 +3,8 @@ Imports Datalaag.Global
 Public Class FrmNaambewerken
     public Naam As Namen
     Private Sub frmNaambewerken_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        
+        Icon = FrmMain.Icon
 
         If Not IsNothing(Naam) Then
             txtAchternaam.Text = Naam.Achternaam
@@ -12,7 +14,7 @@ Public Class FrmNaambewerken
             chkVijftigplus.Checked = Naam.Vijftigplus
             chkSenioren.Checked = Naam.Senioren
             chkWintervissen.Checked = Naam.Winter
-            chkjeugd.Checked = Naam.Winter
+            chkjeugd.Checked = Naam.Jeugd
             chkkoppelvissen.Checked = Naam.Koppelvissen
             chkVerwijderd.Checked = Naam.Verwijderd
         Else 
@@ -27,7 +29,7 @@ Public Class FrmNaambewerken
 
     End Sub
 
-    Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
+     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
 
         Naam.Achternaam = txtAchternaam.Text
         Naam.Voornaam = txtVoornaam.Text
@@ -35,7 +37,7 @@ Public Class FrmNaambewerken
         Naam.Vijftigplus = chkVijftigplus.Checked
         Naam.Senioren = chkSenioren.Checked
         Naam.Winter = chkWintervissen.Checked
-        Naam.Winter = chkjeugd.Checked
+        Naam.Jeugd = chkjeugd.Checked
         Naam.Koppelvissen = chkkoppelvissen.Checked
         Naam.Verwijderd = chkVerwijderd.Checked
         Namenrepo.Save(Naam)

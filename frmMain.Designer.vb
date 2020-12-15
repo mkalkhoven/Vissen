@@ -23,6 +23,7 @@ Partial Class FrmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMain))
         Me.cboSeizoen = New System.Windows.Forms.ComboBox()
         Me.cboNaamserie = New System.Windows.Forms.ComboBox()
         Me.dgvnamen = New System.Windows.Forms.DataGridView()
@@ -67,11 +68,17 @@ Partial Class FrmMain
         Me.txtNaam2 = New System.Windows.Forms.TextBox()
         Me.txtAantal = New System.Windows.Forms.TextBox()
         Me.lblAantal = New System.Windows.Forms.Label()
+        Me.cmsUitslag = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.VerwijderenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblMelding = New System.Windows.Forms.Label()
+        Me.btnKlassement = New System.Windows.Forms.Button()
+        Me.btnVisser = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.gpVerhaalEtc.SuspendLayout
         Me.gbNaamGewichtEtc.SuspendLayout
+        Me.cmsUitslag.SuspendLayout
         Me.SuspendLayout
         '
         'cboSeizoen
@@ -166,12 +173,12 @@ Partial Class FrmMain
         Me.dgvUitslagen.RowHeadersVisible = false
         Me.dgvUitslagen.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvUitslagen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvUitslagen.Size = New System.Drawing.Size(438, 413)
+        Me.dgvUitslagen.Size = New System.Drawing.Size(480, 413)
         Me.dgvUitslagen.TabIndex = 17
         '
         'lblVerhaal
         '
-        Me.lblVerhaal.Location = New System.Drawing.Point(794, 239)
+        Me.lblVerhaal.Location = New System.Drawing.Point(836, 239)
         Me.lblVerhaal.Name = "lblVerhaal"
         Me.lblVerhaal.Size = New System.Drawing.Size(313, 496)
         Me.lblVerhaal.TabIndex = 20
@@ -181,7 +188,7 @@ Partial Class FrmMain
         'lblNieuwVerhaal
         '
         Me.lblNieuwVerhaal.AutoSize = true
-        Me.lblNieuwVerhaal.Location = New System.Drawing.Point(794, 211)
+        Me.lblNieuwVerhaal.Location = New System.Drawing.Point(836, 211)
         Me.lblNieuwVerhaal.Name = "lblNieuwVerhaal"
         Me.lblNieuwVerhaal.Size = New System.Drawing.Size(80, 24)
         Me.lblNieuwVerhaal.TabIndex = 157
@@ -201,7 +208,7 @@ Partial Class FrmMain
         'lblUitslagid2
         '
         Me.lblUitslagid2.AutoSize = true
-        Me.lblUitslagid2.Location = New System.Drawing.Point(427, 117)
+        Me.lblUitslagid2.Location = New System.Drawing.Point(421, 117)
         Me.lblUitslagid2.Name = "lblUitslagid2"
         Me.lblUitslagid2.Size = New System.Drawing.Size(95, 24)
         Me.lblUitslagid2.TabIndex = 168
@@ -211,7 +218,7 @@ Partial Class FrmMain
         'lblDatumid
         '
         Me.lblDatumid.AutoSize = true
-        Me.lblDatumid.Location = New System.Drawing.Point(427, 85)
+        Me.lblDatumid.Location = New System.Drawing.Point(421, 85)
         Me.lblDatumid.Name = "lblDatumid"
         Me.lblDatumid.Size = New System.Drawing.Size(82, 24)
         Me.lblDatumid.TabIndex = 169
@@ -237,7 +244,7 @@ Partial Class FrmMain
         Me.gpVerhaalEtc.Controls.Add(Me.lblDatum)
         Me.gpVerhaalEtc.Location = New System.Drawing.Point(350, 1)
         Me.gpVerhaalEtc.Name = "gpVerhaalEtc"
-        Me.gpVerhaalEtc.Size = New System.Drawing.Size(757, 207)
+        Me.gpVerhaalEtc.Size = New System.Drawing.Size(799, 207)
         Me.gpVerhaalEtc.TabIndex = 170
         Me.gpVerhaalEtc.TabStop = false
         Me.gpVerhaalEtc.Visible = false
@@ -362,7 +369,7 @@ Partial Class FrmMain
         '
         'btnWijzigverhaal
         '
-        Me.btnWijzigverhaal.Location = New System.Drawing.Point(602, 18)
+        Me.btnWijzigverhaal.Location = New System.Drawing.Point(651, 29)
         Me.btnWijzigverhaal.Name = "btnWijzigverhaal"
         Me.btnWijzigverhaal.Size = New System.Drawing.Size(142, 33)
         Me.btnWijzigverhaal.TabIndex = 167
@@ -405,7 +412,7 @@ Partial Class FrmMain
         'btnOpslaan
         '
         Me.btnOpslaan.Enabled = false
-        Me.btnOpslaan.Location = New System.Drawing.Point(513, 44)
+        Me.btnOpslaan.Location = New System.Drawing.Point(502, 41)
         Me.btnOpslaan.Name = "btnOpslaan"
         Me.btnOpslaan.Size = New System.Drawing.Size(105, 33)
         Me.btnOpslaan.TabIndex = 182
@@ -424,7 +431,7 @@ Partial Class FrmMain
         'txtGewichtTotaal
         '
         Me.txtGewichtTotaal.BackColor = System.Drawing.Color.White
-        Me.txtGewichtTotaal.Location = New System.Drawing.Point(342, 114)
+        Me.txtGewichtTotaal.Location = New System.Drawing.Point(339, 114)
         Me.txtGewichtTotaal.Name = "txtGewichtTotaal"
         Me.txtGewichtTotaal.ReadOnly = true
         Me.txtGewichtTotaal.Size = New System.Drawing.Size(79, 30)
@@ -432,7 +439,7 @@ Partial Class FrmMain
         '
         'txtGewicht1
         '
-        Me.txtGewicht1.Location = New System.Drawing.Point(342, 43)
+        Me.txtGewicht1.Location = New System.Drawing.Point(339, 43)
         Me.txtGewicht1.Name = "txtGewicht1"
         Me.txtGewicht1.Size = New System.Drawing.Size(79, 30)
         Me.txtGewicht1.TabIndex = 172
@@ -457,7 +464,7 @@ Partial Class FrmMain
         '
         'txtGewicht2
         '
-        Me.txtGewicht2.Location = New System.Drawing.Point(342, 79)
+        Me.txtGewicht2.Location = New System.Drawing.Point(339, 79)
         Me.txtGewicht2.Name = "txtGewicht2"
         Me.txtGewicht2.Size = New System.Drawing.Size(79, 30)
         Me.txtGewicht2.TabIndex = 179
@@ -465,7 +472,7 @@ Partial Class FrmMain
         'lblGewicht
         '
         Me.lblGewicht.AutoSize = true
-        Me.lblGewicht.Location = New System.Drawing.Point(342, 15)
+        Me.lblGewicht.Location = New System.Drawing.Point(339, 15)
         Me.lblGewicht.Name = "lblGewicht"
         Me.lblGewicht.Size = New System.Drawing.Size(80, 24)
         Me.lblGewicht.TabIndex = 175
@@ -482,7 +489,7 @@ Partial Class FrmMain
         '
         'txtAantal
         '
-        Me.txtAantal.Location = New System.Drawing.Point(428, 43)
+        Me.txtAantal.Location = New System.Drawing.Point(421, 43)
         Me.txtAantal.Name = "txtAantal"
         Me.txtAantal.Size = New System.Drawing.Size(79, 30)
         Me.txtAantal.TabIndex = 176
@@ -491,18 +498,62 @@ Partial Class FrmMain
         'lblAantal
         '
         Me.lblAantal.AutoSize = true
-        Me.lblAantal.Location = New System.Drawing.Point(433, 15)
+        Me.lblAantal.Location = New System.Drawing.Point(427, 15)
         Me.lblAantal.Name = "lblAantal"
         Me.lblAantal.Size = New System.Drawing.Size(65, 24)
         Me.lblAantal.TabIndex = 177
         Me.lblAantal.Text = "Aantal"
         Me.lblAantal.Visible = false
         '
+        'cmsUitslag
+        '
+        Me.cmsUitslag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerwijderenToolStripMenuItem})
+        Me.cmsUitslag.Name = "cmsUitslag"
+        Me.cmsUitslag.Size = New System.Drawing.Size(136, 26)
+        '
+        'VerwijderenToolStripMenuItem
+        '
+        Me.VerwijderenToolStripMenuItem.Name = "VerwijderenToolStripMenuItem"
+        Me.VerwijderenToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.VerwijderenToolStripMenuItem.Text = "Verwijderen"
+        '
+        'lblMelding
+        '
+        Me.lblMelding.AutoSize = true
+        Me.lblMelding.Location = New System.Drawing.Point(12, 782)
+        Me.lblMelding.Name = "lblMelding"
+        Me.lblMelding.Size = New System.Drawing.Size(89, 24)
+        Me.lblMelding.TabIndex = 172
+        Me.lblMelding.Text = "Melding: "
+        '
+        'btnKlassement
+        '
+        Me.btnKlassement.Enabled = false
+        Me.btnKlassement.Location = New System.Drawing.Point(699, 635)
+        Me.btnKlassement.Name = "btnKlassement"
+        Me.btnKlassement.Size = New System.Drawing.Size(131, 33)
+        Me.btnKlassement.TabIndex = 183
+        Me.btnKlassement.Text = "Klassement"
+        Me.btnKlassement.UseVisualStyleBackColor = true
+        '
+        'btnVisser
+        '
+        Me.btnVisser.Location = New System.Drawing.Point(699, 674)
+        Me.btnVisser.Name = "btnVisser"
+        Me.btnVisser.Size = New System.Drawing.Size(131, 33)
+        Me.btnVisser.TabIndex = 184
+        Me.btnVisser.Text = "Visser"
+        Me.btnVisser.UseVisualStyleBackColor = true
+        Me.btnVisser.Visible = false
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1120, 791)
+        Me.ClientSize = New System.Drawing.Size(1164, 831)
+        Me.Controls.Add(Me.btnVisser)
+        Me.Controls.Add(Me.btnKlassement)
+        Me.Controls.Add(Me.lblMelding)
         Me.Controls.Add(Me.gbNaamGewichtEtc)
         Me.Controls.Add(Me.gpVerhaalEtc)
         Me.Controls.Add(Me.lblNieuwVerhaal)
@@ -515,6 +566,7 @@ Partial Class FrmMain
         Me.Controls.Add(Me.cboNaamserie)
         Me.Controls.Add(Me.cboSeizoen)
         Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -526,6 +578,7 @@ Partial Class FrmMain
         Me.gpVerhaalEtc.PerformLayout
         Me.gbNaamGewichtEtc.ResumeLayout(false)
         Me.gbNaamGewichtEtc.PerformLayout
+        Me.cmsUitslag.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -575,4 +628,9 @@ End Sub
     Friend WithEvents txtNaam2 As TextBox
     Friend WithEvents txtAantal As TextBox
     Friend WithEvents lblAantal As Label
+    Friend WithEvents cmsUitslag As ContextMenuStrip
+    Friend WithEvents VerwijderenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblMelding As Label
+    Friend WithEvents btnKlassement As Button
+    Friend WithEvents btnVisser As Button
 End Class
