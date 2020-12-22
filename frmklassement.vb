@@ -55,24 +55,38 @@ Public Class Frmklassement
             kolommen = $"{kolommen} ,Punten{i} AS [Pnt{i}], Gewicht{i} AS [Gew{i}]"
         Next
 
-        'Dim sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {Maaktabelnaam}_test k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten"
-        Dim sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten"
+        Dim sql As String
+
+        if Serie.Naam.ToLower().Contains("jeugd") Then
+            sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalgewicht DESC"
+        else
+            sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten ASC"
+        End If
         Dim dt = Selecteer(sql)
-
-        'Piet centreren + e
-
+        
         dgvKlassement.DataSource = dt
         dgvKlassement.Columns(1).DefaultCellStyle.Format = "N0"
-        dgvKlassement.Columns(2).DefaultCellStyle.Format = "N1"
         dgvKlassement.Columns(3).DefaultCellStyle.Format = "N1"
         dgvKlassement.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvKlassement.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dgvKlassement.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvKlassement.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-       
+        
+        if Serie.Naam.ToLower().Contains("jeugd") Then
+            dgvKlassement.Columns(2).HeaderText = "Aantal"
+            dgvKlassement.Columns(2).DefaultCellStyle.Format = "N0"
+        Else 
+            dgvKlassement.Columns(2).DefaultCellStyle.Format = "N1"
+        End If
+        
         For Each col As DataGridViewColumn In dgvKlassement.Columns
             If col.HeaderText.Contains("Pnt") Then
-                col.DefaultCellStyle.Format = "N1"
+                If Serie.Naam.ToLower().Contains("jeugd")
+                    col.DefaultCellStyle.Format = "N0"    
+                    col.HeaderText = col.HeaderText.Replace("Pnt", "Aant")
+                Else 
+                    col.DefaultCellStyle.Format = "N1"
+                End If
             End If
             If col.HeaderText.Contains("Gew") Then
                 col.DefaultCellStyle.Format = "N0"
@@ -167,9 +181,9 @@ Public Class Frmklassement
                 sql = $"SELECT * FROM Uitslagen WHERE IDdatum = {wedstrijd("ID")} AND  IDdeelnemer = {row("Naamid")}"
                 Dim uitslag = Selecteer(sql)
                 If uitslag.Rows.Count = 0 Then
-                    tmpUitslag.Punten = 15
+                    tmpUitslag.Punten = Serie.Maxaantal
                     tmpUitslag.Gewicht = 0
-                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = 15 WHERE Deelnemerid = {row("Naamid")}"
+                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = {Serie.Maxaantal} WHERE Deelnemerid = {row("Naamid")}"
                     Uitvoeren(sql)
                 ElseIf uitslag.Rows.Count = 1 Then
                     aantalX += 1
@@ -189,11 +203,20 @@ Public Class Frmklassement
             Dim totaalpunten = 0
             dim corr As Integer = Integer.Parse(Cbocorrectie.Text)
             corr = aantal - corr
-            For i = 0 To corr-1
-                Dim x = tmp(i)
-                totaalpunten += x.Punten
-                totaalgewicht += x.Gewicht
-            Next
+
+            'If Serie.Naam.ToLower().Contains("jeugd") Then
+            '    For i = 0 To tmpUitslagen.Count-1
+            '        Dim x = tmp(i)
+            '        totaalpunten += x.Punten
+            '        totaalgewicht += x.Gewicht
+            '    Next
+            'Else 
+                For i = 0 To corr-1
+                    Dim x = tmp(i)
+                    totaalpunten += x.Punten
+                    totaalgewicht += x.Gewicht
+                Next
+            'End If
 
             sql = $"UPDATE {tabelnaam} SET X = {aantalX}, Totaalpunten = {totaalpunten}, Totaalgewicht = {totaalgewicht} WHERE Deelnemerid = {row("Naamid")}"
             Uitvoeren(sql)

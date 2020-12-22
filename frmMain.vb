@@ -52,6 +52,8 @@ Public Class FrmMain
         Catch ex As Exception
         End Try
 
+        _isstarted = True
+
     End sub
     Private function Selecteervistype As Vistype
         
@@ -213,7 +215,10 @@ Public Class FrmMain
 
     End Sub
     Private Sub CboSerieVolgnummer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboSerieVolgnummer.SelectedIndexChanged 
-        
+        Legen()
+        If _isstarted = False Then
+            Return
+        End If
 
         If IsNothing(cboSeizoen.SelectedValue) Or IsNothing(cboNaamserie.SelectedValue) Or IsNothing(CboSerieVolgnummer.SelectedValue) Then
             Return
@@ -268,10 +273,14 @@ Public Class FrmMain
                     .Seizoen = _seizoen
                 }
                 f.ShowDialog()
-                _datum = Datumweeretcrepo.Get(f.Datum.ID)
+                Try
+                    _datum = Datumweeretcrepo.Get(f.Datum.ID)
+                    Legen()
+                    Vuluitslaggrid(_datum)
+                Catch ex As Exception
+                    _datum = nothing
+                End Try
                 f.Dispose()
-                Legen()
-                Vuluitslaggrid(_datum)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -279,8 +288,6 @@ Public Class FrmMain
     End Sub
     Private sub Vuluitslaggrid(datum As DatumWeerEtc)
         
-        'Piet centreren + e
-
         Vuldetails(datum)
         Dim uitslagen = Uitslagenrepo.Get(datum)
         dgvUitslagen.DataSource = nothing
@@ -766,4 +773,5 @@ Public Class FrmMain
         IsStarted = true
 
     End Sub
+
 End Class

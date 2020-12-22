@@ -37,26 +37,38 @@ Public Class FrmNieuwewedstrijd
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnNieuwOpslaan.Click
 
         If txtNieuwLocatievissen.text ="" Then txtNieuwLocatievissen.text = "?":txtNieuwLocatievissen.Focus(): Return 
-        If txtNieuwLuchtdruk.text = "" Then txtNieuwLuchtdruk.text = "?": txtNieuwLuchtdruk.Focus(): Return
+        If Not IsNumeric(txtNieuwLuchtdruk.text) Then txtNieuwLuchtdruk.text = "0": txtNieuwLuchtdruk.Focus(): Return
         if txtNieuwWeerAlgemeen.text = "" Then txtNieuwWeerAlgemeen.text = "?": txtNieuwWeerAlgemeen.Focus(): Return
         If txtNieuwWindsnelheid.text = "" Then txtNieuwWindsnelheid.text = "?": txtNieuwWindsnelheid.Focus():  Return	
         if txtNieuwTemperatuur.text	= "" Then txtNieuwTemperatuur.text	= "?": txtNieuwTemperatuur.Focus(): Return
         If txtNieuwVerhaal.text = "" then txtNieuwVerhaal.text = "?": txtNieuwVerhaal.Focus(): Return
 
-        Datum = New DatumWeerEtc With {
-            .IDseizoen = Seizoen.ID,
-            .IDserieNummer = Serie.Id,
-            .SerieNaamNr = nummer,
-            .Plaats = txtNieuwLocatievissen.text,
-            .MB = txtNieuwLuchtdruk.text,
-            .Wind = CboNieuwWindrichting.text,
-            .WindSnelheid = txtNieuwWindsnelheid.text,
-            .Temp = txtNieuwTemperatuur.text,
-            .Datum = DateTimePickerNieuw.text,
-            .Weer = txtNieuwWeerAlgemeen.text,
-            .Verhaal = txtNieuwVerhaal.text
-        }
-        Datum.ID = Datumweeretcrepo.Getid()
+        If Datum.ID = 0 Then
+            Datum = New DatumWeerEtc With {
+                .IDseizoen = Seizoen.ID,
+                .IDserieNummer = Nummer,
+                .SerieNaamNr = Serie.Id,
+                .Plaats = txtNieuwLocatievissen.text,
+                .MB = txtNieuwLuchtdruk.text,
+                .Wind = CboNieuwWindrichting.text,
+                .WindSnelheid = txtNieuwWindsnelheid.text,
+                .Temp = txtNieuwTemperatuur.text,
+                .Datum = DateTimePickerNieuw.text,
+                .Weer = txtNieuwWeerAlgemeen.text,
+                .Verhaal = txtNieuwVerhaal.text
+                }
+            Datum.ID = Datumweeretcrepo.Getid()
+        Else 
+            Datum.Plaats = txtNieuwLocatievissen.text
+            Datum.MB = txtNieuwLuchtdruk.text
+            Datum.Wind = CboNieuwWindrichting.text
+            Datum.WindSnelheid = txtNieuwWindsnelheid.text
+            Datum.Temp = txtNieuwTemperatuur.text
+            Datum.Datum = DateTimePickerNieuw.text
+            Datum.Weer = txtNieuwWeerAlgemeen.text
+            Datum.Verhaal = txtNieuwVerhaal.text
+        end if
+        
         Datumweeretcrepo.Save(Datum)
         Close()
         
