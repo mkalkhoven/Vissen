@@ -1,5 +1,11 @@
 ﻿Module Globaal
     Public IsStarted = false
+
+    public sub Showmessage(message As string)
+
+        MessageBox.Show(message, "Vissen", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    End sub
     Public Sub Verbergid(dgv As DataGridView)
 
             dgv.Columns(0).Visible = false
@@ -23,10 +29,14 @@
     End sub
     public Function Selecteerid(dgv As DataGridView, kolom As string) As long
 
-        Dim index = dgv.Columns(kolom).Index
-        Dim id As Long = long.Parse(dgv.Item(index, dgv.CurrentRow.Index).Value.ToString())
-        Return id
-
+        Try
+            Dim index = dgv.Columns(kolom).Index
+            Dim id As Long = long.Parse(dgv.Item(index, dgv.CurrentRow.Index).Value.ToString())
+            Return id
+        Catch ex As Exception
+            Return 0
+        End Try
+        
     End Function
     public Function Selecteerid(row As DataGridViewrow, kolom As string) As long
 

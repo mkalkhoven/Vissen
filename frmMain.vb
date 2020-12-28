@@ -6,7 +6,10 @@ Public Class FrmMain
     Private _deelnemer1 As New Namen
     Private _deelnemer2 As New Namen
     Private _uitslag as New Uitslagen
-    Private _datum as New DatumWeerEtc
+    dim _koppelvissen = new Nachtvissen
+    private nachtvis as Nachtvissen' = New Nachtvissen
+
+    dim _datum as New DatumWeerEtc
     Private _seizoen as New Seizoen
     Private ReadOnly _regelhoogte = 27
     Private _isstarted as Boolean = false
@@ -92,22 +95,40 @@ Public Class FrmMain
         Dim namen = Namenrepo.Getsorted(vistype, zoeken)
         dgvnamen.DataSource = namen
         dgvnamen.Columns(1).Visible = false
-
-        dim numbers = dgvUitslagen.Rows.Cast (Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
-
-        Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
-        cm.SuspendBinding()
         
-        If dgvUitslagen.Rows.Count > 0 Then
-            For Each row As DataGridViewRow In dgvnamen.Rows
-                Dim id = Selecteerid(row, "Naamid")
-                Console.WriteLine($"{row.Cells(1).Value} {row.Cells(2).Value}")
-                If numbers.Contains($"#{id}#") Then
-                    row.Visible = False
-                End If
-            Next
-        End If   
-        cm.ResumeBinding()
+        'Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
+        'cm.SuspendBinding()
+        'dim numbers = ""
+        'Dim value As Long
+        'Try
+        '    value = cboNaamserie.SelectedValue
+        'Catch ex As Exception
+        '    Dim serie As NaamSerie = cboNaamserie.SelectedValue
+        '    value = serie.Id
+        'End Try
+
+        'If value = 15 Then
+        '    For Each row As DataGridViewrow In dgvUitslagen.rows
+        '        Dim id As Long = long.Parse(row.Cells("nachtvisid").Value.ToString())
+        '        Dim nv = Nachtvissenrepo.Get(id)
+        '        numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
+        '    Next
+        'End If
+
+        'numbers = dgvUitslagen.Rows.Cast (Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+
+        'If dgvUitslagen.Rows.Count > 0 Then
+        '    For Each row As DataGridViewRow In dgvnamen.Rows
+        '        Dim id = Selecteerid(row, "Naamid")
+        '        If numbers.Contains($"#{id}#") Then
+        '            row.Visible = False
+        '        End If
+        '    Next
+        'End If
+
+
+        
+        'cm.ResumeBinding()
         Verbergid(dgvnamen)
         Uitvullen(dgvnamen)
 
@@ -168,17 +189,37 @@ Public Class FrmMain
     End Sub
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
 
-        txtGewicht1.Enabled = True
-        txtAantal.Enabled = True
-        txtGewicht1.Text = ""
-        txtGewicht2.Text = ""
-        txtAantal.Text = ""
-        btnOpslaan.Enabled = False
-        dgvUitslagen.ClearSelection()
-        _deelnemer1 = Namenrepo.Get(Selecteerid(dgvnamen, "Id"))
-        txtNaam1.Text = _deelnemer1.Naam
-        txtGewicht1.Focus()
-
+        Dim id As long
+        If cboNaamserie.SelectedValue = 15 And not String.IsNullOrEmpty(txtNaam1.Text) Then
+            txtGewicht2.Enabled = True
+            txtGewicht2.Text = ""
+            dgvUitslagen.ClearSelection()
+            id = Selecteerid(dgvnamen, "NaamId")
+            If id > 0 Then
+                _deelnemer2 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                If _deelnemer1.Id = _deelnemer2.Id Then
+                    Showmessage("U kunt niet dezelfde deelnemer selecteren. Bent u een aap, ofzo..?")
+                    Return
+                End If
+                txtNaam2.Text = _deelnemer2.Naam
+                txtGewicht2.Focus()
+            End If
+        else
+            txtGewicht1.Enabled = True
+            txtAantal.Enabled = True
+            txtGewicht1.Text = ""
+            txtGewicht2.Text = ""
+            txtAantal.Text = ""
+            btnOpslaan.Enabled = False
+            dgvUitslagen.ClearSelection()
+            id = Selecteerid(dgvnamen, "NaamId")
+            If id > 0 Then
+                _deelnemer1 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                txtNaam1.Text = _deelnemer1.Naam
+                txtGewicht1.Focus()
+            End If
+        End If
+        
     End Sub
 
     Private Sub cmsBewerken_Click(sender As Object, e As EventArgs) Handles cmsBewerken.Click 
@@ -289,9 +330,49 @@ Public Class FrmMain
     Private sub Vuluitslaggrid(datum As DatumWeerEtc)
         
         Vuldetails(datum)
-        Dim uitslagen = Uitslagenrepo.Get(datum)
         dgvUitslagen.DataSource = nothing
-        dgvUitslagen.DataSource = uitslagen
+        If cboNaamserie.SelectedValue = 15 Then
+            Dim sql = $"SELECT * FROM Nachtvissen WHERE ID = {datum.ID} ORDER BY Gewicht DESC"
+            Dim dt = Selecteer(sql)
+            Dim koppeluitslag = New List(Of uitslag)
+            Dim totaal As long = 0
+            Dim plaats = 1
+            For Each row As datarow In dt.Rows
+                Dim uitslag = New Uitslag With {
+                    .Uitslagid = Long.Parse(row("Nachtvisid").ToString()),
+                    .Plaats = $"{plaats}.",
+                    .Naam = row("Namen"),
+                    .Gewicht = long.Parse(row("Gewicht").ToString())
+                }
+                koppeluitslag.Add(uitslag)
+                totaal += Long.Parse(row("Gewicht").ToString())
+                plaats += 1
+            Next
+
+            Dim totaaluitslag = New Uitslag With {
+                .Naam = "      Totaal Gewicht",
+                .Gewicht = totaal
+            }
+            koppeluitslag.Add(totaaluitslag)
+            dgvUitslagen.DataSource = koppeluitslag
+            
+            dgvUitslagen.Columns(0).Visible = false
+            dgvUitslagen.Columns(1).HeaderText = "Pl."
+            dgvUitslagen.Columns(1).Width = 50
+            dgvUitslagen.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.Middlecenter
+            dgvUitslagen.Columns(2).Width = 325
+            
+            dgvUitslagen.Columns(3).DefaultCellStyle.Format = "N0"
+            dgvUitslagen.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+            dgvUitslagen.Columns(4).Visible = false
+            dgvUitslagen.Columns(5).Visible = false
+
+            Return
+        Else 
+            Dim uitslagen = Uitslagenrepo.Get(datum)
+            dgvUitslagen.DataSource = uitslagen
+        End If
         dgvUitslagen.Columns(0).Visible = false
         dgvUitslagen.Columns(1).HeaderText = "Pl."
         dgvUitslagen.Columns(1).Width = 50
@@ -471,10 +552,59 @@ Public Class FrmMain
 
         dgvUitslagen.ClearSelection()
 
+
+        Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
+        cm.SuspendBinding()
+
+        dim numbers = ""
+        Dim value As Long
+        Try
+            value = cboNaamserie.SelectedValue
+        Catch ex As Exception
+            Dim serie As NaamSerie = cboNaamserie.SelectedValue
+            value = serie.Id
+        End Try
+
+        If value = 15 Then
+            For Each row As DataGridViewrow In dgvUitslagen.rows
+                Dim id As Long = 0
+                long.TryParse(row.Cells("Uitslagid").Value.ToString(), id)
+                If id > 0 Then
+                    Dim nv = Nachtvissenrepo.Get(id)
+                    numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}#"
+                end if
+            Next
+        else
+            numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+        End If
+        
+        If dgvUitslagen.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvnamen.Rows
+                Dim id = Selecteerid(row, "Naamid")
+                
+                row.Visible = Not numbers.Contains($"#{id}#")
+            Next
+        End If
+        
+        cm.ResumeBinding()
+
     End Sub
 
     Private Sub dgvUitslagen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUitslagen.CellClick 
-
+        
+        If cboNaamserie.SelectedValue = 15 Then
+            nachtvis = Nachtvissenrepo.Get(Selecteerid(dgvUitslagen, "Uitslagid"))
+            _deelnemer1 = Namenrepo.Getbyoldid(nachtvis.Deelnemerid1)
+            _deelnemer2 = Namenrepo.Getbyoldid(nachtvis.Deelnemerid2)
+            txtNaam1.Text = _deelnemer1.Naam
+            txtGewicht1.Text = nachtvis.Gewicht1
+            txtGewicht1.Enabled = True
+            txtNaam2.Text = _deelnemer2.Naam
+            txtGewicht2.Text = nachtvis.Gewicht2
+            txtGewicht2.Enabled = True
+            Optellen()
+            Return
+        End If
         legen
         btnOpslaan.Enabled = False
         txtGewicht1.Enabled = True
@@ -520,6 +650,8 @@ Public Class FrmMain
     End sub
     Private sub Opslaan()
         
+        _datum = Datumweeretcrepo.Get(Long.Parse(lblDatumid.Text))
+
         Select Case cboNaamserie.SelectedValue
             Case 1, 2, 3, 5, 6, 9, 10, 11
                 'naam en gewicht
@@ -529,10 +661,26 @@ Public Class FrmMain
                 End If
             Case 15'Koppel
                 'beide namen en beide gewichten
-                If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
-                    Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
-                    Exit Sub
+                'If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
+                '    Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
+                '    Exit Sub
+                'End If
+                'Opslaan in aparte tabel: nachtvissen
+
+                If IsNothing(nachtvis) Then
+                    nachtvis = New Nachtvissen()
+                    nachtvis.Nachtvisid = Nachtvissenrepo.Getid()
+                    Nachtvis.ID = _datum.ID
                 End If
+                nachtvis.Deelnemerid1 = _deelnemer1.NaamID
+                nachtvis.Gewicht1 = Long.Parse(txtGewicht1.Text)
+                nachtvis.Deelnemerid2 = _deelnemer2.NaamID
+                nachtvis.Gewicht2 = Long.Parse(txtGewicht2.Text)
+                nachtvis.Gewicht = long.Parse(txtGewichtTotaal.Text.replace(".", ""))
+                nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
+                Nachtvissenrepo.Save(Nachtvis)
+                Optellen()
+                nachtvis = Nothing
             Case 12, 13'Jeugd
                 'naam, gewicht en aantal
                 If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtAantal.Text) Then
@@ -541,17 +689,16 @@ Public Class FrmMain
                 End If
         End Select
 
-        _datum = Datumweeretcrepo.Get(Long.Parse(lblDatumid.Text))
-
         If Not String.IsNullOrEmpty(lblUitslagid1.Text) Then
             _uitslag = Uitslagenrepo.Get(Long.Parse(lblUitslagid1.Text))
-        Else 
-            _uitslag = New Uitslagen()
-            _uitslag.IDdeelnemer = _deelnemer1.NaamID
-            _uitslag.SerieNaamNr = Integer.Parse(cboNaamserie.SelectedValue)
-            _uitslag.IDdatum = _datum.ID
-            _uitslag.IDseizoen = _seizoen.ID
-            _uitslag.SerieNummerNr = Integer.Parse(CboSerieVolgnummer.SelectedValue)
+        Else
+            _uitslag = New Uitslagen With {
+                .IDdeelnemer = _deelnemer1.NaamID,
+                .SerieNaamNr = Integer.Parse(cboNaamserie.SelectedValue),
+                .IDdatum = _datum.ID,
+                .IDseizoen = _seizoen.ID,
+                .SerieNummerNr = Integer.Parse(CboSerieVolgnummer.SelectedValue)
+            }
         End If
         If Not String.IsNullOrEmpty(txtGewicht1.Text) Then
             _uitslag.Kilo = Double.Parse(txtGewicht1.Text)
@@ -587,7 +734,6 @@ Public Class FrmMain
         'Vulgrid()
 
     End sub
-
     Private sub Berekenpunten()
         
         Dim naamserie = Naamserierepo.Get(_datum.SerieNaamNr)
@@ -644,7 +790,6 @@ Public Class FrmMain
         Vuldetails(_datum)
 
     End Sub
-
     Private Function Enableopslaan()
 
         Dim enable As Boolean
@@ -658,7 +803,7 @@ Public Class FrmMain
             Case 15'Koppel
                 'beide namen en beide gewichten
                 If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
-                    Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
+                    'Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
                     'Exit Sub
                 End If
             Case 12, 13'Jeugd
@@ -678,6 +823,8 @@ Public Class FrmMain
 
     Private Sub txtGewicht2_KeyUp(sender As Object, e As KeyEventArgs) Handles txtGewicht2.KeyUp
 
+        Optellen()
+
     End Sub
 
     Private Sub dgvUitslagen_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvUitslagen.MouseUp
@@ -695,7 +842,15 @@ Public Class FrmMain
     Private Sub VerwijderenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerwijderenToolStripMenuItem.Click
 
         If MessageBox.Show("Wilt u de geselecteerde naam verwijderen", "Verwijderen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
             Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
+
+            If cboNaamserie.SelectedValue = 15 Then
+                Nachtvissenrepo.Delete(id)
+                Vuluitslaggrid(_datum)
+                Return
+            End If
+
             Uitslagenrepo.Delete(id)
 
             Berekenpunten
@@ -730,7 +885,8 @@ Public Class FrmMain
 
         If Not IsNumeric(txtGewicht1.Text) Then
             txtGewicht1.Text = ""
-            lblMelding.Text = "Het gewicht moet een numeriek, heel getal zijn"
+            'lblMelding.Text = "Het gewicht moet een numeriek, heel getal zijn"
+            optellen
             txtGewicht1.Focus()
             Return
         End If
@@ -744,8 +900,35 @@ Public Class FrmMain
             End If
         End If
 
-    End Sub
+        If cboNaamserie.SelectedValue = 15 Then
+            Optellen
+        End If
 
+    End Sub
+    Private sub Optellen
+
+        Dim totaal As Long
+
+        If IsNumeric(txtGewicht1.Text) Then
+            totaal = long.Parse(txtGewicht1.Text)
+        end if
+        If IsNumeric(txtGewicht2.Text)Then
+            totaal += Long.Parse(txtGewicht2.Text)
+        End If
+
+        if String.IsNullOrEmpty(txtGewicht1.Text) And String.IsNullOrEmpty(txtGewicht2.Text) Then
+            txtGewichtTotaal.Text = ""
+        Else 
+            txtGewichtTotaal.Text = totaal.ToString("N0")
+        End If
+
+        If Not String.IsNullOrEmpty(txtGewicht1.Text) And Not String.IsNullOrEmpty(txtGewicht2.Text) Then
+            btnOpslaan.Enabled = True
+        else
+            btnOpslaan.Enabled = False
+        End If
+
+    End sub
     Private Sub btnKlassement_Click(sender As Object, e As EventArgs) Handles btnKlassement.Click
         Dim f As New frmklassement With {
             .Seizoen = Seizoenrepo.Get(cboSeizoen.SelectedValue),
@@ -774,4 +957,21 @@ Public Class FrmMain
 
     End Sub
 
+    Private Sub txtNaam1_Enter(sender As Object, e As EventArgs) Handles txtNaam1.Enter
+
+        txtNaam1.Text = ""
+        txtGewicht1.Text = ""
+        _deelnemer1 = Nothing
+        optellen
+
+    End Sub
+
+    Private Sub txtNaam2_Enter(sender As Object, e As EventArgs) Handles txtNaam2.Enter
+
+        txtNaam2.Text=""
+        txtGewicht2.Text=""
+        _deelnemer2 = Nothing
+        optellen
+
+    End Sub
 End Class

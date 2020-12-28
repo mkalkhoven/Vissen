@@ -161,22 +161,31 @@ Public Class FrmVisser
         Uitvoeren(sql)
 
         Dim serienaam = ""
+        Dim Where = ""
         Select Case Serie.id
             Case 6
                 serienaam= "Vijftigplus"
             Case 1, 2, 3
                 serienaam = "Senioren"
+                Where = $"(idseizoen = {Seizoen.ID} and serienaamnr = 1) or (idseizoen = {Seizoen.ID} and serienaamnr = 2) or (idseizoen = {Seizoen.ID} and serienaamnr = 3)"
             Case 9, 10, 11
                 serienaam = "Winter"
+                Where = $"(idseizoen = {Seizoen.ID} and serienaamnr = 9) or (idseizoen = {Seizoen.ID} and serienaamnr = 10) or (idseizoen = {Seizoen.ID} and serienaamnr = 11)"
             Case 12, 13
                 serienaam = "Jeugd"
+                Where = $"(idseizoen = {Seizoen.ID} and serienaamnr = 12) or (idseizoen = {Seizoen.ID} and serienaamnr = 13)"
         End Select
 
-        sql= $"SELECT DISTINCT n.Naamid, n.naam FROM Namen n JOIN Uitslagen u ON n.NaamID = u.IDdeelnemer WHERE n.{serienaam} = 1 AND u.IDseizoen = {Seizoen.ID}"
+        'sql= $"SELECT DISTINCT n.Naamid, n.naam FROM Namen n JOIN Uitslagen u ON n.NaamID = u.IDdeelnemer WHERE n.{serienaam} = 1 AND u.IDseizoen = {Seizoen.ID}"
+        
+        
+        'Lijst ophalen van deelnemerid uit uitslagen met alle betrokken series
+        sql = $"SELECT DISTINCT IDdeelnemer FROM Uitslagen where {where}"
+        
         Dim dt = Selecteer(sql)
 
         For Each row As DataRow In dt.Rows
-            sql = $"INSERT INTO {tabelnaam} (Deelnemerid)VALUES({row("Naamid")})"
+            sql = $"INSERT INTO {tabelnaam} (Deelnemerid)VALUES({row("IDdeelnemer")})"
             Uitvoeren(sql)
             Dim aantalX = 0
             Dim totaalgewicht = 0
@@ -185,7 +194,7 @@ Public Class FrmVisser
                 Case 1, 2, 3'Senioren
                     aantal = Uitslagenrepo.Getaantal(1, Seizoen)
                     For i = 1 To aantal
-                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 1 AND SerieNummerNr = {i} AND IDdeelnemer = {row("Naamid")}"
+                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 1 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
                         Dim uitslag = Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
@@ -197,11 +206,11 @@ Public Class FrmVisser
                     Next
                     aantal = Uitslagenrepo.Getaantal(2, Seizoen)
                     For i = 1 To aantal
-                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 2 AND SerieNummerNr = {i} AND IDdeelnemer = {row("Naamid")}"
+                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 2 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
                         Dim uitslag = Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
-                            sql = $"UPDATE {tabelnaam} SET B_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
+                            sql = $"UPDATE {tabelnaam} SET B_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
                             Uitvoeren(sql)
                             totaalgewicht += kilo("Kilo")
                             aantalX += 1
@@ -209,28 +218,28 @@ Public Class FrmVisser
                     Next
                     aantal = Uitslagenrepo.Getaantal(3, Seizoen)
                     For i = 1 To aantal
-                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 3 AND SerieNummerNr = {i} AND IDdeelnemer = {row("Naamid")}"
+                        sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 3 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
                         Dim uitslag = Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
-                            sql = $"UPDATE {tabelnaam} SET C_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
+                            sql = $"UPDATE {tabelnaam} SET C_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
                             Uitvoeren(sql)
                             totaalgewicht += kilo("Kilo")
                             aantalX += 1
                         End If
                     Next
-                    sql = $"UPDATE {tabelnaam} SET Totaalgewicht = {totaalgewicht}, X = {aantalX} WHERE Deelnemerid = {row("Naamid")}"
+                    sql = $"UPDATE {tabelnaam} SET Totaalgewicht = {totaalgewicht}, X = {aantalX} WHERE Deelnemerid = {row("IDdeelnemer")}"
                     Uitvoeren(sql)
                 Case 9, 10, 11 'Winter
 
                 Case 12, 13'Jeugd
                     aantal = Uitslagenrepo.Getaantal(12, Seizoen)
                     For i = 1 To aantal
-                        sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 12 AND SerieNummerNr = {i} AND IDdeelnemer = {row("Naamid")}"
+                        sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 12 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
                         Dim uitslag = Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
-                            sql = $"UPDATE {tabelnaam} SET J1_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
+                            sql = $"UPDATE {tabelnaam} SET J1_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
                             Uitvoeren(sql)
                             totaalgewicht += kilo("Kilo")
                             totaalaantalvis += kilo("Pnt")
@@ -239,18 +248,18 @@ Public Class FrmVisser
                     Next
                     aantal = Uitslagenrepo.Getaantal(13, Seizoen)
                     For i = 1 To aantal
-                        sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 13 AND SerieNummerNr = {i} AND IDdeelnemer = {row("Naamid")}"
+                        sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 13 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
                         Dim uitslag = Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
-                            sql = $"UPDATE {tabelnaam} SET J2_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
+                            sql = $"UPDATE {tabelnaam} SET J2_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
                             Uitvoeren(sql)
                             totaalgewicht += kilo("Kilo")
                             totaalaantalvis += kilo("Pnt")
                             aantalX += 1
                         End If
                     Next
-                    sql = $"UPDATE {tabelnaam} SET Totaalgewicht = {totaalgewicht}, Totaalvis = {totaalaantalvis}, X = {aantalX} WHERE Deelnemerid = {row("Naamid")}"
+                    sql = $"UPDATE {tabelnaam} SET Totaalgewicht = {totaalgewicht}, Totaalvis = {totaalaantalvis}, X = {aantalX} WHERE Deelnemerid = {row("IDdeelnemer")}"
                     Uitvoeren(sql)
             End Select  
         Next
