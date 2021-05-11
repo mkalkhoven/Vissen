@@ -11,7 +11,6 @@ Public Class FrmMain
 
     dim _datum as New DatumWeerEtc
     Private _seizoen as New Seizoen
-    Private ReadOnly _regelhoogte = 27
     Private _isstarted as Boolean = false
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load 
 
@@ -95,48 +94,43 @@ Public Class FrmMain
         Dim namen = Namenrepo.Getsorted(vistype, zoeken)
         dgvnamen.DataSource = namen
         dgvnamen.Columns(1).Visible = false
-        
-        'Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
-        'cm.SuspendBinding()
-        'dim numbers = ""
-        'Dim value As Long
-        'Try
-        '    value = cboNaamserie.SelectedValue
-        'Catch ex As Exception
-        '    Dim serie As NaamSerie = cboNaamserie.SelectedValue
-        '    value = serie.Id
-        'End Try
 
-        'If value = 15 Then
-        '    For Each row As DataGridViewrow In dgvUitslagen.rows
-        '        Dim id As Long = long.Parse(row.Cells("nachtvisid").Value.ToString())
-        '        Dim nv = Nachtvissenrepo.Get(id)
-        '        numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
-        '    Next
-        'End If
+        Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
+        cm.SuspendBinding()
+        dim numbers = ""
+        Dim value As Long
+        Try
+            value = cboNaamserie.SelectedValue
+        Catch ex As Exception
+            Dim serie As NaamSerie = cboNaamserie.SelectedValue
+            value = serie.Id
+        End Try
 
-        'numbers = dgvUitslagen.Rows.Cast (Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+        If value = 15 Then
+            For Each row As DataGridViewrow In dgvUitslagen.rows
+                Dim id As Long = long.Parse(row.Cells("nachtvisid").Value.ToString())
+                Dim nv = Nachtvissenrepo.Get(id)
+                numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
+            Next
+        End If
 
-        'If dgvUitslagen.Rows.Count > 0 Then
-        '    For Each row As DataGridViewRow In dgvnamen.Rows
-        '        Dim id = Selecteerid(row, "Naamid")
-        '        If numbers.Contains($"#{id}#") Then
-        '            row.Visible = False
-        '        End If
-        '    Next
-        'End If
+        numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+
+        If dgvUitslagen.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In dgvnamen.Rows
+                Dim id = Selecteerid(row, "Naamid")
+                If numbers.Contains($"#{id}#") Then
+                    row.Visible = False
+                End If
+            Next
+        End If
 
 
-        
-        'cm.ResumeBinding()
+
+        cm.ResumeBinding()
         Verbergid(dgvnamen)
         Uitvullen(dgvnamen)
-
-        For Each row As DataGridViewRow In dgvnamen.Rows
-            row.Height = _regelhoogte
-       
-        Next
-
+        
     End sub
 
     Private Sub dgvnamen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvnamen.DataBindingComplete 
@@ -189,12 +183,11 @@ Public Class FrmMain
     End Sub
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
 
-        Dim id As long
+        Dim id As long = Selecteerid(dgvnamen, "NaamId")
         If cboNaamserie.SelectedValue = 15 And not String.IsNullOrEmpty(txtNaam1.Text) Then
             txtGewicht2.Enabled = True
             txtGewicht2.Text = ""
             dgvUitslagen.ClearSelection()
-            id = Selecteerid(dgvnamen, "NaamId")
             If id > 0 Then
                 _deelnemer2 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
                 If _deelnemer1.Id = _deelnemer2.Id Then
@@ -212,7 +205,6 @@ Public Class FrmMain
             txtAantal.Text = ""
             btnOpslaan.Enabled = False
             dgvUitslagen.ClearSelection()
-            id = Selecteerid(dgvnamen, "NaamId")
             If id > 0 Then
                 _deelnemer1 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
                 txtNaam1.Text = _deelnemer1.Naam
@@ -340,7 +332,6 @@ Public Class FrmMain
             For Each row As datarow In dt.Rows
                 Dim uitslag = New Uitslag With {
                     .Uitslagid = Long.Parse(row("Nachtvisid").ToString()),
-                    .Plaats = $"{plaats}.",
                     .Naam = row("Namen"),
                     .Gewicht = long.Parse(row("Gewicht").ToString())
                 }
@@ -354,7 +345,9 @@ Public Class FrmMain
                 .Gewicht = totaal
             }
             koppeluitslag.Add(totaaluitslag)
-            dgvUitslagen.DataSource = koppeluitslag
+
+            
+            dgvUitslagen.DataSource = Maakplaats(koppeluitslag)
             
             dgvUitslagen.Columns(0).Visible = false
             dgvUitslagen.Columns(1).HeaderText = "Pl."
@@ -371,7 +364,7 @@ Public Class FrmMain
             Return
         Else 
             Dim uitslagen = Uitslagenrepo.Get(datum)
-            dgvUitslagen.DataSource = uitslagen
+            dgvUitslagen.DataSource = Maakplaats(uitslagen)
         End If
         dgvUitslagen.Columns(0).Visible = false
         dgvUitslagen.Columns(1).HeaderText = "Pl."
@@ -380,7 +373,6 @@ Public Class FrmMain
         dgvUitslagen.Columns(3).Width = 85
         dgvUitslagen.Columns(4).Width = 80
         dgvUitslagen.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.Middlecenter
-        'dgvKlassement.Columns(3).Width = 100 piet2
         
         dgvUitslagen.Columns(2).Width = 250
         dgvUitslagen.Columns(3).DefaultCellStyle.Format = "N0"
@@ -402,14 +394,13 @@ Public Class FrmMain
         End If
         dgvUitslagen.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter
         
-        dim teller = 1
-        For Each row As DataGridViewRow In dgvUitslagen.Rows
-            row.Height = _regelhoogte
-            If row.Index < dgvUitslagen.Rows.Count -1 Then
-                row.Cells(1).Value = $"{teller}."
-                teller +=1
-            End If
-        Next
+        'dim teller = 1
+        'For Each row As DataGridViewRow In dgvUitslagen.Rows
+        '    If row.Index < dgvUitslagen.Rows.Count -1 Then
+        '        row.Cells(1).Value = $"{teller}."
+        '        teller +=1
+        '    End If
+        'Next
 
         Vulgrid()
         btnKlassement.Enabled = dgvUitslagen.Rows.Count > 0
@@ -507,6 +498,9 @@ Public Class FrmMain
             txtAantal.Enabled = false
             lblDatumid.Text = datum.ID
             lblDatum.Text = datum.Datum.Value.ToString("d-MM-yyyy")
+
+            lblDatumtitel.Text = $"Datum: (id = {datum.ID})"
+
             lblVerhaal.Text = datum.Verhaal
             lblLocatieVissen.Text = datum.Plaats
             lblLuchtdrukMB.Text = datum.MB
@@ -718,8 +712,7 @@ Public Class FrmMain
             _uitslag.IDdatum = _uitslag.Uitslagid
             Uitslagenrepo.Save(_uitslag)
         End If
-
-        Berekenpunten
+        
         txtNaam1.Text = ""
         txtNaam2.Text = ""
         txtGewicht1.text = ""
@@ -732,53 +725,76 @@ Public Class FrmMain
 
         Vuluitslaggrid(_datum)
         'Vulgrid()
+Berekenpunten
+        Berekenpunten()
 
     End sub
     Private sub Berekenpunten()
-        
+        Dim gedeeldepunten As Double = 0
+        Dim bevateennul = false
+        Dim gedaan = 0
+        Dim punten As double = 1
+        dim plaats As Long = 0
         Dim naamserie = Naamserierepo.Get(_datum.SerieNaamNr)
+        Dim uitslagen = Uitslagenrepo.Get(_datum)
+        Dim klaar = 0
+        Dim teller = 0
 
-        If naamserie.Maxaantal > 0 Then
-            Dim punten = 0
-            Dim overslaan = ""
-            Dim uitslagen = Uitslagenrepo.Get(_datum)
-            For Each uitslag As Uitslag In uitslagen
-                If uitslag.Uitslagid > 0 then
-                    If punten < naamserie.Maxaantal then
+        While teller < uitslagen.Count - 1
+            plaats += 1
+            dim uitslag = uitslagen(teller)
+            Dim aantal = Uitslagenrepo.Getaantal(_datum, uitslag.Gewicht)
+            If aantal = 1 Then
+                uitslag.Punten = punten
+                Uitslagenrepo.Save(uitslag)
+                teller += 1
+                If punten <= naamserie.Maxaantal Then
+                    punten += 1
+                end if
+            Else
+                gedeeldepunten = 0
+                For i = 1 To aantal
+                    gedeeldepunten += punten
+                    If punten <= naamserie.Maxaantal Then
                         punten += 1
                     end if
-                    Dim aantal = Uitslagenrepo.Getaantal(_datum, uitslag.Gewicht)
-                    If aantal = 1 Then 'Tenzij deze als is geupdate met gemiddelde
-                        uitslag.Punten = punten
-                        Uitslagenrepo.Save(uitslag)
-                    ElseIf uitslag.Gewicht = 0 Then
-                        uitslag.Punten = punten
-                        Uitslagenrepo.Save(uitslag)
-                    Else
-                        If overslaan.Contains(uitslag.Gewicht) Then
-                            'Niets
-                        Else 
-                            Dim gedeeldepunten As Double = 0
-                            For i = 1 To aantal
-                                gedeeldepunten += punten
-                                If punten < naamserie.Maxaantal then
-                                    punten += 1
-                                end if
-                            Next
-                            punten -= aantal
-                            dim gemiddelde = gedeeldepunten / aantal
-                            Uitslagenrepo.Save(_datum, gemiddelde, uitslag.Gewicht)
-                            overslaan = $"{overslaan}#{uitslag.Gewicht}#"
-                        End If
-                    End If
-                end if
-            Next
-        End If
-
+                Next
+                For i = 1 To aantal
+                    uitslag = uitslagen(teller)
+                    uitslag.Punten = gedeeldepunten/aantal
+                    Uitslagenrepo.Save(uitslag)
+                    teller +=1
+                Next
+            End If
+        End While
+        
+        dgvUitslagen.DataSource = Maakplaats(uitslagen)
+        
     End sub
+
+    Private Function Maakplaats(uitslagen As List(Of Uitslag))As List(Of Uitslag)
+        
+        Dim plaats = 1
+        Dim voriggewicht = 0
+
+        For Each uitslag As Uitslag In uitslagen
+            If(uitslag.Gewicht <> voriggewicht) Then
+                if uitslag.Naam.TrimEnd().ToLower().Contains("totaal") Then
+                    Continue For
+                End If
+                uitslag.Plaats = $"{plaats}."
+                voriggewicht = uitslag.Gewicht
+            End If
+            plaats += 1
+        Next
+
+        Return uitslagen
+
+    End Function
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click  
         
         Opslaan
+        Legen()
 
     End Sub
     Private Sub btnWijzigverhaal_Click(sender As Object, e As EventArgs) Handles btnWijzigverhaal.Click
@@ -853,9 +869,9 @@ Public Class FrmMain
 
             Uitslagenrepo.Delete(id)
 
-            Berekenpunten
-
             Vuluitslaggrid(_datum)
+
+            Berekenpunten
 
             _deelnemer1 = Nothing
             lblUitslagid1.Text = ""
@@ -973,5 +989,9 @@ Public Class FrmMain
         _deelnemer2 = Nothing
         optellen
 
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Berekenpunten
     End Sub
 End Class

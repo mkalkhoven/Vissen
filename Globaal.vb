@@ -1,6 +1,8 @@
 ﻿Module Globaal
     Public IsStarted = false
-
+    public Function Getid(row As DataGridViewRow) As Long
+        Return row.Cells(0).Value
+    End Function
     public sub Showmessage(message As string)
 
         MessageBox.Show(message, "Vissen", MessageBoxButtons.OK, MessageBoxIcon.Information)

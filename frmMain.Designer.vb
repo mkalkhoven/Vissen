@@ -73,6 +73,7 @@ Partial Class FrmMain
         Me.lblMelding = New System.Windows.Forms.Label()
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -171,6 +172,7 @@ Partial Class FrmMain
         Me.dgvUitslagen.MultiSelect = false
         Me.dgvUitslagen.Name = "dgvUitslagen"
         Me.dgvUitslagen.RowHeadersVisible = false
+        Me.dgvUitslagen.RowTemplate.Height = 27
         Me.dgvUitslagen.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvUitslagen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvUitslagen.Size = New System.Drawing.Size(480, 413)
@@ -180,7 +182,7 @@ Partial Class FrmMain
         '
         Me.lblVerhaal.Location = New System.Drawing.Point(836, 239)
         Me.lblVerhaal.Name = "lblVerhaal"
-        Me.lblVerhaal.Size = New System.Drawing.Size(313, 496)
+        Me.lblVerhaal.Size = New System.Drawing.Size(453, 496)
         Me.lblVerhaal.TabIndex = 20
         Me.lblVerhaal.Text = "Verhaal:"
         Me.lblVerhaal.Visible = false
@@ -546,11 +548,22 @@ Partial Class FrmMain
         Me.btnVisser.UseVisualStyleBackColor = true
         Me.btnVisser.Visible = false
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(939, 373)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(168, 171)
+        Me.Button1.TabIndex = 185
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = true
+        Me.Button1.Visible = false
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1164, 831)
+        Me.ClientSize = New System.Drawing.Size(1301, 831)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
         Me.Controls.Add(Me.lblMelding)
@@ -633,4 +646,5 @@ End Sub
     Friend WithEvents lblMelding As Label
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
+    Friend WithEvents Button1 As Button
 End Class

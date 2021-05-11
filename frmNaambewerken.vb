@@ -34,6 +34,11 @@ Public Class FrmNaambewerken
         Naam.Achternaam = txtAchternaam.Text
         Naam.Voornaam = txtVoornaam.Text
         Naam.Tussenvoegsel = txtTussenvoegsel.Text
+        If String.IsNullOrEmpty(txtTussenvoegsel.Text) Then
+            Naam.Naam = $"{txtVoornaam.Text} {txtAchternaam.Text}"
+        else
+            Naam.Naam = $"{txtVoornaam.Text} {txtTussenvoegsel.Text} {txtAchternaam.Text}"
+        End If
         Naam.Vijftigplus = chkVijftigplus.Checked
         Naam.Senioren = chkSenioren.Checked
         Naam.Winter = chkWintervissen.Checked
@@ -42,7 +47,7 @@ Public Class FrmNaambewerken
         Naam.Verwijderd = chkVerwijderd.Checked
         Namenrepo.Save(Naam)
         If Not Naam.NaamID.HasValue
-            Naam.NaamID = Naam.Id
+            Naam.NaamID = Naam.Id + 1000
             Namenrepo.Save(Naam)
         End If
 
