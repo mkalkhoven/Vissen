@@ -106,7 +106,7 @@ Public Class FrmMain
             value = serie.Id
         End Try
 
-        If value = 15 Then
+        If value = 15 Or value = 17 Then
             For Each row As DataGridViewrow In dgvUitslagen.rows
                 Dim id As Long = long.Parse(row.Cells("nachtvisid").Value.ToString())
                 Dim nv = Nachtvissenrepo.Get(id)
@@ -184,7 +184,7 @@ Public Class FrmMain
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
 
         Dim id As long = Selecteerid(dgvnamen, "NaamId")
-        If cboNaamserie.SelectedValue = 15 And not String.IsNullOrEmpty(txtNaam1.Text) Then
+        If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) And not String.IsNullOrEmpty(txtNaam1.Text) Then
             txtGewicht2.Enabled = True
             txtGewicht2.Text = ""
             dgvUitslagen.ClearSelection()
@@ -323,7 +323,7 @@ Public Class FrmMain
         
         Vuldetails(datum)
         dgvUitslagen.DataSource = nothing
-        If cboNaamserie.SelectedValue = 15 Then
+        If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
             Dim sql = $"SELECT * FROM Nachtvissen WHERE ID = {datum.ID} ORDER BY Gewicht DESC"
             Dim dt = Selecteer(sql)
             Dim koppeluitslag = New List(Of uitslag)
@@ -450,7 +450,7 @@ Public Class FrmMain
                 btnOpslaan.Enabled = False
                 btnOpslaan.Location = New Point(421, 41)
 
-            Case 15 'Koppelwedstrijden.
+            Case 15, 17 'Koppelwedstrijden nachtvissen
                 Legen()
                 gbNaamGewichtEtc.Visible=True
                 LblNaam1.Visible = true		 'Naam iedereen
@@ -559,7 +559,7 @@ Public Class FrmMain
             value = serie.Id
         End Try
 
-        If value = 15 Then
+        If value = 15 Or value = 17 Then
             For Each row As DataGridViewrow In dgvUitslagen.rows
                 Dim id As Long = 0
                 long.TryParse(row.Cells("Uitslagid").Value.ToString(), id)
@@ -586,7 +586,7 @@ Public Class FrmMain
 
     Private Sub dgvUitslagen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUitslagen.CellClick 
         
-        If cboNaamserie.SelectedValue = 15 Then
+        If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
             nachtvis = Nachtvissenrepo.Get(Selecteerid(dgvUitslagen, "Uitslagid"))
             _deelnemer1 = Namenrepo.Getbyoldid(nachtvis.Deelnemerid1)
             _deelnemer2 = Namenrepo.Getbyoldid(nachtvis.Deelnemerid2)
@@ -653,7 +653,7 @@ Public Class FrmMain
                     Toonmelding("Zowel de naam als het gewicht moeten worden ingevuld")
                     Exit Sub
                 End If
-            Case 15'Koppel
+            Case 15, 17 'Koppel nachtvissen
                 'beide namen en beide gewichten
                 'If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
                 '    Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
@@ -816,7 +816,7 @@ Berekenpunten
                 If not String.IsNullOrEmpty(txtNaam1.Text) and Not String.IsNullOrEmpty(txtGewicht1.Text) Then
                     enable = True
                 End If
-            Case 15'Koppel
+            Case 15, 17'Koppel, nachtvissen
                 'beide namen en beide gewichten
                 If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
                     'Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
@@ -861,7 +861,7 @@ Berekenpunten
 
             Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
 
-            If cboNaamserie.SelectedValue = 15 Then
+            If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
                 Nachtvissenrepo.Delete(id)
                 Vuluitslaggrid(_datum)
                 Return
@@ -916,7 +916,7 @@ Berekenpunten
             End If
         End If
 
-        If cboNaamserie.SelectedValue = 15 Then
+        If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
             Optellen
         End If
 

@@ -59,11 +59,16 @@ Module ModDatabase
         Dim dt As New Data.DataTable
 
         Dim da As New SqlDataAdapter(CmdSql)
-        da.Fill(dt)
 
-        CloseDB()
 
-        Return dt
+        Try
+            da.Fill(dt)
+            Return dt
+        Catch ex As Exception
+            Return dt
+        Finally
+            CloseDb()
+        End Try
 
     End Function
 

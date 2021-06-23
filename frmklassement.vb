@@ -63,8 +63,11 @@ Public Class Frmklassement
             sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten ASC"
         End If
         Dim dt = Selecteer(sql)
-        
-        dgvKlassement.DataSource = dt
+
+        If dt.Rows.Count > 0 Then
+
+
+            dgvKlassement.DataSource = dt
         dgvKlassement.Columns(1).DefaultCellStyle.Format = "N0"
         dgvKlassement.Columns(3).DefaultCellStyle.Format = "N1"
         dgvKlassement.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -106,11 +109,16 @@ Public Class Frmklassement
             teller += 1
         Next
 
+        End If
+
+
         dgvKlassement.Height = (dgvKlassement.Rows.Count * 22) + 60
         Height = dgvKlassement.Height + dgvKlassement.Top + 36
 
         btnMaakklassement.Left = width - 24 - btnMaakklassement.Width
         btnSluiten.Left = btnMaakklassement.Left
+
+
 
     End sub
 

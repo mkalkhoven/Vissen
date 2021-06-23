@@ -1,0 +1,168 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net5.0-windows\.NETCoreApp,Version=v5.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net5.0-windows\Vissen.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".git\ms-persist.xml" />
+    <Content Include=".vs\VSWorkspaceState.json" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\Vissen.xml" />
+    <Content Include="obj\Debug\net5.0-windows\Vissen.designer.deps.json" />
+    <Content Include="obj\Debug\net5.0-windows\Vissen.designer.runtimeconfig.json" />
+    <Content Include="obj\Debug\Vissen.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Vissen.xml" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\Vissen.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include=".git\COMMIT_EDITMSG" />
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\FETCH_HEAD" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\applypatch-msg.sample" />
+    <None Include=".git\hooks\commit-msg.sample" />
+    <None Include=".git\hooks\fsmonitor-watchman.sample" />
+    <None Include=".git\hooks\post-update.sample" />
+    <None Include=".git\hooks\pre-applypatch.sample" />
+    <None Include=".git\hooks\pre-commit.sample" />
+    <None Include=".git\hooks\pre-merge-commit.sample" />
+    <None Include=".git\hooks\pre-push.sample" />
+    <None Include=".git\hooks\pre-rebase.sample" />
+    <None Include=".git\hooks\pre-receive.sample" />
+    <None Include=".git\hooks\prepare-commit-msg.sample" />
+    <None Include=".git\hooks\update.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\master" />
+    <None Include=".git\logs\refs\remotes\origin\master" />
+    <None Include=".git\objects\12\dc6b2670ffd4067c5aba09b0996c94192e0b10" />
+    <None Include=".git\objects\19\89277f134a8a16c8c7bb16edc43a8bac53bf5a" />
+    <None Include=".git\objects\1a\f7de150c99c12dd67a509fe57c10d63e4eeb04" />
+    <None Include=".git\objects\1f\1d3b266b60280cabf5ce36fa0ded3bd25adecc" />
+    <None Include=".git\objects\1f\f0c423042b46cb1d617b81efb715defbe8054d" />
+    <None Include=".git\objects\28\698082c9c7bbc14675c2b3a84401d9e7ca8922" />
+    <None Include=".git\objects\2b\9291bb9c04874d30c1d09a9ebe23a0dd78155a" />
+    <None Include=".git\objects\2d\080f3f3a38781a9cdcd671a29960c63e6df421" />
+    <None Include=".git\objects\2d\aaccae6e63ab1f376f8693a49b35d0a4208d89" />
+    <None Include=".git\objects\32\f2991919068afcdbc6aa79c76ed738327e84cc" />
+    <None Include=".git\objects\36\e505469791453f54c2fb99df51fc464b61f1a9" />
+    <None Include=".git\objects\3a\e97a09769be98d210099e750334bafb10f5c82" />
+    <None Include=".git\objects\46\6ff40dd46b44553ee827067f6f86b494b8e982" />
+    <None Include=".git\objects\49\4bfb40aec2818ab4ee113395cb563050aec139" />
+    <None Include=".git\objects\4c\e6fddec962ff3b86038d9939b6be5dfc1e6351" />
+    <None Include=".git\objects\4e\951a11708a30b1e8099aa3fa6e4bf154046083" />
+    <None Include=".git\objects\53\6f171421df122c545667c27378f1f92a0769f9" />
+    <None Include=".git\objects\54\695d53b2ac2dc765aba9ccde731227c6934480" />
+    <None Include=".git\objects\58\3866e6d0a84942738a05dcf62253ce649cc2b6" />
+    <None Include=".git\objects\59\57e1d43c8f34bb3a95afe3adc3e99b74c03b76" />
+    <None Include=".git\objects\5e\240d17709a02dc60fdce0a1bb783b9e09aebc8" />
+    <None Include=".git\objects\5e\b969ed2b0a9d67d7c09aa51226c570612df243" />
+    <None Include=".git\objects\5e\f1015b4407969e15ab029b7020380f8fdfa652" />
+    <None Include=".git\objects\66\5c17c2e46383d577076d23558d6f530a2dec1e" />
+    <None Include=".git\objects\6a\5f4bf3c7c97e5afcf13d8ec13076bc3a63964e" />
+    <None Include=".git\objects\6b\76073a1e3eb0ac632fcc2acaf47e7cfc04e9a7" />
+    <None Include=".git\objects\6d\7908029e22531c31898eef108ff12224eeb6fa" />
+    <None Include=".git\objects\76\a867727f3be566a767a5ceacc19647a065d330" />
+    <None Include=".git\objects\7e\dc13d76382b5289ac7f16b258258a7f6de2a37" />
+    <None Include=".git\objects\83\0caa99e37690e79977f0e0dcfa79448105893d" />
+    <None Include=".git\objects\85\b890b3c66b9beee248abaddd2ec71f8b1df2b2" />
+    <None Include=".git\objects\85\c24ffef66522cf50d93e6da88562a3effb67e3" />
+    <None Include=".git\objects\89\f75a8cc2e06e3a5eeb5ec3eb9a886809f3f202" />
+    <None Include=".git\objects\8b\60838835ecd7c3584ca8698bac0bcfd2361838" />
+    <None Include=".git\objects\8c\50e8b677999d89800b25960b6038a5b34e5ef2" />
+    <None Include=".git\objects\8d\2e9767ff6e26c252df4e3738d83d885192b19e" />
+    <None Include=".git\objects\8d\60c39aec7944d55b9992c714aff87955491258" />
+    <None Include=".git\objects\92\03342b9c33b26facba0d8156e718ed1b8ed183" />
+    <None Include=".git\objects\a1\0810a376f031d82b8f642011c948453955d21d" />
+    <None Include=".git\objects\a7\a8286348eac812d5a6fa184cc17b2128bcade1" />
+    <None Include=".git\objects\ab\f02963ba06b372a1779006c926bbd7d923d8c3" />
+    <None Include=".git\objects\ac\c8ebb9aa49d231e4506e5c92e389022471b21f" />
+    <None Include=".git\objects\af\7dbebbacef595e3089c01c05671016c21a8304" />
+    <None Include=".git\objects\b0\c99d22b0145fae945f18b4195f2c6dadb8f71a" />
+    <None Include=".git\objects\b1\b9c98275daf500e2a4dfb560e388c07b6cab30" />
+    <None Include=".git\objects\b2\4d71e22373e5147f3c05c68a8742714a89b5d6" />
+    <None Include=".git\objects\b2\c464ebe7a4126895e0d21033f8de0880d20db0" />
+    <None Include=".git\objects\bd\cd79681d05bc6ed46a6224fd4a848873b14534" />
+    <None Include=".git\objects\be\cbb58131722435240d935960ed46e9012cc1d1" />
+    <None Include=".git\objects\c2\ea240720b10dbf876335672b6cc5b12c60412a" />
+    <None Include=".git\objects\c6\dd89c7fb3e62d1c5305e4ebec222f60b1d7e1a" />
+    <None Include=".git\objects\c8\50bef6d7e5924611f2dd3256480fa5a472e9eb" />
+    <None Include=".git\objects\c8\5f93999573a3fb968304a79fa806967e0ac345" />
+    <None Include=".git\objects\ca\d6efbe12f5ddbff8bcec615119d12923d43161" />
+    <None Include=".git\objects\d4\98bf0faaedc003d9c9ece6c0fb17ebb39c2625" />
+    <None Include=".git\objects\d6\c41dad046bb29988a6c813a32968c8a823732d" />
+    <None Include=".git\objects\e0\52beb9fa40225718530a23b56f51301e63400a" />
+    <None Include=".git\objects\e3\31ed0000f7438622a1c9a9dc39fdfa1064fc6c" />
+    <None Include=".git\objects\e6\8fd7c88e2c4f0510cfb020f7a52d25800a99d3" />
+    <None Include=".git\objects\f3\a61b17787eb45e6576525e57151b1fa00eeece" />
+    <None Include=".git\objects\f4\8b20605b5ae4e5a748ab289b4378ca9b1048ef" />
+    <None Include=".git\objects\f7\7941cc8109b6cdd7ab56fbeacaf8c94bd1e907" />
+    <None Include=".git\objects\fd\062cf4b798ec4ae113ccbe4ecf81ea8d909f25" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\master" />
+    <None Include=".vs\slnx.sqlite" />
+    <None Include="bin\Debug\Datalaag.dll" />
+    <None Include="bin\Debug\Datalaag.dll.config" />
+    <None Include="bin\Debug\Datalaag.pdb" />
+    <None Include="bin\Debug\EntityFramework.dll" />
+    <None Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <None Include="bin\Debug\Vissen.exe" />
+    <None Include="bin\Debug\Vissen.exe.config" />
+    <None Include="bin\Debug\Vissen.pdb" />
+    <None Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.vb" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\net5.0-windows\Vissen.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net5.0-windows\Vissen.assets.cache" />
+    <None Include="obj\Debug\net5.0-windows\Vissen.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net5.0-windows\Vissen.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
+    <None Include="obj\Debug\Vissen.exe" />
+    <None Include="obj\Debug\Vissen.Frmklassement.resources" />
+    <None Include="obj\Debug\Vissen.FrmMain.resources" />
+    <None Include="obj\Debug\Vissen.FrmNaambewerken.resources" />
+    <None Include="obj\Debug\Vissen.FrmNieuwewedstrijd.resources" />
+    <None Include="obj\Debug\Vissen.FrmVisser.resources" />
+    <None Include="obj\Debug\Vissen.pdb" />
+    <None Include="obj\Debug\Vissen.Resources.resources" />
+    <None Include="obj\Debug\Vissen.vbproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\Vissen.vbproj.CopyComplete" />
+    <None Include="obj\Debug\Vissen.vbproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\Vissen.vbproj.GenerateResource.cache" />
+    <None Include="obj\Debug\Vissen.vbprojAssemblyReference.cache" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\Release\.NETFramework,Version=v4.8.AssemblyAttributes.vb" />
+    <None Include="obj\Vissen.csproj.nuget.g.props" />
+    <None Include="obj\Vissen.csproj.nuget.g.targets" />
+    <None Include="Vissen.sln" />
+    <None Include="Vissen.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\objects\pack\" />
+    <Folder Include=".git\refs\tags\" />
+    <Folder Include=".vs\Vissen\v16\" />
+    <Folder Include="bin\Debug\net5.0-windows\ref\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\net5.0-windows\ref\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
+</Project>
