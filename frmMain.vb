@@ -589,7 +589,12 @@ Public Class FrmMain
         If dgvUitslagen.Rows.Count > 0 Then
 
             For Each row As DataGridViewRow In dgvnamen.Rows
-                Dim id = Selecteerid(row, "Naamid")
+                Dim id = 0
+                Try
+                    id = Selecteerid(row, "Naamid")
+                Catch ex As Exception
+                    'Niets
+                End Try
                 row.Visible = Not numbers.Contains($"#{id}#")
             Next
         End If
