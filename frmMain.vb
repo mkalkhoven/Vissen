@@ -68,12 +68,12 @@ Public Class FrmMain
                     vistype = Vistype.Vrijewedstrijden
                 Case 6
                     vistype = Vistype.Vijftigplus
-                Case 15
-                    vistype = Vistype.Koppel
                 Case 9, 10, 11
                     vistype = Vistype.Winter
                 Case 12, 13
                     vistype = Vistype.Jeugd
+                Case 17, 15
+                    vistype = Vistype.Koppel
             End Select
             Return vistype
         Catch ex As Exception
@@ -107,14 +107,20 @@ Public Class FrmMain
         End Try
 
         If value = 15 Or value = 17 Then
-            For Each row As DataGridViewrow In dgvUitslagen.rows
-                Dim id As Long = long.Parse(row.Cells("nachtvisid").Value.ToString())
-                Dim nv = Nachtvissenrepo.Get(id)
-                numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
-            Next
-        End If
+            For Each row As DataGridViewRow In dgvUitslagen.Rows
 
-        numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+                'Dim tmp As String = row.Cells(0).Value.ToString()
+
+                'Dim id As Long = Long.Parse(row.Cells(1).Value.ToString())
+                'Dim nv = Nachtvissenrepo.Get(id)
+                'numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid1}"
+                'id = Long.Parse(row.Cells("Deelnemerid2").Value.ToString())
+                'nv = Nachtvissenrepo.Get(id)
+                'numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
+            Next
+        Else
+            numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+        End If
 
         If dgvUitslagen.Rows.Count > 0 Then
             For Each row As DataGridViewRow In dgvnamen.Rows
@@ -156,8 +162,11 @@ Public Class FrmMain
         'Piet
         txtNaam1.text = ""
 
-        _toonalles = false
+        _toonalles = False
         btnToonalles.Text = "Toon alles"
+
+
+
         Vulgrid()
 
         Fillcombo()
@@ -242,9 +251,9 @@ Public Class FrmMain
         Selecteerregel(_deelnemer1.Id, dgvnamen)
 
     End Sub
-    Private Sub cboSeizoen_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeizoen.SelectedIndexChanged 
+    Private Sub cboSeizoen_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeizoen.SelectedIndexChanged
 
-        Fillcombo
+        Fillcombo()
 
     End Sub
     Private Sub CboSerieVolgnummer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboSerieVolgnummer.SelectedIndexChanged 
@@ -560,26 +569,31 @@ Public Class FrmMain
         End Try
 
         If value = 15 Or value = 17 Then
-            For Each row As DataGridViewrow In dgvUitslagen.rows
+            If dgvUitslagen.Rows.Count <= 1 Then
+                Return
+            End If
+            For Each row As DataGridViewRow In dgvUitslagen.Rows
                 Dim id As Long = 0
-                long.TryParse(row.Cells("Uitslagid").Value.ToString(), id)
+                Long.TryParse(row.Cells("Uitslagid").Value.ToString(), id)
                 If id > 0 Then
                     Dim nv = Nachtvissenrepo.Get(id)
-                    numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}#"
-                end if
+                    If Not IsNothing(nv) Then
+                        numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}#"
+                    End If
+                End If
             Next
-        else
+        Else
             numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
         End If
-        
+
         If dgvUitslagen.Rows.Count > 0 Then
+
             For Each row As DataGridViewRow In dgvnamen.Rows
                 Dim id = Selecteerid(row, "Naamid")
-                
                 row.Visible = Not numbers.Contains($"#{id}#")
             Next
         End If
-        
+
         cm.ResumeBinding()
 
     End Sub
@@ -791,10 +805,38 @@ Berekenpunten
         Return uitslagen
 
     End Function
-    Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click  
-        
-        Opslaan
+    Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
+
+        Dim nummer = 0
+        Dim serie = 0
+
+        Opslaan()
         Legen()
+
+        Try
+            If IsNumeric(CboSerieVolgnummer.SelectedValue) Then
+                nummer = CboSerieVolgnummer.SelectedValue
+            ElseIf IsNothing(CboSerieVolgnummer.SelectedValue) Then
+                nummer = 0
+            Else
+                Dim zoek = ","
+                Dim eind = CboSerieVolgnummer.SelectedValue.ToString().LastIndexOf(zoek, StringComparison.Ordinal) - 1
+                nummer = Long.Parse(CboSerieVolgnummer.SelectedValue.ToString().Substring(1, eind))
+            End If
+        Catch ex As Exception
+            If Not IsNothing(CboSerieVolgnummer.SelectedValue) Then
+                nummer = Long.Parse(CboSerieVolgnummer.SelectedValue.ToString())
+            End If
+        End Try
+        If IsNothing(_seizoen) Or IsNothing(serie) Or IsNothing(nummer = 0) Then
+            Return
+        End If
+        serie = cboNaamserie.SelectedValue
+
+        _datum = Datumweeretcrepo.Get(_seizoen.ID, serie, nummer)
+        If Not IsNothing(_datum) Then
+            Vuluitslaggrid(_datum)
+        End If
 
     End Sub
     Private Sub btnWijzigverhaal_Click(sender As Object, e As EventArgs) Handles btnWijzigverhaal.Click
