@@ -67,9 +67,13 @@ Public Class FrmNieuwewedstrijd
             Datum.Datum = DateTimePickerNieuw.text
             Datum.Weer = txtNieuwWeerAlgemeen.text
             Datum.Verhaal = txtNieuwVerhaal.text
-        end if
-        
-        Datumweeretcrepo.Save(Datum)
+        end If
+
+        Try
+            Datumweeretcrepo.Save(Datum)
+        Catch ex As Exception
+            MessageBox.Show(ex.InnerException.ToString)
+        End Try
         Close()
         
     End Sub
