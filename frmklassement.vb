@@ -198,7 +198,7 @@ Public Class Frmklassement
                     Dim regel = uitslag(0)
                     tmpUitslag.Punten = regel("Pnt")
                     tmpUitslag.Gewicht = regel("Kilo")
-                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = {regel("Pnt")}, Gewicht{teller} = {regel("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
+                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = {regel("Pnt").ToString().Replace(",", ".")}, Gewicht{teller} = {regel("Kilo")} WHERE Deelnemerid = {row("Naamid")}"
                     Uitvoeren(sql)
                 End If
                 teller += 1
