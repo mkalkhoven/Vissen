@@ -191,7 +191,7 @@ Public Class Frmklassement
                 If uitslag.Rows.Count = 0 Then
                     tmpUitslag.Punten = Serie.Maxaantal
                     tmpUitslag.Gewicht = 0
-                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = {Serie.Maxaantal} WHERE Deelnemerid = {row("Naamid")}"
+                    sql = $"UPDATE {tabelnaam} SET Punten{teller} = {Serie.Punten} WHERE Deelnemerid = {row("Naamid")}"
                     Uitvoeren(sql)
                 ElseIf uitslag.Rows.Count = 1 Then
                     aantalX += 1
