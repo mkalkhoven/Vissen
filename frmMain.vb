@@ -1,6 +1,7 @@
 ﻿Imports Datalaag
 Imports Datalaag.Classes
 Imports Datalaag.Global
+Imports Vissen.Globaal
 Public Class FrmMain
     private _toonalles As Boolean = false
     Private _deelnemer1 As New Namen
@@ -1039,6 +1040,30 @@ Berekenpunten
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Berekenpunten
+
+        Dim sql = "SELECT DISTINCT Datum FROM Loting2"
+        Dim dt = Selecteer(sql)
+
+        For Each row As DataRow In dt.Rows
+            Dim datum = row("Datum")
+            sql = $"SELECT * FROM Agenda WHERE Datum = {GetISODate(datum)}"
+            Dim dtagenda = Selecteeragenda(sql)
+            If dtagenda.Rows.Count = 1 Then
+                Dim serienummer As String = dtagenda.Rows(0)("Serie").ToString()
+                If Not serienummer.Contains(".") Then
+                    serienummer = $"{serienummer}."
+                End If
+                sql = $"UPDATE Loting2 SET Serienummer = '{serienummer}' WHERE Datum = {GetISODate(datum)}"
+                Uitvoeren(sql)
+
+            End If
+        Next
+
+    End Sub
+
+    Private Sub btnLoting_Click(sender As Object, e As EventArgs) Handles btnLoting.Click
+
+        frmHistorie.ShowDialog()
+
     End Sub
 End Class

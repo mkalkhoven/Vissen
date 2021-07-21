@@ -4,7 +4,8 @@ Imports System.Data.SqlClient
 Module ModDatabase
 
     Public CnVissen As SqlConnection = New SqlConnection("Server=h2865773.stratoserver.net;Database=Visseizoen;User Id=sa;Password=!!fn8565fn##;")
-    public CmdSql As SqlCommand
+    Public Cnagenda As SqlConnection = New SqlConnection("Server=h2865773.stratoserver.net;Database=DeRuisvoorn;User Id=sa;Password=!!fn8565fn##;")
+    Public CmdSql As SqlCommand
     Public Sub Verwijder(sql As String)
 
         Uitvoeren(sql)
@@ -39,17 +40,41 @@ Module ModDatabase
 
     End Sub
 
-    public Function Selecteeraantal(sql as String) as long
+    Public Function Selecteeraantal(sql As String) As Long
 
         Dim dt = Selecteer(sql)
         If dt.Rows.Count = 1 Then
             Dim tmp = Long.Parse(dt.Rows(0)("Aantal").ToString())
             Return tmp
-        Else 
+        Else
             Return 0
         End If
 
     End Function
+
+    Public Function Selecteeragenda(sql As String) As Data.DataTable
+
+        OpenDb()
+
+        CmdSql = New SqlCommand(sql, Cnagenda)
+
+        Dim dt As New Data.DataTable
+
+        Dim da As New SqlDataAdapter(CmdSql)
+
+
+        Try
+            da.Fill(dt)
+            Return dt
+        Catch ex As Exception
+            Return dt
+        Finally
+            CloseDb()
+        End Try
+
+    End Function
+
+
     Public Function Selecteer(sql As String) As Data.DataTable
         
         OpenDB()

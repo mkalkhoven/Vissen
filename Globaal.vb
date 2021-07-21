@@ -1,9 +1,19 @@
 ﻿Module Globaal
-    Public IsStarted = false
-    public Function Getid(row As DataGridViewRow) As Long
+    Public IsStarted = False
+    Public Function Getid(row As DataGridViewRow) As Long
         Return row.Cells(0).Value
     End Function
-    public sub Showmessage(message As string)
+    Public Function Getid(cbo As ComboBox) As Long
+
+        Try
+            Dim id = Long.Parse(cbo.SelectedValue.ToString())
+            Return id
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+    Public sub Showmessage(message As string)
 
         MessageBox.Show(message, "Vissen", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -59,15 +69,42 @@
 
     End Function
 
-    public sub Selecteerregel(id As Long, dgv As datagridview)
+    Public Sub Selecteerregel(id As Long, dgv As datagridview)
 
         For Each row As DataGridViewRow In dgv.rows
             If row.Cells(0).Value.ToString = id.ToString() Then
-                row.Selected = true
+                row.Selected = True
                 Return
             End If
         Next
 
-    End sub
+    End Sub
+
+    Public Function GetISODate(datum As String) As String
+
+        Dim tmp As DateTime
+        DateTime.TryParse(datum, tmp)
+
+        Return $"'{tmp.ToString("yyyy-MM-dd")}'"
+
+    End Function
+
+    Public Function GetISODate() As String
+
+        Return $"'{DateTime.Now.ToString("yyyy-MM-dd")}'"
+
+    End Function
+
+    Public Function GetISODateTime() As String
+
+        Return $"'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}'"
+
+    End Function
+
+    Public Function GetISODateTime(datumtijd As DateTime) As String
+
+        Return $"'{datumtijd.ToString("yyyy-MM-dd HH:mm:ss")}'"
+
+    End Function
 
 End Module
