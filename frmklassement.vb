@@ -189,7 +189,7 @@ Public Class Frmklassement
                 sql = $"SELECT * FROM Uitslagen WHERE IDdatum = {wedstrijd("ID")} AND  IDdeelnemer = {row("Naamid")}"
                 Dim uitslag = Selecteer(sql)
                 If uitslag.Rows.Count = 0 Then
-                    tmpUitslag.Punten = Serie.Maxaantal
+                    tmpUitslag.Punten = Serie.Punten
                     tmpUitslag.Gewicht = 0
                     sql = $"UPDATE {tabelnaam} SET Punten{teller} = {Serie.Punten} WHERE Deelnemerid = {row("Naamid")}"
                     Uitvoeren(sql)
@@ -208,25 +208,17 @@ Public Class Frmklassement
             Dim tmp = tmpUitslagen.OrderBy(Function(obj) obj.Punten).ThenByDescending(Function(obj) obj.Gewicht) 
             
             Dim totaalgewicht = 0
-            Dim totaalpunten = 0
-            dim corr As Integer = Integer.Parse(Cbocorrectie.Text)
+            Dim totaalpunten As Decimal = 0
+            Dim corr As Integer = Integer.Parse(Cbocorrectie.Text)
             corr = aantal - corr
 
-            'If Serie.Naam.ToLower().Contains("jeugd") Then
-            '    For i = 0 To tmpUitslagen.Count-1
-            '        Dim x = tmp(i)
-            '        totaalpunten += x.Punten
-            '        totaalgewicht += x.Gewicht
-            '    Next
-            'Else 
-                For i = 0 To corr-1
-                    Dim x = tmp(i)
-                    totaalpunten += x.Punten
-                    totaalgewicht += x.Gewicht
-                Next
-            'End If
+            For i = 0 To corr - 1
+                Dim x = tmp(i)
+                totaalpunten += x.Punten
+                totaalgewicht += x.Gewicht
+            Next
 
-            sql = $"UPDATE {tabelnaam} SET X = {aantalX}, Totaalpunten = {totaalpunten}, Totaalgewicht = {totaalgewicht} WHERE Deelnemerid = {row("Naamid")}"
+            sql = $"UPDATE {tabelnaam} SET X = {aantalX}, Totaalpunten = {totaalpunten.ToString().Replace(",", ".")}, Totaalgewicht = {totaalgewicht} WHERE Deelnemerid = {row("Naamid")}"
             Uitvoeren(sql)
         Next
 

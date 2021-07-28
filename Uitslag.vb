@@ -1,4 +1,4 @@
 ﻿Public Class Tmpuitslag
-    Public Property Gewicht As long
-    Public Property Punten As long
+    Public Property Gewicht As Decimal
+    Public Property Punten As Decimal
 End Class
