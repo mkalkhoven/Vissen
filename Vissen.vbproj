@@ -92,6 +92,18 @@
     <Compile Include="frmHistorie.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmHistorieserie.Designer.vb">
+      <DependentUpon>frmHistorieserie.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHistorieserie.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHistorieseriebewerken.Designer.vb">
+      <DependentUpon>frmHistorieseriebewerken.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHistorieseriebewerken.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmklassement.Designer.vb">
       <DependentUpon>frmklassement.vb</DependentUpon>
     </Compile>
@@ -152,6 +164,12 @@
   <ItemGroup>
     <EmbeddedResource Include="frmHistorie.resx">
       <DependentUpon>frmHistorie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHistorieserie.resx">
+      <DependentUpon>frmHistorieserie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHistorieseriebewerken.resx">
+      <DependentUpon>frmHistorieseriebewerken.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmklassement.resx">
       <DependentUpon>frmklassement.vb</DependentUpon>

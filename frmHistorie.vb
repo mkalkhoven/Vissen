@@ -7,6 +7,8 @@ Public Class frmHistorie
 
         VulSeriecombo(cboSerie)
 
+        Icon = FrmMain.Icon
+
     End Sub
 
     Public Sub VulSeriecombo(cbo As ComboBox)
@@ -74,11 +76,11 @@ Public Class frmHistorie
             dgvLoting.DataSource = Nothing
         End Try
 
-        VulSeizoencombo()
+        Vulgrid()
 
     End Sub
 
-    Private Sub VulSeizoencombo()
+    Private Sub Vulgrid()
 
         Dim serieid = Getid(cboSerie)
         Dim seizoenid = Getid(cboSeizoen)
@@ -138,7 +140,7 @@ Public Class frmHistorie
 
     Private Sub cboSeizoen_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeizoen.SelectedIndexChanged
 
-        VulSeizoencombo()
+        Vulgrid()
 
     End Sub
 
@@ -153,6 +155,24 @@ Public Class frmHistorie
         Next
 
         dgvLoting.ClearSelection()
+
+    End Sub
+
+    Private Sub btnBewerken_Click(sender As Object, e As EventArgs) Handles btnBewerken.Click
+
+
+        Dim serieid = Getid(cboSerie)
+        Dim seizoenid = Getid(cboSeizoen)
+        Dim serie = Naamserierepo.Get(serieid)
+        Dim seizoen = Seizoenrepo.Get(seizoenid)
+
+        Dim f As New frmHistorieserie With {
+            .serie = serie,
+            .seizoen = seizoen
+        }
+        f.ShowDialog()
+
+        Vulgrid()
 
     End Sub
 End Class

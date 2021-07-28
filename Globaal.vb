@@ -1,5 +1,10 @@
 ﻿Module Globaal
     Public IsStarted = False
+    Public Function Getid(dgv As DataGridView) As Long
+
+        'Return Getid(dgv.SelectedRows)
+
+    End Function
     Public Function Getid(row As DataGridViewRow) As Long
         Return row.Cells(0).Value
     End Function

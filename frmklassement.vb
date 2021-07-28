@@ -176,7 +176,7 @@ Public Class Frmklassement
         sql = $"SELECT ID FROM DatumWeerEtc WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = {Serie.Id}"
         Dim dtWedstrijden = selecteer(sql)
 
-        sql= $"SELECT DISTINCT n.Naamid, n.naam FROM Namen n JOIN Uitslagen u ON n.NaamID = u.IDdeelnemer WHERE n.{serienaam} = 1 AND u.SerieNaamNr = {Serie.Id} AND u.IDseizoen = {Seizoen.ID}"
+        sql = $"SELECT DISTINCT n.Naamid, n.naam FROM Namen n JOIN Uitslagen u ON n.NaamID = u.IDdeelnemer WHERE u.SerieNaamNr = {Serie.Id} AND u.IDseizoen = {Seizoen.ID}"
         Dim dt = Selecteer(sql)
         For Each row As datarow In dt.Rows
             Dim tmpUitslagen As new List(Of Tmpuitslag)
