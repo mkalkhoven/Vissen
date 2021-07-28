@@ -558,9 +558,8 @@ Public Class FrmMain
 
 
         Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
-        cm.SuspendBinding()
 
-        dim numbers = ""
+        Dim numbers = ""
         Dim value As Long
         Try
             value = cboNaamserie.SelectedValue
@@ -596,11 +595,12 @@ Public Class FrmMain
                 Catch ex As Exception
                     'Niets
                 End Try
+                cm.SuspendBinding()
                 row.Visible = Not numbers.Contains($"#{id}#")
+                cm.ResumeBinding()
             Next
         End If
 
-        cm.ResumeBinding()
 
     End Sub
 
@@ -656,11 +656,6 @@ Public Class FrmMain
         txtNaam2.Text = ""
         lblLocatieVissen.Text = ""
         lblMelding.Text = ""
-        'If lblVerhaal.Text = "" Then
-        '    dgvnamen.Enabled = False
-        '    Else 
-        '        dgvnamen.Enabled = True
-        'End If
     End sub
     Private sub Opslaan()
         
@@ -675,16 +670,22 @@ Public Class FrmMain
                 End If
             Case 15, 17 'Koppel nachtvissen
                 'beide namen en beide gewichten
-                'If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
-                '    Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
-                '    Exit Sub
-                'End If
-                'Opslaan in aparte tabel: nachtvissen
 
+                If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtNaam2.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
+                    Exit Sub
+                End If
+                If Not String.IsNullOrEmpty(txtNaam1.Text) And Not String.IsNullOrEmpty(txtNaam2.Text) Then
+                    If String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtGewicht2.Text) Then
+                        Toonmelding("Zowel de beide namen, als beide gewichten moeten worden ingevuld")
+                    End If
+                End If
+
+                'Opslaan in aparte tabel: nachtvissen
                 If IsNothing(nachtvis) Then
-                    nachtvis = New Nachtvissen()
-                    nachtvis.Nachtvisid = Nachtvissenrepo.Getid()
-                    Nachtvis.ID = _datum.ID
+                    nachtvis = New Nachtvissen With {
+                        .Nachtvisid = Nachtvissenrepo.Getid(),
+                        .ID = _datum.ID
+                    }
                 End If
                 nachtvis.Deelnemerid1 = _deelnemer1.NaamID
                 nachtvis.Gewicht1 = Long.Parse(txtGewicht1.Text)
@@ -718,34 +719,35 @@ Public Class FrmMain
             _uitslag.Kilo = Double.Parse(txtGewicht1.Text)
         Else
             _uitslag.Kilo = 0
-        end if
+        end If
         If _uitslag.SerieNaamNr = 12 Or _uitslag.SerieNaamNr = 13 Then
             If Not String.IsNullOrEmpty(txtAantal.Text) Then
-                _uitslag.Pnt = double.Parse(txtAantal.Text)
+                _uitslag.Pnt = Double.Parse(txtAantal.Text)
             End If
-        Else 
+        Else
             _uitslag.Pnt = 0
         End If
+
+        Legen()
+
         Uitslagenrepo.Save(_uitslag)
 
         If _uitslag.IDdatum = 0 Then
             _uitslag.IDdatum = _uitslag.Uitslagid
             Uitslagenrepo.Save(_uitslag)
         End If
-        
-        txtNaam1.Text = ""
-        txtNaam2.Text = ""
-        txtGewicht1.text = ""
-        txtGewicht1.Enabled = false
-        txtGewicht2.Text = ""
-        txtGewicht2.Enabled = false
-        txtAantal.Text = ""
-        txtAantal.Enabled = false
-        btnOpslaan.Enabled = false
+
+        'txtNaam1.Text = ""
+        'txtNaam2.Text = ""
+        'txtGewicht1.text = ""
+        'txtGewicht1.Enabled = false
+        'txtGewicht2.Text = ""
+        'txtGewicht2.Enabled = false
+        'txtAantal.Text = ""
+        'txtAantal.Enabled = false
+        btnOpslaan.Enabled = False
 
         Vuluitslaggrid(_datum)
-        'Vulgrid()
-Berekenpunten
         Berekenpunten()
 
     End sub
@@ -813,8 +815,16 @@ Berekenpunten
     End Function
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
 
+        Opslaanvoorbereiden()
+
+    End Sub
+
+    Private Sub Opslaanvoorbereiden()
+
         Dim nummer = 0
         Dim serie = 0
+
+        gbNaamGewichtEtc.Enabled = False
 
         Opslaan()
         Legen()
@@ -843,6 +853,8 @@ Berekenpunten
         If Not IsNothing(_datum) Then
             Vuluitslaggrid(_datum)
         End If
+
+        gbNaamGewichtEtc.Enabled = True
 
     End Sub
     Private Sub btnWijzigverhaal_Click(sender As Object, e As EventArgs) Handles btnWijzigverhaal.Click
@@ -888,6 +900,9 @@ Berekenpunten
     Private Sub txtGewicht2_KeyUp(sender As Object, e As KeyEventArgs) Handles txtGewicht2.KeyUp
 
         Optellen()
+        If e.KeyCode = Keys.Enter Then
+            Opslaanvoorbereiden()
+        End If
 
     End Sub
 
@@ -926,6 +941,8 @@ Berekenpunten
             txtNaam1.Text = ""
             txtGewicht1.Text = ""
         End If
+
+        Legen()
 
     End Sub
 

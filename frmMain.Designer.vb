@@ -425,6 +425,7 @@ Partial Class FrmMain
         'txtNaam1
         '
         Me.txtNaam1.BackColor = System.Drawing.Color.White
+        Me.txtNaam1.Enabled = False
         Me.txtNaam1.Location = New System.Drawing.Point(6, 43)
         Me.txtNaam1.Name = "txtNaam1"
         Me.txtNaam1.ReadOnly = True
@@ -434,6 +435,7 @@ Partial Class FrmMain
         'txtGewichtTotaal
         '
         Me.txtGewichtTotaal.BackColor = System.Drawing.Color.White
+        Me.txtGewichtTotaal.Enabled = False
         Me.txtGewichtTotaal.Location = New System.Drawing.Point(339, 114)
         Me.txtGewichtTotaal.Name = "txtGewichtTotaal"
         Me.txtGewichtTotaal.ReadOnly = True
@@ -442,6 +444,7 @@ Partial Class FrmMain
         '
         'txtGewicht1
         '
+        Me.txtGewicht1.BackColor = System.Drawing.Color.White
         Me.txtGewicht1.Location = New System.Drawing.Point(339, 43)
         Me.txtGewicht1.Name = "txtGewicht1"
         Me.txtGewicht1.Size = New System.Drawing.Size(79, 30)
@@ -467,6 +470,7 @@ Partial Class FrmMain
         '
         'txtGewicht2
         '
+        Me.txtGewicht2.BackColor = System.Drawing.Color.White
         Me.txtGewicht2.Location = New System.Drawing.Point(339, 79)
         Me.txtGewicht2.Name = "txtGewicht2"
         Me.txtGewicht2.Size = New System.Drawing.Size(79, 30)
@@ -484,6 +488,7 @@ Partial Class FrmMain
         'txtNaam2
         '
         Me.txtNaam2.BackColor = System.Drawing.Color.White
+        Me.txtNaam2.Enabled = False
         Me.txtNaam2.Location = New System.Drawing.Point(6, 79)
         Me.txtNaam2.Name = "txtNaam2"
         Me.txtNaam2.ReadOnly = True
@@ -492,6 +497,7 @@ Partial Class FrmMain
         '
         'txtAantal
         '
+        Me.txtAantal.BackColor = System.Drawing.Color.White
         Me.txtAantal.Location = New System.Drawing.Point(421, 43)
         Me.txtAantal.Name = "txtAantal"
         Me.txtAantal.Size = New System.Drawing.Size(79, 30)
