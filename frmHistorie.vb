@@ -8,7 +8,7 @@ Public Class frmHistorie
         VulSeriecombo(cboSerie)
 
         Icon = FrmMain.Icon
-
+        pnlWachtem.Visible = False
     End Sub
 
     Public Sub VulSeriecombo(cbo As ComboBox)
@@ -85,6 +85,9 @@ Public Class frmHistorie
         Dim serieid = Getid(cboSerie)
         Dim seizoenid = Getid(cboSeizoen)
 
+        pnlWachtem.Visible = True
+        Application.DoEvents()
+
         If seizoenid = 0 Then
             Return
             seizoenid = Seizoenrepo.Getlaatste()
@@ -100,12 +103,22 @@ Public Class frmHistorie
 
         sql = $"SELECT DISTINCT Datum, Serienummer from loting2 where serieid = {serieid} and seizoenid = {seizoenid} ORDER BY Datum"
         Dim dt2 = Selecteer(sql)
+
+        If IsDBNull(dt) Then
+            Toonmelding("Er zijn geen gegevens gevonden")
+            pnlWachtem.Visible = False
+            Return
+        End If
+
+
+
         For Each row As DataRow In dt2.Rows
             dt.Columns.Add(row("Serienummer"), Type.GetType("System.String"))
         Next
 
         Dim iRow = 0
         For Each row As DataRow In dt.Rows
+
             Dim iCol = 4
             Dim inaam = 0
             For Each row2 As DataRow In dt2.Rows
@@ -133,6 +146,7 @@ Public Class frmHistorie
         Next
 
         dgvLoting.DataSource = dt
+        pnlWachtem.Visible = False
 
     End Sub
 

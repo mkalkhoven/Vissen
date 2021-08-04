@@ -22,7 +22,7 @@ Partial Class frmHistorie
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnBewerken = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
@@ -30,7 +30,10 @@ Partial Class frmHistorie
         Me.dgvLoting = New System.Windows.Forms.DataGridView()
         Me.cboSerie = New System.Windows.Forms.ComboBox()
         Me.btnSluiten = New System.Windows.Forms.Button()
+        Me.pnlWachtem = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dgvLoting, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlWachtem.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnBewerken
@@ -81,8 +84,8 @@ Partial Class frmHistorie
         Me.dgvLoting.AllowUserToDeleteRows = False
         Me.dgvLoting.AllowUserToResizeColumns = False
         Me.dgvLoting.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgvLoting.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvLoting.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvLoting.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvLoting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLoting.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
@@ -120,11 +123,30 @@ Partial Class frmHistorie
         Me.btnSluiten.Text = "Sluiten"
         Me.btnSluiten.UseVisualStyleBackColor = True
         '
+        'pnlWachtem
+        '
+        Me.pnlWachtem.Controls.Add(Me.Label1)
+        Me.pnlWachtem.Location = New System.Drawing.Point(696, 466)
+        Me.pnlWachtem.Name = "pnlWachtem"
+        Me.pnlWachtem.Size = New System.Drawing.Size(214, 43)
+        Me.pnlWachtem.TabIndex = 307
+        Me.pnlWachtem.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(8, 10)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(201, 24)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Een moment geduld..."
+        '
         'frmHistorie
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1087, 539)
+        Me.Controls.Add(Me.pnlWachtem)
         Me.Controls.Add(Me.btnBewerken)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnPrint)
@@ -142,6 +164,8 @@ Partial Class frmHistorie
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "frmHistorie"
         CType(Me.dgvLoting, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlWachtem.ResumeLayout(False)
+        Me.pnlWachtem.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -153,4 +177,6 @@ Partial Class frmHistorie
     Friend WithEvents dgvLoting As DataGridView
     Friend WithEvents cboSerie As ComboBox
     Friend WithEvents btnSluiten As Button
+    Friend WithEvents pnlWachtem As Panel
+    Friend WithEvents Label1 As Label
 End Class
