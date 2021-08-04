@@ -111,8 +111,7 @@ Public Class frmHistorie
             For Each row2 As DataRow In dt2.Rows
                 'Per naam
                 inaam += 1
-                Application.DoEvents()
-                Application.DoEvents()
+                'Application.DoEvents()
 
                 sql = $"SELECT * FROM Loting2 WHERE Naamid = {row("Naamid")} AND Seizoenid = {seizoenid} AND Serieid = {serieid} AND Serienummer = '{row2("Serienummer")}'"
                 Dim dt3 = Selecteer(sql)
@@ -121,7 +120,6 @@ Public Class frmHistorie
                     dgvLoting.Rows(iRow).Cells(iCol).Value = "-"
                 Else
                     'Plaats
-
                     If cboSerie.SelectedValue = 9 Then
                         'dgvLoting.Rows(iRow).Cells(iCol).Value = $"{Plaatsrow("Onderboven")}{Plaatsrow("Plaats")}"
                     Else

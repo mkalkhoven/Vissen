@@ -4,6 +4,10 @@
 
         'Return Getid(dgv.SelectedRows)
 
+        For Each row As DataGridViewRow In dgv.SelectedRows
+            Return Getid(row)
+        Next
+        Return 0
     End Function
     Public Function Getid(row As DataGridViewRow) As Long
         Return row.Cells(0).Value
@@ -28,12 +32,17 @@
             dgv.Columns(0).Visible = false
 
     End Sub
-    public sub Toonmelding(melding as string)
+    Public Sub Toonmelding(melding As String)
 
         MessageBox.Show(melding, "Vissen", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-    End sub
-    public sub Kleurregel(regel As DataGridViewRow)
+    End Sub
+    Public Function Toonvraag(vraag As String) As DialogResult
+
+        Return MessageBox.Show(vraag, "Vissen", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+    End Function
+    Public sub Kleurregel(regel As DataGridViewRow)
 
             regel.DefaultCellStyle.BackColor  = Color.Yellow
 

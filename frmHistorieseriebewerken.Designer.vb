@@ -22,6 +22,7 @@ Partial Class frmHistorieseriebewerken
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnSluiten = New System.Windows.Forms.Button()
         Me.lblSeizoen = New System.Windows.Forms.Label()
         Me.lblSerie = New System.Windows.Forms.Label()
@@ -29,13 +30,16 @@ Partial Class frmHistorieseriebewerken
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblDatum = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.dgvloting = New System.Windows.Forms.DataGridView()
-        CType(Me.dgvloting, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgvLoting = New System.Windows.Forms.DataGridView()
+        Me.btnOpslaan = New System.Windows.Forms.Button()
+        Me.btnNieuw = New System.Windows.Forms.Button()
+        Me.btnVerwijderen = New System.Windows.Forms.Button()
+        CType(Me.dgvLoting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSluiten
         '
-        Me.btnSluiten.Location = New System.Drawing.Point(631, 15)
+        Me.btnSluiten.Location = New System.Drawing.Point(444, 101)
         Me.btnSluiten.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.btnSluiten.Name = "btnSluiten"
         Me.btnSluiten.Size = New System.Drawing.Size(143, 42)
@@ -55,7 +59,7 @@ Partial Class frmHistorieseriebewerken
         'lblSerie
         '
         Me.lblSerie.AutoSize = True
-        Me.lblSerie.Location = New System.Drawing.Point(282, 15)
+        Me.lblSerie.Location = New System.Drawing.Point(99, 66)
         Me.lblSerie.Name = "lblSerie"
         Me.lblSerie.Size = New System.Drawing.Size(52, 24)
         Me.lblSerie.TabIndex = 308
@@ -73,7 +77,7 @@ Partial Class frmHistorieseriebewerken
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(195, 15)
+        Me.Label1.Location = New System.Drawing.Point(12, 66)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(59, 24)
         Me.Label1.TabIndex = 306
@@ -82,7 +86,7 @@ Partial Class frmHistorieseriebewerken
         'lblDatum
         '
         Me.lblDatum.AutoSize = True
-        Me.lblDatum.Location = New System.Drawing.Point(465, 15)
+        Me.lblDatum.Location = New System.Drawing.Point(99, 39)
         Me.lblDatum.Name = "lblDatum"
         Me.lblDatum.Size = New System.Drawing.Size(66, 24)
         Me.lblDatum.TabIndex = 312
@@ -91,34 +95,72 @@ Partial Class frmHistorieseriebewerken
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(378, 15)
+        Me.Label6.Location = New System.Drawing.Point(12, 39)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(73, 24)
         Me.Label6.TabIndex = 310
         Me.Label6.Text = "Datum:"
         '
-        'dgvloting
+        'dgvLoting
         '
-        Me.dgvloting.AllowUserToAddRows = False
-        Me.dgvloting.AllowUserToDeleteRows = False
-        Me.dgvloting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvloting.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvloting.Location = New System.Drawing.Point(16, 42)
-        Me.dgvloting.MultiSelect = False
-        Me.dgvloting.Name = "dgvloting"
-        Me.dgvloting.RowHeadersVisible = False
-        Me.dgvloting.RowTemplate.Height = 27
-        Me.dgvloting.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dgvloting.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvloting.Size = New System.Drawing.Size(562, 639)
-        Me.dgvloting.TabIndex = 313
+        Me.dgvLoting.AllowUserToAddRows = False
+        Me.dgvLoting.AllowUserToDeleteRows = False
+        Me.dgvLoting.AllowUserToResizeColumns = False
+        Me.dgvLoting.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvLoting.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvLoting.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvLoting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvLoting.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dgvLoting.Location = New System.Drawing.Point(16, 101)
+        Me.dgvLoting.Margin = New System.Windows.Forms.Padding(11)
+        Me.dgvLoting.MultiSelect = False
+        Me.dgvLoting.Name = "dgvLoting"
+        Me.dgvLoting.RowHeadersVisible = False
+        Me.dgvLoting.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader
+        Me.dgvLoting.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvLoting.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvLoting.Size = New System.Drawing.Size(415, 582)
+        Me.dgvLoting.TabIndex = 313
+        Me.dgvLoting.VirtualMode = True
+        '
+        'btnOpslaan
+        '
+        Me.btnOpslaan.Location = New System.Drawing.Point(444, 152)
+        Me.btnOpslaan.Name = "btnOpslaan"
+        Me.btnOpslaan.Size = New System.Drawing.Size(143, 42)
+        Me.btnOpslaan.TabIndex = 315
+        Me.btnOpslaan.Text = "Opslaan"
+        Me.btnOpslaan.UseVisualStyleBackColor = True
+        '
+        'btnNieuw
+        '
+        Me.btnNieuw.Location = New System.Drawing.Point(444, 200)
+        Me.btnNieuw.Name = "btnNieuw"
+        Me.btnNieuw.Size = New System.Drawing.Size(143, 42)
+        Me.btnNieuw.TabIndex = 316
+        Me.btnNieuw.Text = "Nieuw"
+        Me.btnNieuw.UseVisualStyleBackColor = True
+        '
+        'btnVerwijderen
+        '
+        Me.btnVerwijderen.Location = New System.Drawing.Point(444, 248)
+        Me.btnVerwijderen.Name = "btnVerwijderen"
+        Me.btnVerwijderen.Size = New System.Drawing.Size(143, 42)
+        Me.btnVerwijderen.TabIndex = 317
+        Me.btnVerwijderen.Text = "Verwijderen"
+        Me.btnVerwijderen.UseVisualStyleBackColor = True
         '
         'frmHistorieseriebewerken
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(788, 693)
-        Me.Controls.Add(Me.dgvloting)
+        Me.ClientSize = New System.Drawing.Size(601, 693)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.btnVerwijderen)
+        Me.Controls.Add(Me.btnNieuw)
+        Me.Controls.Add(Me.btnOpslaan)
+        Me.Controls.Add(Me.dgvLoting)
         Me.Controls.Add(Me.lblDatum)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblSeizoen)
@@ -133,7 +175,7 @@ Partial Class frmHistorieseriebewerken
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmHistorieseriebewerken"
-        CType(Me.dgvloting, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvLoting, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -146,5 +188,8 @@ Partial Class frmHistorieseriebewerken
     Friend WithEvents Label1 As Label
     Friend WithEvents lblDatum As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents dgvloting As DataGridView
+    Friend WithEvents dgvLoting As DataGridView
+    Friend WithEvents btnOpslaan As Button
+    Friend WithEvents btnNieuw As Button
+    Friend WithEvents btnVerwijderen As Button
 End Class

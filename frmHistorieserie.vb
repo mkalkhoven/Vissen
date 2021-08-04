@@ -41,6 +41,10 @@ Public Class frmHistorieserie
 
     Private Sub btnBewerken_Click(sender As Object, e As EventArgs) Handles btnBewerken.Click
 
+        If dgvloting.SelectedRows.Count = 0 Then
+            Return
+        End If
+
         Dim datumid = Selecteerid(dgvloting, "Id")
         Dim datum = Datumweeretcrepo.Get(datumid)
 

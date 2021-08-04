@@ -92,6 +92,12 @@
     <Compile Include="frmHistorie.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmHistorienieuw.Designer.vb">
+      <DependentUpon>frmHistorienieuw.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHistorienieuw.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmHistorieserie.Designer.vb">
       <DependentUpon>frmHistorieserie.vb</DependentUpon>
     </Compile>
@@ -164,6 +170,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmHistorie.resx">
       <DependentUpon>frmHistorie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHistorienieuw.resx">
+      <DependentUpon>frmHistorienieuw.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHistorieserie.resx">
       <DependentUpon>frmHistorieserie.vb</DependentUpon>
