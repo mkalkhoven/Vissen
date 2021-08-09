@@ -36,8 +36,12 @@ Partial Class FrmNaambewerken
         Me.chkkoppelvissen = New System.Windows.Forms.CheckBox()
         Me.chkWintervissen = New System.Windows.Forms.CheckBox()
         Me.chkVerwijderd = New System.Windows.Forms.CheckBox()
-        Me.cboPatner = New System.Windows.Forms.ComboBox()
+        Me.cboPartnervijftigplus = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboPartnersenioren = New System.Windows.Forms.ComboBox()
+        Me.cboPartnerjeugd = New System.Windows.Forms.ComboBox()
+        Me.cboPartnerkoppelvissen = New System.Windows.Forms.ComboBox()
+        Me.cboPartnerwinter = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'btnOpslaan
@@ -77,7 +81,7 @@ Partial Class FrmNaambewerken
         'chkVijftigplus
         '
         Me.chkVijftigplus.AutoSize = True
-        Me.chkVijftigplus.Location = New System.Drawing.Point(184, 173)
+        Me.chkVijftigplus.Location = New System.Drawing.Point(18, 161)
         Me.chkVijftigplus.Name = "chkVijftigplus"
         Me.chkVijftigplus.Size = New System.Drawing.Size(90, 28)
         Me.chkVijftigplus.TabIndex = 5
@@ -119,7 +123,7 @@ Partial Class FrmNaambewerken
         'chkSenioren
         '
         Me.chkSenioren.AutoSize = True
-        Me.chkSenioren.Location = New System.Drawing.Point(184, 207)
+        Me.chkSenioren.Location = New System.Drawing.Point(18, 199)
         Me.chkSenioren.Name = "chkSenioren"
         Me.chkSenioren.Size = New System.Drawing.Size(101, 28)
         Me.chkSenioren.TabIndex = 10
@@ -129,7 +133,7 @@ Partial Class FrmNaambewerken
         'chkjeugd
         '
         Me.chkjeugd.AutoSize = True
-        Me.chkjeugd.Location = New System.Drawing.Point(184, 241)
+        Me.chkjeugd.Location = New System.Drawing.Point(18, 237)
         Me.chkjeugd.Name = "chkjeugd"
         Me.chkjeugd.Size = New System.Drawing.Size(79, 28)
         Me.chkjeugd.TabIndex = 11
@@ -139,7 +143,7 @@ Partial Class FrmNaambewerken
         'chkkoppelvissen
         '
         Me.chkkoppelvissen.AutoSize = True
-        Me.chkkoppelvissen.Location = New System.Drawing.Point(184, 275)
+        Me.chkkoppelvissen.Location = New System.Drawing.Point(18, 275)
         Me.chkkoppelvissen.Name = "chkkoppelvissen"
         Me.chkkoppelvissen.Size = New System.Drawing.Size(137, 28)
         Me.chkkoppelvissen.TabIndex = 12
@@ -149,7 +153,7 @@ Partial Class FrmNaambewerken
         'chkWintervissen
         '
         Me.chkWintervissen.AutoSize = True
-        Me.chkWintervissen.Location = New System.Drawing.Point(184, 309)
+        Me.chkWintervissen.Location = New System.Drawing.Point(18, 313)
         Me.chkWintervissen.Name = "chkWintervissen"
         Me.chkWintervissen.Size = New System.Drawing.Size(135, 28)
         Me.chkWintervissen.TabIndex = 13
@@ -159,38 +163,83 @@ Partial Class FrmNaambewerken
         'chkVerwijderd
         '
         Me.chkVerwijderd.AutoSize = True
-        Me.chkVerwijderd.Location = New System.Drawing.Point(184, 343)
+        Me.chkVerwijderd.Location = New System.Drawing.Point(18, 371)
         Me.chkVerwijderd.Name = "chkVerwijderd"
         Me.chkVerwijderd.Size = New System.Drawing.Size(122, 28)
         Me.chkVerwijderd.TabIndex = 14
         Me.chkVerwijderd.Text = "Verwijderd"
         Me.chkVerwijderd.UseVisualStyleBackColor = True
         '
-        'cboPatner
+        'cboPartnervijftigplus
         '
-        Me.cboPatner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPatner.FormattingEnabled = True
-        Me.cboPatner.Location = New System.Drawing.Point(184, 123)
-        Me.cboPatner.Name = "cboPatner"
-        Me.cboPatner.Size = New System.Drawing.Size(340, 32)
-        Me.cboPatner.TabIndex = 15
+        Me.cboPartnervijftigplus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPartnervijftigplus.Enabled = False
+        Me.cboPartnervijftigplus.FormattingEnabled = True
+        Me.cboPartnervijftigplus.Location = New System.Drawing.Point(184, 159)
+        Me.cboPartnervijftigplus.Name = "cboPartnervijftigplus"
+        Me.cboPartnervijftigplus.Size = New System.Drawing.Size(260, 32)
+        Me.cboPartnervijftigplus.TabIndex = 15
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 126)
+        Me.Label1.Location = New System.Drawing.Point(180, 132)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(72, 24)
         Me.Label1.TabIndex = 16
         Me.Label1.Text = "Partner"
         '
+        'cboPartnersenioren
+        '
+        Me.cboPartnersenioren.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPartnersenioren.Enabled = False
+        Me.cboPartnersenioren.FormattingEnabled = True
+        Me.cboPartnersenioren.Location = New System.Drawing.Point(184, 197)
+        Me.cboPartnersenioren.Name = "cboPartnersenioren"
+        Me.cboPartnersenioren.Size = New System.Drawing.Size(260, 32)
+        Me.cboPartnersenioren.TabIndex = 17
+        '
+        'cboPartnerjeugd
+        '
+        Me.cboPartnerjeugd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPartnerjeugd.Enabled = False
+        Me.cboPartnerjeugd.FormattingEnabled = True
+        Me.cboPartnerjeugd.Location = New System.Drawing.Point(184, 235)
+        Me.cboPartnerjeugd.Name = "cboPartnerjeugd"
+        Me.cboPartnerjeugd.Size = New System.Drawing.Size(260, 32)
+        Me.cboPartnerjeugd.TabIndex = 18
+        '
+        'cboPartnerkoppelvissen
+        '
+        Me.cboPartnerkoppelvissen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPartnerkoppelvissen.Enabled = False
+        Me.cboPartnerkoppelvissen.FormattingEnabled = True
+        Me.cboPartnerkoppelvissen.Location = New System.Drawing.Point(184, 273)
+        Me.cboPartnerkoppelvissen.Name = "cboPartnerkoppelvissen"
+        Me.cboPartnerkoppelvissen.Size = New System.Drawing.Size(260, 32)
+        Me.cboPartnerkoppelvissen.TabIndex = 19
+        '
+        'cboPartnerwinter
+        '
+        Me.cboPartnerwinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPartnerwinter.Enabled = False
+        Me.cboPartnerwinter.FormattingEnabled = True
+        Me.cboPartnerwinter.Location = New System.Drawing.Point(184, 311)
+        Me.cboPartnerwinter.Name = "cboPartnerwinter"
+        Me.cboPartnerwinter.Size = New System.Drawing.Size(260, 32)
+        Me.cboPartnerwinter.TabIndex = 20
+        '
         'FrmNaambewerken
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(656, 379)
+        Me.ClientSize = New System.Drawing.Size(656, 417)
+        Me.Controls.Add(Me.cboPartnerwinter)
+        Me.Controls.Add(Me.cboPartnerkoppelvissen)
+        Me.Controls.Add(Me.cboPartnerjeugd)
+        Me.Controls.Add(Me.cboPartnersenioren)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cboPatner)
+        Me.Controls.Add(Me.cboPartnervijftigplus)
         Me.Controls.Add(Me.chkVerwijderd)
         Me.Controls.Add(Me.chkWintervissen)
         Me.Controls.Add(Me.chkkoppelvissen)
@@ -231,6 +280,10 @@ End Sub
     Friend WithEvents chkkoppelvissen As CheckBox
     Friend WithEvents chkWintervissen As CheckBox
     Friend WithEvents chkVerwijderd As CheckBox
-    Friend WithEvents cboPatner As ComboBox
+    Friend WithEvents cboPartnervijftigplus As ComboBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents cboPartnersenioren As ComboBox
+    Friend WithEvents cboPartnerjeugd As ComboBox
+    Friend WithEvents cboPartnerkoppelvissen As ComboBox
+    Friend WithEvents cboPartnerwinter As ComboBox
 End Class
