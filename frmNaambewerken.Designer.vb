@@ -36,36 +36,38 @@ Partial Class FrmNaambewerken
         Me.chkkoppelvissen = New System.Windows.Forms.CheckBox()
         Me.chkWintervissen = New System.Windows.Forms.CheckBox()
         Me.chkVerwijderd = New System.Windows.Forms.CheckBox()
-        Me.SuspendLayout
+        Me.cboPatner = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.SuspendLayout()
         '
         'btnOpslaan
         '
-        Me.btnOpslaan.Location = New System.Drawing.Point(647, 12)
+        Me.btnOpslaan.Location = New System.Drawing.Point(530, 15)
         Me.btnOpslaan.Name = "btnOpslaan"
         Me.btnOpslaan.Size = New System.Drawing.Size(119, 53)
         Me.btnOpslaan.TabIndex = 1
         Me.btnOpslaan.Text = "Opslaan"
-        Me.btnOpslaan.UseVisualStyleBackColor = true
+        Me.btnOpslaan.UseVisualStyleBackColor = True
         '
         'btnSluiten
         '
-        Me.btnSluiten.Location = New System.Drawing.Point(647, 71)
+        Me.btnSluiten.Location = New System.Drawing.Point(530, 74)
         Me.btnSluiten.Name = "btnSluiten"
         Me.btnSluiten.Size = New System.Drawing.Size(119, 53)
         Me.btnSluiten.TabIndex = 2
         Me.btnSluiten.Text = "Sluiten"
-        Me.btnSluiten.UseVisualStyleBackColor = true
+        Me.btnSluiten.UseVisualStyleBackColor = True
         '
         'txtAchternaam
         '
         Me.txtAchternaam.Location = New System.Drawing.Point(184, 15)
         Me.txtAchternaam.Name = "txtAchternaam"
-        Me.txtAchternaam.Size = New System.Drawing.Size(178, 30)
+        Me.txtAchternaam.Size = New System.Drawing.Size(340, 30)
         Me.txtAchternaam.TabIndex = 3
         '
         'lblAchternaam
         '
-        Me.lblAchternaam.AutoSize = true
+        Me.lblAchternaam.AutoSize = True
         Me.lblAchternaam.Location = New System.Drawing.Point(12, 15)
         Me.lblAchternaam.Name = "lblAchternaam"
         Me.lblAchternaam.Size = New System.Drawing.Size(111, 24)
@@ -74,17 +76,17 @@ Partial Class FrmNaambewerken
         '
         'chkVijftigplus
         '
-        Me.chkVijftigplus.AutoSize = true
-        Me.chkVijftigplus.Location = New System.Drawing.Point(184, 143)
+        Me.chkVijftigplus.AutoSize = True
+        Me.chkVijftigplus.Location = New System.Drawing.Point(184, 173)
         Me.chkVijftigplus.Name = "chkVijftigplus"
         Me.chkVijftigplus.Size = New System.Drawing.Size(90, 28)
         Me.chkVijftigplus.TabIndex = 5
         Me.chkVijftigplus.Text = "50 plus"
-        Me.chkVijftigplus.UseVisualStyleBackColor = true
+        Me.chkVijftigplus.UseVisualStyleBackColor = True
         '
         'lblTussenvoehsel
         '
-        Me.lblTussenvoehsel.AutoSize = true
+        Me.lblTussenvoehsel.AutoSize = True
         Me.lblTussenvoehsel.Location = New System.Drawing.Point(12, 51)
         Me.lblTussenvoehsel.Name = "lblTussenvoehsel"
         Me.lblTussenvoehsel.Size = New System.Drawing.Size(128, 24)
@@ -100,7 +102,7 @@ Partial Class FrmNaambewerken
         '
         'lblVoornaam
         '
-        Me.lblVoornaam.AutoSize = true
+        Me.lblVoornaam.AutoSize = True
         Me.lblVoornaam.Location = New System.Drawing.Point(12, 87)
         Me.lblVoornaam.Name = "lblVoornaam"
         Me.lblVoornaam.Size = New System.Drawing.Size(93, 24)
@@ -111,64 +113,84 @@ Partial Class FrmNaambewerken
         '
         Me.txtVoornaam.Location = New System.Drawing.Point(184, 87)
         Me.txtVoornaam.Name = "txtVoornaam"
-        Me.txtVoornaam.Size = New System.Drawing.Size(178, 30)
+        Me.txtVoornaam.Size = New System.Drawing.Size(340, 30)
         Me.txtVoornaam.TabIndex = 8
         '
         'chkSenioren
         '
-        Me.chkSenioren.AutoSize = true
-        Me.chkSenioren.Location = New System.Drawing.Point(184, 177)
+        Me.chkSenioren.AutoSize = True
+        Me.chkSenioren.Location = New System.Drawing.Point(184, 207)
         Me.chkSenioren.Name = "chkSenioren"
         Me.chkSenioren.Size = New System.Drawing.Size(101, 28)
         Me.chkSenioren.TabIndex = 10
         Me.chkSenioren.Text = "Senioren"
-        Me.chkSenioren.UseVisualStyleBackColor = true
+        Me.chkSenioren.UseVisualStyleBackColor = True
         '
         'chkjeugd
         '
-        Me.chkjeugd.AutoSize = true
-        Me.chkjeugd.Location = New System.Drawing.Point(184, 211)
+        Me.chkjeugd.AutoSize = True
+        Me.chkjeugd.Location = New System.Drawing.Point(184, 241)
         Me.chkjeugd.Name = "chkjeugd"
         Me.chkjeugd.Size = New System.Drawing.Size(79, 28)
         Me.chkjeugd.TabIndex = 11
         Me.chkjeugd.Text = "Jeugd"
-        Me.chkjeugd.UseVisualStyleBackColor = true
+        Me.chkjeugd.UseVisualStyleBackColor = True
         '
         'chkkoppelvissen
         '
-        Me.chkkoppelvissen.AutoSize = true
-        Me.chkkoppelvissen.Location = New System.Drawing.Point(184, 245)
+        Me.chkkoppelvissen.AutoSize = True
+        Me.chkkoppelvissen.Location = New System.Drawing.Point(184, 275)
         Me.chkkoppelvissen.Name = "chkkoppelvissen"
         Me.chkkoppelvissen.Size = New System.Drawing.Size(137, 28)
         Me.chkkoppelvissen.TabIndex = 12
         Me.chkkoppelvissen.Text = "Koppelvissen"
-        Me.chkkoppelvissen.UseVisualStyleBackColor = true
+        Me.chkkoppelvissen.UseVisualStyleBackColor = True
         '
         'chkWintervissen
         '
-        Me.chkWintervissen.AutoSize = true
-        Me.chkWintervissen.Location = New System.Drawing.Point(184, 279)
+        Me.chkWintervissen.AutoSize = True
+        Me.chkWintervissen.Location = New System.Drawing.Point(184, 309)
         Me.chkWintervissen.Name = "chkWintervissen"
         Me.chkWintervissen.Size = New System.Drawing.Size(135, 28)
         Me.chkWintervissen.TabIndex = 13
         Me.chkWintervissen.Text = "Wintervissen"
-        Me.chkWintervissen.UseVisualStyleBackColor = true
+        Me.chkWintervissen.UseVisualStyleBackColor = True
         '
         'chkVerwijderd
         '
-        Me.chkVerwijderd.AutoSize = true
-        Me.chkVerwijderd.Location = New System.Drawing.Point(184, 313)
+        Me.chkVerwijderd.AutoSize = True
+        Me.chkVerwijderd.Location = New System.Drawing.Point(184, 343)
         Me.chkVerwijderd.Name = "chkVerwijderd"
         Me.chkVerwijderd.Size = New System.Drawing.Size(122, 28)
         Me.chkVerwijderd.TabIndex = 14
         Me.chkVerwijderd.Text = "Verwijderd"
-        Me.chkVerwijderd.UseVisualStyleBackColor = true
+        Me.chkVerwijderd.UseVisualStyleBackColor = True
+        '
+        'cboPatner
+        '
+        Me.cboPatner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPatner.FormattingEnabled = True
+        Me.cboPatner.Location = New System.Drawing.Point(184, 123)
+        Me.cboPatner.Name = "cboPatner"
+        Me.cboPatner.Size = New System.Drawing.Size(340, 32)
+        Me.cboPatner.TabIndex = 15
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 126)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 24)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "Partner"
         '
         'FrmNaambewerken
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(778, 438)
+        Me.ClientSize = New System.Drawing.Size(656, 379)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.cboPatner)
         Me.Controls.Add(Me.chkVerwijderd)
         Me.Controls.Add(Me.chkWintervissen)
         Me.Controls.Add(Me.chkkoppelvissen)
@@ -209,4 +231,6 @@ End Sub
     Friend WithEvents chkkoppelvissen As CheckBox
     Friend WithEvents chkWintervissen As CheckBox
     Friend WithEvents chkVerwijderd As CheckBox
+    Friend WithEvents cboPatner As ComboBox
+    Friend WithEvents Label1 As Label
 End Class

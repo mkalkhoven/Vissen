@@ -6,6 +6,11 @@ Public Class FrmNaambewerken
         
         Icon = FrmMain.Icon
 
+        Dim Namen = Namenrepo.Get(Naam.Vijftigplus, Naam.Senioren, Naam.Winter, Naam.Jeugd, Naam.Koppelvissen)
+        cboPatner.DataSource = Namen
+        cboPatner.DisplayMember = "Naam"
+        cboPatner.ValueMember = "NaamId"
+
         If Not IsNothing(Naam) Then
             txtAchternaam.Text = Naam.Achternaam
             txtVoornaam.Text = Naam.Voornaam
@@ -17,6 +22,11 @@ Public Class FrmNaambewerken
             chkjeugd.Checked = Naam.Jeugd
             chkkoppelvissen.Checked = Naam.Koppelvissen
             chkVerwijderd.Checked = Naam.Verwijderd
+
+            If Not IsNothing(Naam.Partnerid) Then
+                cboPatner.SelectedValue = Naam.Partnerid
+            End If
+
         Else 
             Naam = New Namen()
         End If
@@ -45,6 +55,11 @@ Public Class FrmNaambewerken
         Naam.Jeugd = chkjeugd.Checked
         Naam.Koppelvissen = chkkoppelvissen.Checked
         Naam.Verwijderd = chkVerwijderd.Checked
+
+        If cboPatner.SelectedIndex > 0 Then
+            Naam.Partnerid = Long.Parse(cboPatner.SelectedValue.ToString())
+        End If
+
         Namenrepo.Save(Naam)
         If Not Naam.NaamID.HasValue
             Naam.NaamID = Naam.Id + 1000
