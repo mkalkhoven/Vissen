@@ -73,7 +73,6 @@ Partial Class FrmMain
         Me.lblMelding = New System.Windows.Forms.Label()
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
         CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMouse.SuspendLayout()
@@ -211,7 +210,7 @@ Partial Class FrmMain
         'lblUitslagid2
         '
         Me.lblUitslagid2.AutoSize = True
-        Me.lblUitslagid2.Location = New System.Drawing.Point(421, 117)
+        Me.lblUitslagid2.Location = New System.Drawing.Point(523, 117)
         Me.lblUitslagid2.Name = "lblUitslagid2"
         Me.lblUitslagid2.Size = New System.Drawing.Size(95, 24)
         Me.lblUitslagid2.TabIndex = 168
@@ -425,7 +424,6 @@ Partial Class FrmMain
         'txtNaam1
         '
         Me.txtNaam1.BackColor = System.Drawing.Color.White
-        Me.txtNaam1.Enabled = False
         Me.txtNaam1.Location = New System.Drawing.Point(6, 43)
         Me.txtNaam1.Name = "txtNaam1"
         Me.txtNaam1.ReadOnly = True
@@ -488,7 +486,6 @@ Partial Class FrmMain
         'txtNaam2
         '
         Me.txtNaam2.BackColor = System.Drawing.Color.White
-        Me.txtNaam2.Enabled = False
         Me.txtNaam2.Location = New System.Drawing.Point(6, 79)
         Me.txtNaam2.Name = "txtNaam2"
         Me.txtNaam2.ReadOnly = True
@@ -555,15 +552,6 @@ Partial Class FrmMain
         Me.btnVisser.UseVisualStyleBackColor = True
         Me.btnVisser.Visible = False
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(939, 373)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(168, 171)
-        Me.Button1.TabIndex = 185
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'btnLoting
         '
         Me.btnLoting.Location = New System.Drawing.Point(699, 714)
@@ -579,7 +567,6 @@ Partial Class FrmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1343, 831)
         Me.Controls.Add(Me.btnLoting)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
         Me.Controls.Add(Me.lblMelding)
@@ -662,6 +649,5 @@ End Sub
     Friend WithEvents lblMelding As Label
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents btnLoting As Button
 End Class
