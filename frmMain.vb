@@ -653,8 +653,10 @@ Public Class FrmMain
                 nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
                 nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
                 Nachtvissenrepo.Save(nachtvis)
+                Vuluitslaggrid(_datum)
                 Optellen()
                 nachtvis = Nothing
+                Return
             Case 12, 13 'Jeugd
                 'naam, gewicht en aantal
                 If String.IsNullOrEmpty(txtNaam1.Text) Or String.IsNullOrEmpty(txtGewicht1.Text) Or String.IsNullOrEmpty(txtAantal.Text) Then
@@ -689,12 +691,12 @@ Public Class FrmMain
 
         Legen()
 
-        Uitslagenrepo.Save(_uitslag)
+        'Uitslagenrepo.Save(_uitslag)
 
         If _uitslag.IDdatum = 0 Then
             _uitslag.IDdatum = _uitslag.Uitslagid
-            Uitslagenrepo.Save(_uitslag)
         End If
+        Uitslagenrepo.Save(_uitslag)
 
         btnOpslaan.Enabled = False
 
@@ -871,31 +873,36 @@ Public Class FrmMain
 
     Private Sub VerwijderenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerwijderenToolStripMenuItem.Click
 
-        If MessageBox.Show("Wilt u de geselecteerde naam verwijderen", "Verwijderen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+        Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
 
-            Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
-
-            If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
-                Nachtvissenrepo.Delete(id)
-                Vuluitslaggrid(_datum)
-                Return
-            End If
-
-            Legen()
-
-            Uitslagenrepo.Delete(id)
-
-            Vuluitslaggrid(_datum)
-
-            Berekenpunten()
-
-            _deelnemer1 = Nothing
-            lblUitslagid1.Text = ""
-            txtNaam1.Text = ""
-            txtGewicht1.Text = ""
+        If id = 0 Then
+            Return
         End If
 
-        Legen()
+        If MessageBox.Show("Wilt u de geselecteerde naam verwijderen", "Verwijderen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
+                Nachtvissenrepo.Delete(id)
+            End If
+        Else
+            dgvUitslagen.ClearSelection()
+            Legen()
+            Return
+        End If
+
+        _deelnemer1 = Nothing
+        _deelnemer2 = Nothing
+        Vuluitslaggrid(_datum)
+        Berekenpunten()
+        lblUitslagid1.Text = ""
+        txtNaam1.Text = ""
+        txtGewicht1.Text = ""
+        txtNaam2.Text = ""
+        txtGewicht2.Text = ""
+
+        Vuluitslaggrid(_datum)
+
+        dgvUitslagen.ClearSelection()
+        dgvnamen.ClearSelection()
 
     End Sub
 
@@ -1015,29 +1022,6 @@ Public Class FrmMain
         Optellen()
 
     End Sub
-
-    'Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-    '    Dim sql = "SELECT DISTINCT Datum FROM Loting2"
-    '    Dim dt = Selecteer(sql)
-
-    '    For Each row As DataRow In dt.Rows
-    '        Dim datum = row("Datum")
-    '        sql = $"SELECT * FROM Agenda WHERE Datum = {GetISODate(datum)}"
-    '        Dim dtagenda = Selecteeragenda(sql)
-    '        If dtagenda.Rows.Count = 1 Then
-    '            Dim serienummer As String = dtagenda.Rows(0)("Serie").ToString()
-    '            If Not serienummer.Contains(".") Then
-    '                serienummer = $"{serienummer}."
-    '            End If
-    '            sql = $"UPDATE Loting2 SET Serienummer = '{serienummer}' WHERE Datum = {GetISODate(datum)}"
-    '            Uitvoeren(sql)
-
-    '        End If
-    '    Next
-
-    'End Sub
-
     Private Sub btnLoting_Click(sender As Object, e As EventArgs) Handles btnLoting.Click
 
         frmHistorie.ShowDialog()
@@ -1052,6 +1036,9 @@ Public Class FrmMain
         If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) Then
             If id > 0 Then
                 nachtvis = Nachtvissenrepo.Get(id)
+                If IsNothing(nachtvis) Then
+                    Return
+                End If
                 _deelnemer1 = Namenrepo.Getbyoldid(Long.Parse(nachtvis.Deelnemerid1.ToString))
                 _deelnemer2 = Namenrepo.Getbyoldid(Long.Parse(nachtvis.Deelnemerid2.ToString))
 
@@ -1081,7 +1068,7 @@ Public Class FrmMain
         End If
         txtGewicht1.Enabled = True
         txtGewicht2.Enabled = True
-        dgvUitslagen.ClearSelection()
+        'dgvUitslagen.ClearSelection()
 
     End Sub
 End Class
