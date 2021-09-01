@@ -334,7 +334,7 @@ Public Class FrmMain
         Vuldetails(datum)
         dgvUitslagen.DataSource = Nothing
         If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
-            Dim sql = $"SELECT * FROM Nachtvissen WHERE ID = {datum.ID} ORDER BY Gewicht DESC"
+            Dim sql = $"SELECT * FROM Nachtvissen WHERE ID = {datum.ID} ORDER BY Gewicht DESC, Hoogstegewicht DESC"
             Dim dt = Selecteer(sql)
             Dim koppeluitslag = New List(Of Uitslag)
             Dim totaal As Long = 0
@@ -650,6 +650,13 @@ Public Class FrmMain
                 nachtvis.Gewicht1 = Long.Parse(txtGewicht1.Text)
                 nachtvis.Deelnemerid2 = _deelnemer2.NaamID
                 nachtvis.Gewicht2 = Long.Parse(txtGewicht2.Text)
+
+                If nachtvis.Gewicht1 >= nachtvis.Gewicht2 Then
+                    nachtvis.Hoogstegewicht = nachtvis.Gewicht1
+                Else
+                    nachtvis.Hoogstegewicht = nachtvis.Gewicht2
+                End If
+
                 nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
                 nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
                 Nachtvissenrepo.Save(nachtvis)
@@ -705,14 +712,11 @@ Public Class FrmMain
 
     End Sub
     Private Sub Berekenpunten()
-        Dim gedeeldepunten As Double = 0
-        Dim bevateennul = False
-        Dim gedaan = 0
+
         Dim punten As Double = 1
         Dim plaats As Long = 0
         Dim naamserie = Naamserierepo.Get(_datum.SerieNaamNr)
         Dim uitslagen = Uitslagenrepo.Get(_datum)
-        Dim klaar = 0
         Dim teller = 0
 
         While teller < uitslagen.Count - 1
@@ -727,7 +731,7 @@ Public Class FrmMain
                     punten += 1
                 End If
             Else
-                gedeeldepunten = 0
+                Dim gedeeldepunten As Double = 0
                 For i = 1 To aantal
                     gedeeldepunten += punten
                     If punten <= naamserie.Maxaantal Then
@@ -1069,6 +1073,25 @@ Public Class FrmMain
         txtGewicht1.Enabled = True
         txtGewicht2.Enabled = True
         'dgvUitslagen.ClearSelection()
+
+    End Sub
+
+    Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
+
+        Dim nachtvissen = Nachtvissenrepo.Get()
+        For Each vis In nachtvissen
+            If IsNothing(vis.Gewicht1) And IsNothing(vis.Gewicht2) Then
+                vis.Gewicht1 = vis.Gewicht / 2
+                vis.Gewicht2 = vis.Gewicht / 2
+            End If
+
+            If vis.Gewicht1 >= vis.Gewicht2 Then
+                vis.Hoogstegewicht = vis.Gewicht1
+            Else
+                vis.Hoogstegewicht = vis.Gewicht2
+            End If
+            Nachtvissenrepo.Save(vis)
+        Next
 
     End Sub
 End Class

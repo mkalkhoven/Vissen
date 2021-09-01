@@ -74,6 +74,7 @@ Partial Class FrmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
+        Me.btnTest = New System.Windows.Forms.Button()
         CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMouse.SuspendLayout()
         CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -561,11 +562,21 @@ Partial Class FrmMain
         Me.btnLoting.Text = "Loting"
         Me.btnLoting.UseVisualStyleBackColor = True
         '
+        'btnTest
+        '
+        Me.btnTest.Location = New System.Drawing.Point(1048, 320)
+        Me.btnTest.Name = "btnTest"
+        Me.btnTest.Size = New System.Drawing.Size(240, 179)
+        Me.btnTest.TabIndex = 187
+        Me.btnTest.Text = "Test"
+        Me.btnTest.UseVisualStyleBackColor = True
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1343, 831)
+        Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -650,4 +661,5 @@ End Sub
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
+    Friend WithEvents btnTest As Button
 End Class
