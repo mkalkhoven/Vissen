@@ -59,8 +59,8 @@ Public Class Frmklassement
 
         if Serie.Naam.ToLower().Contains("jeugd") Then
             sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalgewicht DESC"
-        else
-            sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {Kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten ASC"
+        Else
+            sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten ASC, k.Totaalgewicht DESC"
         End If
         Dim dt = Selecteer(sql)
 

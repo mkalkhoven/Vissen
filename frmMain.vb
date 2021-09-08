@@ -727,15 +727,19 @@ Public Class FrmMain
                 uitslag.Punten = punten
                 Uitslagenrepo.Save(uitslag)
                 teller += 1
-                If punten <= naamserie.Maxaantal Then
+                If punten < naamserie.Maxaantal Then
                     punten += 1
+                Else
+                    punten = naamserie.Maxaantal
                 End If
             Else
                 Dim gedeeldepunten As Double = 0
                 For i = 1 To aantal
                     gedeeldepunten += punten
-                    If punten <= naamserie.Maxaantal Then
+                    If punten < naamserie.Maxaantal Then
                         punten += 1
+                    Else
+                        punten = naamserie.Maxaantal
                     End If
                 Next
                 For i = 1 To aantal
@@ -1073,25 +1077,6 @@ Public Class FrmMain
         txtGewicht1.Enabled = True
         txtGewicht2.Enabled = True
         'dgvUitslagen.ClearSelection()
-
-    End Sub
-
-    Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
-
-        Dim nachtvissen = Nachtvissenrepo.Get()
-        For Each vis In nachtvissen
-            If IsNothing(vis.Gewicht1) And IsNothing(vis.Gewicht2) Then
-                vis.Gewicht1 = vis.Gewicht / 2
-                vis.Gewicht2 = vis.Gewicht / 2
-            End If
-
-            If vis.Gewicht1 >= vis.Gewicht2 Then
-                vis.Hoogstegewicht = vis.Gewicht1
-            Else
-                vis.Hoogstegewicht = vis.Gewicht2
-            End If
-            Nachtvissenrepo.Save(vis)
-        Next
 
     End Sub
 End Class

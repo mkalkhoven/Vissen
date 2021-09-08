@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMain))
@@ -74,7 +74,6 @@ Partial Class FrmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
-        Me.btnTest = New System.Windows.Forms.Button()
         CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMouse.SuspendLayout()
         CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -562,21 +561,11 @@ Partial Class FrmMain
         Me.btnLoting.Text = "Loting"
         Me.btnLoting.UseVisualStyleBackColor = True
         '
-        'btnTest
-        '
-        Me.btnTest.Location = New System.Drawing.Point(1048, 320)
-        Me.btnTest.Name = "btnTest"
-        Me.btnTest.Size = New System.Drawing.Size(240, 179)
-        Me.btnTest.TabIndex = 187
-        Me.btnTest.Text = "Test"
-        Me.btnTest.UseVisualStyleBackColor = True
-        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1343, 831)
-        Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -592,24 +581,24 @@ Partial Class FrmMain
         Me.Controls.Add(Me.dgvnamen)
         Me.Controls.Add(Me.cboNaamserie)
         Me.Controls.Add(Me.cboSeizoen)
-        Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
-        CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).EndInit
-        Me.cmsMouse.ResumeLayout(false)
-        CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).EndInit
-        Me.gpVerhaalEtc.ResumeLayout(false)
-        Me.gpVerhaalEtc.PerformLayout
-        Me.gbNaamGewichtEtc.ResumeLayout(false)
-        Me.gbNaamGewichtEtc.PerformLayout
-        Me.cmsUitslag.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsMouse.ResumeLayout(False)
+        CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.gpVerhaalEtc.ResumeLayout(False)
+        Me.gpVerhaalEtc.PerformLayout()
+        Me.gbNaamGewichtEtc.ResumeLayout(False)
+        Me.gbNaamGewichtEtc.PerformLayout()
+        Me.cmsUitslag.ResumeLayout(False)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
 
     Friend WithEvents cboSeizoen As ComboBox
     Friend WithEvents cboNaamserie As ComboBox
@@ -661,5 +650,4 @@ End Sub
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
-    Friend WithEvents btnTest As Button
 End Class
