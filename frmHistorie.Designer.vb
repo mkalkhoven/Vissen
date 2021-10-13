@@ -22,7 +22,7 @@ Partial Class frmHistorie
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnBewerken = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
@@ -39,7 +39,7 @@ Partial Class frmHistorie
         'btnBewerken
         '
         Me.btnBewerken.Enabled = False
-        Me.btnBewerken.Location = New System.Drawing.Point(934, 181)
+        Me.btnBewerken.Location = New System.Drawing.Point(934, 73)
         Me.btnBewerken.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.btnBewerken.Name = "btnBewerken"
         Me.btnBewerken.Size = New System.Drawing.Size(143, 42)
@@ -50,23 +50,25 @@ Partial Class frmHistorie
         'btnLoting
         '
         Me.btnLoting.Enabled = False
-        Me.btnLoting.Location = New System.Drawing.Point(934, 127)
+        Me.btnLoting.Location = New System.Drawing.Point(934, 370)
         Me.btnLoting.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.btnLoting.Name = "btnLoting"
         Me.btnLoting.Size = New System.Drawing.Size(143, 42)
         Me.btnLoting.TabIndex = 305
         Me.btnLoting.Text = "Nieuw"
         Me.btnLoting.UseVisualStyleBackColor = True
+        Me.btnLoting.Visible = False
         '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(934, 73)
+        Me.btnPrint.Location = New System.Drawing.Point(934, 316)
         Me.btnPrint.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(143, 42)
         Me.btnPrint.TabIndex = 304
         Me.btnPrint.Text = "Printen"
         Me.btnPrint.UseVisualStyleBackColor = True
+        Me.btnPrint.Visible = False
         '
         'cboSeizoen
         '
@@ -84,8 +86,8 @@ Partial Class frmHistorie
         Me.dgvLoting.AllowUserToDeleteRows = False
         Me.dgvLoting.AllowUserToResizeColumns = False
         Me.dgvLoting.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgvLoting.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvLoting.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvLoting.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvLoting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvLoting.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically

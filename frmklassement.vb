@@ -62,7 +62,7 @@ Public Class Frmklassement
         Else
             sql = $"SELECT '' AS [Pl], n.Naam, k.Totaalpunten AS [Punten], k.Totaalgewicht AS [Gewicht], k.X {kolommen} FROM {tabelnaam} k JOIN Namen n ON k.Deelnemerid = n.NaamID ORDER BY k.Totaalpunten ASC, k.Totaalgewicht DESC"
         End If
-        Dim dt = Selecteer(sql)
+        Dim dt = ModDatabase.Selecteer(sql)
 
         If dt.Rows.Count > 0 Then
 
@@ -174,10 +174,10 @@ Public Class Frmklassement
         End Select
 
         sql = $"SELECT ID FROM DatumWeerEtc WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = {Serie.Id}"
-        Dim dtWedstrijden = selecteer(sql)
+        Dim dtWedstrijden = ModDatabase.Selecteer(sql)
 
         sql = $"SELECT DISTINCT n.Naamid, n.naam FROM Namen n JOIN Uitslagen u ON n.NaamID = u.IDdeelnemer WHERE u.SerieNaamNr = {Serie.Id} AND u.IDseizoen = {Seizoen.ID}"
-        Dim dt = Selecteer(sql)
+        Dim dt = ModDatabase.Selecteer(sql)
         For Each row As datarow In dt.Rows
             Dim tmpUitslagen As new List(Of Tmpuitslag)
             Dim aantalX = 0
@@ -187,7 +187,7 @@ Public Class Frmklassement
             For Each wedstrijd As datarow In dtWedstrijden.Rows
                 Dim tmpUitslag As new Tmpuitslag
                 sql = $"SELECT * FROM Uitslagen WHERE IDdatum = {wedstrijd("ID")} AND  IDdeelnemer = {row("Naamid")}"
-                Dim uitslag = Selecteer(sql)
+                Dim uitslag = ModDatabase.Selecteer(sql)
                 If uitslag.Rows.Count = 0 Then
                     tmpUitslag.Punten = Serie.Punten
                     tmpUitslag.Gewicht = 0

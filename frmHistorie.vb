@@ -94,7 +94,7 @@ Public Class frmHistorie
         End If
 
         Dim sql = $"SELECT DISTINCT n.NaamID, n.Naam, n.Achternaam, n.Voornaam FROM Namen n JOIN Loting2 l on l.Naamid = n.NaamID WHERE l.Serieid = {serieid} AND l.Seizoenid = {seizoenid} ORDER BY n.Achternaam, n.Voornaam"
-        Dim dt = Selecteer(sql)
+        Dim dt = ModDatabase.Selecteer(sql)
         dgvLoting.DataSource = dt
         dgvLoting.Columns(0).Visible = False
         dgvLoting.Columns(1).Width = 250
@@ -102,7 +102,7 @@ Public Class frmHistorie
         dgvLoting.Columns(3).Visible = False
 
         sql = $"SELECT DISTINCT Datum, Serienummer from loting2 where serieid = {serieid} and seizoenid = {seizoenid} ORDER BY Datum"
-        Dim dt2 = Selecteer(sql)
+        Dim dt2 = ModDatabase.Selecteer(sql)
 
         If IsDBNull(dt) Then
             Toonmelding("Er zijn geen gegevens gevonden")
@@ -127,7 +127,7 @@ Public Class frmHistorie
                 'Application.DoEvents()
 
                 sql = $"SELECT * FROM Loting2 WHERE Naamid = {row("Naamid")} AND Seizoenid = {seizoenid} AND Serieid = {serieid} AND Serienummer = '{row2("Serienummer")}'"
-                Dim dt3 = Selecteer(sql)
+                Dim dt3 = ModDatabase.Selecteer(sql)
                 If dt3.Rows.Count = 0 Then
                     'Streepje
                     dgvLoting.Rows(iRow).Cells(iCol).Value = "-"
@@ -172,6 +172,8 @@ Public Class frmHistorie
 
     Private Sub btnBewerken_Click(sender As Object, e As EventArgs) Handles btnBewerken.Click
 
+        btnLoting.Enabled = False
+        btnBewerken.Enabled = False
 
         Dim serieid = Getid(cboSerie)
         Dim seizoenid = Getid(cboSeizoen)
@@ -183,8 +185,16 @@ Public Class frmHistorie
             .seizoen = seizoen
         }
         f.ShowDialog()
-
         Vulgrid()
+
+        btnLoting.Enabled = True
+        btnBewerken.Enabled = True
+
+    End Sub
+
+    Private Sub btnLoting_Click(sender As Object, e As EventArgs) Handles btnLoting.Click
+
+
 
     End Sub
 End Class

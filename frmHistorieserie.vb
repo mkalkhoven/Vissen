@@ -14,7 +14,21 @@ Public Class frmHistorieserie
         Icon = FrmMain.Icon
 
         lblSeizoen.Text = seizoen.Jaar
-        lblSerie.Text = serie.Naam
+
+        Select Case serie.Id
+            Case 1, 2, 3 'Senioren
+                lblSerie.Text = "Senioren"
+            Case 6
+                lblSerie.Text = serie.Naam
+            Case 9, 10, 11 'Winter
+                lblSerie.Text = "Winter"
+            Case 12, 13 'Jeugd
+                lblSerie.Text = "Jeugd"
+            Case Else 'Alle enkele series
+                Toonmelding("De serie kan niet opgehaald worden")
+                Return
+        End Select
+
         Vulgrid()
 
     End Sub
@@ -24,14 +38,17 @@ Public Class frmHistorieserie
 
         Select Case serie.Id
             Case 1, 2, 3 'Senioren
-                sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 1 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 2 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 3 AND IDseizoen = {seizoen.ID})"
+                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 1 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 2 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 3 AND IDseizoen = {seizoen.ID})"
+                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 1 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 2 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 3 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
             Case 9, 10, 11 'Winter
-                sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 9 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 10 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 11 AND IDseizoen = {seizoen.ID})"
+                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 9 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 10 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 11 AND IDseizoen = {seizoen.ID})"
+                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 9 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 10 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 11 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
             Case 12, 13 'Jeugd
-                sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 12 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 13 AND IDseizoen = {seizoen.ID})"
+                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 12 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 13 AND IDseizoen = {seizoen.ID})"
+                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 12 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 13 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
             Case Else 'Alle enkele series
-                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM Agenda SerieNaamNr = {serie.Id} AND IDseizoen = {seizoen.ID}"
-                sql = $"SELECT Agendaid, Datum, Serie, Locatie FROM Agenda WHERE Serieid = {serie.Id} AND Seizoenid = {seizoen.ID} ORDER BY Datum"
+                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = {serie.Id} AND IDseizoen = {seizoen.ID})"
+                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = {serie.Id} AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
         End Select
 
         Dim dt = Selecteeragenda(sql)
@@ -40,8 +57,8 @@ Public Class frmHistorieserie
 
         dgvloting.Columns(0).Visible = False
         dgvloting.Columns(1).DefaultCellStyle.Format = "d MMMM yyyy"
-        dgvloting.Columns(2).Width = 60
         dgvloting.Columns(1).Width = 175
+        dgvloting.Columns(2).Width = 125
         dgvloting.Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
     End Sub
@@ -49,6 +66,22 @@ Public Class frmHistorieserie
     Private Sub dgvloting_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvloting.DataBindingComplete
 
         dgvloting.ClearSelection()
+
+        'Serienaamnummer op basis van darum ophalen
+
+        'For Each row As DataGridViewRow In dgvloting.Rows
+        '    Dim datum = row.Cells("Datum")
+
+
+        'Next
+
+        'Select Case serie.Id
+        '    Case 1, 2, 3 'Senioren
+        '        Sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 1 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 2 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 3 AND IDseizoen = {seizoen.ID})"
+        '    Case 9, 10, 11 'Winter
+        '        Sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 9 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 10 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 11 AND IDseizoen = {seizoen.ID})"
+        '    Case 12, 13 'Jeugd
+        '        Sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 12 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 13 AND IDseizoen = {seizoen.ID})"
 
     End Sub
 
@@ -58,13 +91,14 @@ Public Class frmHistorieserie
             Return
         End If
 
-        Dim datumid = Selecteerid(dgvloting, "Id")
-        Dim datum = Datumweeretcrepo.Get(datumid)
+        Dim Datumid = Selecteerid(dgvloting, "Datumid")
+        Dim datum = Datumweeretcrepo.Get(Datumid)
 
         Dim f As New frmHistorieseriebewerken With {
             .datum = datum,
             .serie = serie,
-            .seizoen = seizoen
+            .seizoen = seizoen,
+            .Agendaid = Datumid
         }
         f.ShowDialog()
         Vulgrid()

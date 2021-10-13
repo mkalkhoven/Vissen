@@ -194,6 +194,11 @@ Public Class FrmMain
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
 
         Dim id As Long = Selecteerid(dgvnamen, "NaamId")
+
+        If id = 0 Then
+            Return
+        End If
+
         If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) And Not String.IsNullOrEmpty(txtNaam1.Text) Then
             txtGewicht2.Enabled = True
             txtGewicht2.Text = ""
@@ -335,7 +340,7 @@ Public Class FrmMain
         dgvUitslagen.DataSource = Nothing
         If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
             Dim sql = $"SELECT * FROM Nachtvissen WHERE ID = {datum.ID} ORDER BY Gewicht DESC, Hoogstegewicht DESC"
-            Dim dt = Selecteer(sql)
+            Dim dt = ModDatabase.Selecteer(sql)
             Dim koppeluitslag = New List(Of Uitslag)
             Dim totaal As Long = 0
             Dim plaats = 1

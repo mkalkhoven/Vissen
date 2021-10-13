@@ -53,7 +53,7 @@ Public Class FrmVisser
         Dim tabelnaam = Maaktabelnaam()
         
         Dim sql = $"SELECT '' AS [Pl], n.Naam, k.* FROM Namen n JOIN {tabelnaam} k ON n.NaamID = k.Deelnemerid ORDER BY k.Totaalgewicht DESC"
-        Dim dt = Selecteer(sql)
+        Dim dt = ModDatabase.Selecteer(sql)
 
         dgvVisser.DataSource = dt
         dgvVisser.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -181,8 +181,8 @@ Public Class FrmVisser
         
         'Lijst ophalen van deelnemerid uit uitslagen met alle betrokken series
         sql = $"SELECT DISTINCT IDdeelnemer FROM Uitslagen where {where}"
-        
-        Dim dt = Selecteer(sql)
+
+        Dim dt = ModDatabase.Selecteer(sql)
 
         For Each row As DataRow In dt.Rows
             sql = $"INSERT INTO {tabelnaam} (Deelnemerid)VALUES({row("IDdeelnemer")})"
@@ -195,7 +195,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(1, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 1 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET A_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -207,7 +207,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(2, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 2 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET B_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -219,7 +219,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(3, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 3 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET C_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -234,7 +234,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(9, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 9 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET A_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -246,7 +246,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(10, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 10 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET B_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -258,7 +258,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(11, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 11 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET C_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -273,7 +273,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(12, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 12 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET J1_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"
@@ -286,7 +286,7 @@ Public Class FrmVisser
                     aantal = Uitslagenrepo.Getaantal(13, Seizoen)
                     For i = 1 To aantal
                         sql = $"SELECT Kilo, Pnt FROM Uitslagen WHERE IDseizoen = {Seizoen.ID} AND SerieNaamNr = 13 AND SerieNummerNr = {i} AND IDdeelnemer = {row("IDdeelnemer")}"
-                        Dim uitslag = Selecteer(sql)
+                        Dim uitslag = ModDatabase.Selecteer(sql)
                         If uitslag.Rows.Count = 1 Then
                             Dim kilo = uitslag.Rows(0)
                             sql = $"UPDATE {tabelnaam} SET J2_{i}e = {kilo("Kilo")} WHERE Deelnemerid = {row("IDdeelnemer")}"

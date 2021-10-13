@@ -6,46 +6,93 @@ Public Class frmHistorieseriebewerken
     Public Agendaid As Long 'Komt uit agenda in deruisvoorn database
     Public serie As NaamSerie
     Public seizoen As Seizoen
+    Private Legeloting As Boolean
     Private Sub frmHistorieseriebewerken_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        lblSerie.Text = serie.Naam
+        Select Case serie.Id
+            Case 1, 2, 3 'Senioren
+                lblSerie.Text = "Senioren"
+            Case 6
+                lblSerie.Text = serie.Naam
+            Case 9, 10, 11 'Winter
+                lblSerie.Text = "Winter"
+            Case 12, 13 'Jeugd
+                lblSerie.Text = "Jeugd"
+            Case Else 'Alle enkele series
+                Toonmelding("De serie kan niet opgehaald worden")
+                Return
+        End Select
         lblSeizoen.Text = seizoen.Jaar
         lblDatum.Text = datum.Datum.Value.ToString("d MMMM yyyy")
         Icon = FrmMain.Icon
 
+        Legeloting = False
 
         Fillgrid()
 
+        If dgvLoting.Rows.Count = 0 Then 'Lege loting
+            Legeloting = True
 
+            Dim Sql As String
 
-
-        'Dim sql = "SELECT DISTINCT ID, Jaar FROM Seizoen ORDER BY Jaar DESC"
-        'Dim dt = Selecteer(sql)
-
-        'cboSeizoen.DataSource = dt
-        'cboSeizoen.DisplayMember = "Jaar"
-        'cboSeizoen.ValueMember = "ID"
-
-        'If loting.Lotingid > 0 Then
-        '    btnLotingopslaan.Visible = False
-        '    btnOpslaan.Visible = True
-        '    btnOpslaan.Enabled = True
-        '    Fillgrid()
-        'Else
-        '    btnLotingopslaan.Location = New Point(437, 6)
-        '    Fillgrid()
-        'End If
-
+            Select Case serie.Id
+                Case 1, 2, 3 'Senioren
+                    Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
+                Case 6
+                    Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Vijftigplus = 1 ORDER BY Achternaam"
+                Case 9, 10, 11 'Winter
+                    Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Winter = 1 ORDER BY Achternaam"
+                Case 12, 13 'Jeugd
+                    Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Jeugd = 1 ORDER BY Achternaam"
+                Case Else 'Alle enkele series
+                    Toonmelding("De serie kan niet opgehaald worden")
+                    Return
+            End Select
+            Dim dt = ModDatabase.Selecteer(Sql)
+            dgvLoting.DataSource = dt
+            dgvLoting.Columns(0).Visible = False
+            dgvLoting.Columns(1).Width = 300
+            dgvLoting.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        End If
 
     End Sub
     Private Sub Fillgrid()
 
-        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, n.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE Datum = {GetISODate(datum.Datum)} AND Serieid = {serie.Id}"
-        Dim dt = Selecteer(sql)
+        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, n.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE Datum = {GetISODate(datum.Datum)} AND Serieid = {serie.Id} ORDER BY l.Plaats"
+        Dim dt = ModDatabase.Selecteer(sql)
+
+        Select Case serie.Id
+            Case 1, 2, 3 'Senioren
+                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
+            Case 6
+                sql = $"SELECT Naamid, Naam, null As Plaats FROM Namen WHERE Naamid NOT IN (SELECT n.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE Datum = {GetISODate(datum.Datum)} AND Serieid = {serie.Id}) AND Vijftigplus = 1 ORDER BY Achternaam"
+            Case 9, 10, 11 'Winter
+                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Winter = 1 ORDER BY Achternaam"
+            Case 12, 13 'Jeugd
+                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Jeugd = 1 ORDER BY Achternaam"
+            Case Else 'Alle enkele series
+                Toonmelding("De serie kan niet opgehaald worden")
+                Return
+        End Select
+
+        Dim dt2 = ModDatabase.Selecteer(sql)
+
+        For Each row As DataRow In dt2.Rows
+            Dim regel As DataRow
+            regel = dt.NewRow
+            With regel
+                .Item(0) = 0
+                .Item(1) = row("Naam")
+                .Item(2) = row("Plaats")
+                .Item(3) = row("Naamid")
+            End With
+            dt.Rows.Add(regel)
+            dt.AcceptChanges()
+        Next
 
         dgvLoting.DataSource = dt
         dgvLoting.Columns(0).Visible = False
-        dgvLoting.Columns(1).Width = 340
+        dgvLoting.Columns(1).Width = 300
         dgvLoting.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         dgvLoting.Columns(3).Visible = False
 
@@ -58,22 +105,50 @@ Public Class frmHistorieseriebewerken
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
 
-        For Each row As DataGridViewRow In dgvLoting.Rows
-            Dim lotingid = Getid(row)
-            Dim Plaats = Long.Parse(row.Cells(2).Value.ToString)
-            Dim Naamid = Long.Parse(row.Cells(3).Value.ToString)
-            Dim Sql As String
-            If lotingid = 0 Then
-                'Eerst alle gegevens ophalen
-                Dim loting = Lotingrepo.Getbydatumid(Agendaid)
-                'Insert
-                Sql = $"INSERT INTO Loting2(Naamid, Seizoenid, Serieid, Datum, Nummer, Plaats, Datumid, Serienummer)VALUES({Naamid}, {loting.Seizoenid}, {loting.Serieid}, {GetISODate(loting.Datum)}, 0, {Plaats}, {loting.Datumid}, {loting.Serienummer})"
-            Else
-                'Update
-                Sql = $"UPDATE Loting2 SET Plaats = {Plaats} WHERE Lotingid = {lotingid}"
-            End If
-            Opslaan(Sql)
-        Next
+        If Legeloting = False Then
+            For Each row As DataGridViewRow In dgvLoting.Rows
+                Dim lotingid = Getid(row)
+                Dim Plaats = 0
+                Long.TryParse(row.Cells(2).Value.ToString, Plaats)
+                Dim Naamid = Long.Parse(row.Cells(3).Value.ToString)
+                Dim Sql As String
+                If lotingid = 0 And Plaats > 0 Then
+                    'Eerst alle gegevens ophalen
+                    Dim loting = Lotingrepo.Getbydatumid(Agendaid)
+
+                    If IsNothing(loting) Then
+                        Dim datum2 As Date = datum.Datum
+                        loting = Lotingrepo.Get(datum2)
+                    End If
+                    'Insert
+                    Sql = $"INSERT INTO Loting2(Naamid, Seizoenid, Serieid, Datum, Nummer, Plaats, Datumid, Serienummer)VALUES({Naamid}, {loting.Seizoenid}, {loting.Serieid}, {GetISODate(loting.Datum)}, 0, {Plaats}, {loting.Datumid}, '{loting.Serienummer}')"
+                        Opslaan(Sql)
+                    Else
+                        'Update
+                        If Plaats > 0 Then
+                        Sql = $"UPDATE Loting2 SET Plaats = {Plaats} WHERE Lotingid = {lotingid}"
+                        Opslaan(Sql)
+                    End If
+                End If
+            Next
+        Else
+            'Nieuwe loting aanmaken
+            For Each row As DataGridViewRow In dgvLoting.Rows
+                Try
+                    Dim datum2 As Date = datum.Datum
+                    Dim agenda = Selecteeragenda(datum2)
+                    Dim Naamid = Long.Parse(row.Cells(0).Value.ToString)
+                    Dim Plaats = Long.Parse(row.Cells(2).Value.ToString)
+                    If Plaats > 0 Then
+                        Dim Sql = $"INSERT INTO Loting2(Naamid, Seizoenid, Serieid, Datum, Nummer, Plaats, Datumid, Serienummer)VALUES({Naamid}, {seizoen.ID}, {serie.Id}, {GetISODate(datum.Datum)}, 0, {Plaats}, {Agendaid}, '{agenda.Serienaamnummer}')"
+                        Opslaan(Sql)
+                    End If
+                Catch ex As Exception
+                    'Geen plaats, niet opslaan
+                End Try
+            Next
+        End If
+        Fillgrid()
 
     End Sub
 

@@ -6,6 +6,12 @@ Module ModDatabase
     Public CnVissen As SqlConnection = New SqlConnection("Server=h2865773.stratoserver.net;Database=Visseizoen;User Id=sa;Password=!!fn8565fn##;")
     Public Cnagenda As SqlConnection = New SqlConnection("Server=h2865773.stratoserver.net;Database=DeRuisvoorn;User Id=sa;Password=!!fn8565fn##;")
     Public CmdSql As SqlCommand
+    'Public Function Selecteeragenda() As Datalaag.Classes.Agenda
+
+
+    '    ghghhgh
+
+    'End Function
     Public Sub Verwijder(sql As String)
 
         Uitvoeren(sql)
@@ -26,8 +32,24 @@ Module ModDatabase
         CloseDB()
 
         Return True
-    End function
+    End Function
+    Public Function Selecteeragenda(Datum As Date) As Datalaag.Classes.Agenda
 
+        Dim sql = $"SELECT * FROM Agenda WHERE Datum = {GetISODate(Datum)}"
+        Dim dt = Globaal.Selecteer(sql, Databasetype.Ruisvoorn)
+
+        Dim Agenda = New Datalaag.Classes.Agenda()
+
+        If dt.Rows.Count = 1 Then
+            Dim row = dt.Rows(0)
+            Agenda.Agendaid = row("Agendaid")
+            Agenda.Serienaamnummer = row("Serie")
+            Agenda.Datum = row("Datum")
+        End If
+
+        Return Agenda
+
+    End Function
     Public Sub Delete(sql As String)
 
         Uitvoeren(sql)
@@ -51,12 +73,28 @@ Module ModDatabase
         End If
 
     End Function
+    Public Function Selecteeragenda(Agendaid As Long) As Datalaag.Classes.Agenda
 
+        Dim sql = $"SELECT * FROM Agenda WHERE Agendaid = {Agendaid}"
+        Dim dt = Globaal.Selecteer(sql, Databasetype.Ruisvoorn)
+
+        Dim Agenda = New Datalaag.Classes.Agenda()
+
+        If dt.Rows.Count = 1 Then
+            Dim row = dt.Rows(0)
+            Agenda.Agendaid = row("Agendaid")
+            Agenda.Serienaamnummer = row("Serie")
+            Agenda.Datum = row("Datum")
+        End If
+
+        Return Agenda
+
+    End Function
     Public Function Selecteeragenda(sql As String) As Data.DataTable
 
         OpenDb()
 
-        CmdSql = New SqlCommand(sql, Cnagenda)
+        CmdSql = New SqlCommand(sql, CnVissen)
 
         Dim dt As New Data.DataTable
 
@@ -75,13 +113,13 @@ Module ModDatabase
     End Function
 
 
-    Public Function Selecteer(sql As String) As Data.DataTable
-        
-        OpenDB()
+    Public Function Selecteer(sql As String) As DataTable
+
+        OpenDb()
 
         CmdSql = New SqlCommand(sql, CnVissen)
 
-        Dim dt As New Data.DataTable
+        Dim dt As New DataTable
 
         Dim da As New SqlDataAdapter(CmdSql)
 
