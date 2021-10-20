@@ -9,19 +9,7 @@ Public Class frmHistorieseriebewerken
     Private Legeloting As Boolean
     Private Sub frmHistorieseriebewerken_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Select Case serie.Id
-            Case 1, 2, 3 'Senioren
-                lblSerie.Text = "Senioren"
-            Case 6
-                lblSerie.Text = serie.Naam
-            Case 9, 10, 11 'Winter
-                lblSerie.Text = "Winter"
-            Case 12, 13 'Jeugd
-                lblSerie.Text = "Jeugd"
-            Case Else 'Alle enkele series
-                Toonmelding("De serie kan niet opgehaald worden")
-                Return
-        End Select
+        lblSerie.Text = serie.Naam
         lblSeizoen.Text = seizoen.Jaar
         lblDatum.Text = datum.Datum.Value.ToString("d MMMM yyyy")
         Icon = FrmMain.Icon
@@ -175,7 +163,7 @@ Public Class frmHistorieseriebewerken
         If dgvLoting.SelectedRows.Count = 0 Then
             Return
         End If
-        If Toonvraag("Wilt u de geselecteerde plaat verwijderen?") = DialogResult.Yes Then
+        If Toonvraag("Wilt u de geselecteerde plaats verwijderen?") = DialogResult.Yes Then
             Dim id = Getid(dgvLoting)
             Lotingrepo.Delete(id)
             Fillgrid()

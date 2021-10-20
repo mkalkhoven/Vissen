@@ -1,4 +1,5 @@
 ﻿Imports Datalaag.Global
+Imports System.Linq
 Public Class frmHistorie
     Private Sub frmHistorie_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -10,36 +11,12 @@ Public Class frmHistorie
         Icon = FrmMain.Icon
         pnlWachtem.Visible = False
     End Sub
-
     Public Sub VulSeriecombo(cbo As ComboBox)
 
-        cbo.Items.Clear()
-        Dim series As New List(Of Serie)
-        Dim leeg As New Serie
-        series.Add(leeg)
-        Dim vijftigplus As New Serie With {
-                .Serieid = 6,
-                .Naam = "50 plus"
-                }
-        series.Add(vijftigplus)
-        Dim jeugd As New Serie With {
-                .Serieid = 12,
-                .Naam = "Jeugd"
-                }
-        series.Add(jeugd)
-        Dim senioren As New Serie With {
-                .Serieid = 1,
-                .Naam = "Senioren"
-                }
-        series.Add(senioren)
-        Dim winter As New Serie With {
-                .Serieid = 9,
-                .Naam = "Winter"
-                }
-        series.Add(winter)
+        Dim series = Naamserierepo.Getsorted()
 
         cbo.DataSource = series
-        cbo.ValueMember = "Serieid"
+        cbo.ValueMember = "Id"
         cbo.DisplayMember = "Naam"
 
     End Sub

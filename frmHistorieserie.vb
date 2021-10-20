@@ -15,41 +15,14 @@ Public Class frmHistorieserie
 
         lblSeizoen.Text = seizoen.Jaar
 
-        Select Case serie.Id
-            Case 1, 2, 3 'Senioren
-                lblSerie.Text = "Senioren"
-            Case 6
-                lblSerie.Text = serie.Naam
-            Case 9, 10, 11 'Winter
-                lblSerie.Text = "Winter"
-            Case 12, 13 'Jeugd
-                lblSerie.Text = "Jeugd"
-            Case Else 'Alle enkele series
-                Toonmelding("De serie kan niet opgehaald worden")
-                Return
-        End Select
+        lblSerie.Text = serie.Naam
 
         Vulgrid()
 
     End Sub
     Private Sub Vulgrid()
 
-        Dim sql As String
-
-        Select Case serie.Id
-            Case 1, 2, 3 'Senioren
-                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 1 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 2 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 3 AND IDseizoen = {seizoen.ID})"
-                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 1 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 2 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 3 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
-            Case 9, 10, 11 'Winter
-                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 9 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 10 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 11 AND IDseizoen = {seizoen.ID})"
-                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 9 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 10 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 11 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
-            Case 12, 13 'Jeugd
-                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) + 'e.' as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = 12 AND IDseizoen = {seizoen.ID}) OR (SerieNaamNr = 13 AND IDseizoen = {seizoen.ID})"
-                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = 12 AND l.Seizoenid = {seizoen.ID}) OR (l.Serieid = 13 AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
-            Case Else 'Alle enkele series
-                'sql = $"SELECT Id, Datum, CAST(IDserieNummer as VARCHAR(2)) as Serie, Plaats FROM DatumWeerEtc WHERE (SerieNaamNr = {serie.Id} AND IDseizoen = {seizoen.ID})"
-                sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = {serie.Id} AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
-        End Select
+        Dim sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = {serie.Id} AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
 
         Dim dt = Selecteeragenda(sql)
 

@@ -107,7 +107,6 @@ Partial Class frmHistorie
         '
         Me.cboSerie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSerie.FormattingEnabled = True
-        Me.cboSerie.Items.AddRange(New Object() {"Jokeren", "Klaverjassen", "Vissen"})
         Me.cboSerie.Location = New System.Drawing.Point(20, 19)
         Me.cboSerie.Margin = New System.Windows.Forms.Padding(6)
         Me.cboSerie.Name = "cboSerie"
