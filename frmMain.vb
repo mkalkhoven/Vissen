@@ -3,53 +3,81 @@ Imports Datalaag.Classes
 Imports Datalaag.Global
 Imports Vissen.Globaal
 Public Class FrmMain
-    private _toonalles As Boolean = false
+    Private klaarmetladen As Boolean = False
+    Private _toonalles As Boolean = False
     Private _deelnemer1 As New Namen
     Private _deelnemer2 As New Namen
-    Private _uitslag as New Uitslagen
-    dim _koppelvissen = new Nachtvissen
-    private nachtvis as Nachtvissen' = New Nachtvissen
+    Private _uitslag As New Uitslagen
+    Dim _koppelvissen = New Nachtvissen
+    Private nachtvis As Nachtvissen ' = New Nachtvissen
 
-    dim _datum as New DatumWeerEtc
-    Private _seizoen as New Seizoen
-    Private _isstarted as Boolean = false
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load 
+    Dim _datum As New DatumWeerEtc
+    Private _seizoen As New Seizoen
+    Private _isstarted As Boolean = False
 
-        Legen()
+    Private Sub Vulseizoencombo()
 
         Dim seizoenen = Seizoenrepo.Getsorted()
+        Dim seizoennaam = seizoenen.First
+        Dim seizoen = New Seizoen With {
+            .Jaar = "Nieuw seizoen",
+            .ID = 0
+        }
+        seizoenen.Insert(0, seizoen)
         cboSeizoen.DataSource = seizoenen
         cboSeizoen.ValueMember = "ID"
         cboSeizoen.DisplayMember = "Jaar"
+        cboSeizoen.Text = seizoennaam.Jaar
 
         Dim series = Naamserierepo.Getsorted()
         cboNaamserie.DataSource = series
         cboNaamserie.ValueMember = "Id"
         cboNaamserie.DisplayMember = "Naam"
 
+    End Sub
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Legen()
+
+        Vulseizoencombo()
+
         lblDatum.Text = ""
         Toonvelden()
 
+        klaarmetladen = True
+
     End Sub
 
-    Private sub Fillcombo
+    Private Sub Fillcombo()
+
+        If klaarmetladen = False Then
+            Return
+        End If
+        If cboSeizoen.Text = "Nieuw seizoen" Then
+            klaarmetladen = False
+            Nieuwseizoenform.ShowDialog()
+            Vulseizoencombo()
+            klaarmetladen = True
+            Return
+        End If
+
 
         Try
-            CboSerieVolgnummer.DataSource = nothing
+            CboSerieVolgnummer.DataSource = Nothing
             Dim seizoen = Seizoenrepo.Get(cboSeizoen.SelectedValue)
             Dim serie = Naamserierepo.Get(cboNaamserie.SelectedValue)
 
             If IsNothing(serie) Or IsNothing(seizoen) Then
-                return
+                Return
             End If
-            
+
             Dim aantal = Datumweeretcrepo.Getaantal(seizoen.ID, serie.Id)
             Dim lijst As New Dictionary(Of Integer, String)
             For i = 1 To aantal + 1
                 lijst.Add(i, $"{i}e.")
             Next
 
-            CboSerieVolgnummer.DataSource = new BindingSource(lijst, nothing)
+            CboSerieVolgnummer.DataSource = New BindingSource(lijst, Nothing)
             CboSerieVolgnummer.DisplayMember = "Value"
             CboSerieVolgnummer.ValueMember = "Key"
         Catch ex As Exception
@@ -57,14 +85,14 @@ Public Class FrmMain
 
         _isstarted = True
 
-    End sub
-    Private function Selecteervistype As Vistype
-        
+    End Sub
+    Private Function Selecteervistype() As Vistype
+
         Dim vistype As Vistype
         Try
             Select Case cboNaamserie.SelectedValue
                 Case 1, 2, 3
-                    vistype = vistype.Senioren
+                    vistype = Vistype.Senioren
                 Case 5
                     vistype = Vistype.Vrijewedstrijden
                 Case 6
@@ -81,24 +109,24 @@ Public Class FrmMain
             Return Nothing
         End Try
 
-    End function
-    Private sub Vulgrid(Optional zoeken As String = "")
+    End Function
+    Private Sub Vulgrid(Optional zoeken As String = "")
 
         Dim vistype As Vistype
 
-        If _toonalles = true Then
+        If _toonalles = True Then
             vistype = Vistype.Toonalles
         Else
-            vistype = Selecteervistype
+            vistype = Selecteervistype()
         End If
 
         Dim namen = Namenrepo.Getsorted(vistype, zoeken)
         dgvnamen.DataSource = namen
-        dgvnamen.Columns(1).Visible = false
+        dgvnamen.Columns(1).Visible = False
 
         Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
         cm.SuspendBinding()
-        dim numbers = ""
+        Dim numbers = ""
         Dim value As Long
         Try
             value = cboNaamserie.SelectedValue
@@ -137,31 +165,31 @@ Public Class FrmMain
         cm.ResumeBinding()
         Verbergid(dgvnamen)
         Uitvullen(dgvnamen)
-        
-    End sub
 
-    Private Sub dgvnamen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvnamen.DataBindingComplete 
+    End Sub
+
+    Private Sub dgvnamen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvnamen.DataBindingComplete
 
         dgvnamen.ClearSelection()
 
     End Sub
 
-    Private Sub btnToonalles_Click(sender As Object, e As EventArgs) Handles btnToonalles.Click 
+    Private Sub btnToonalles_Click(sender As Object, e As EventArgs) Handles btnToonalles.Click
 
-        If _toonalles = true Then
-            _toonalles = false
+        If _toonalles = True Then
+            _toonalles = False
             btnToonalles.Text = "Toon alles"
             txtZoeken.Text = ""
-        Else 
+        Else
             _toonalles = True
             btnToonalles.Text = "Verberg"
         End If
         Vulgrid()
     End Sub
 
-    Private Sub cboNaamserie_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboNaamserie.SelectedIndexChanged 
+    Private Sub cboNaamserie_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboNaamserie.SelectedIndexChanged
         'Piet
-        txtNaam1.text = ""
+        txtNaam1.Text = ""
 
         _toonalles = False
         btnToonalles.Text = "Toon alles"
@@ -171,20 +199,20 @@ Public Class FrmMain
         Vulgrid()
 
         Fillcombo()
-        txtAantal.Visible = false
-        lblAantal.Visible = false
+        txtAantal.Visible = False
+        lblAantal.Visible = False
 
-        Toonvelden
-        
+        Toonvelden()
+
     End Sub
 
-    Private Sub txtZoeken_KeyUp(sender As Object, e As KeyEventArgs) Handles txtZoeken.KeyUp 
+    Private Sub txtZoeken_KeyUp(sender As Object, e As KeyEventArgs) Handles txtZoeken.KeyUp
 
         Vulgrid(txtZoeken.Text)
 
     End Sub
 
-    Private Sub dgvnamen_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvnamen.MouseUp 
+    Private Sub dgvnamen_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvnamen.MouseUp
 
         If e.Button = MouseButtons.Right And _deelnemer1.Id > 0 Then
             cmsMouse.Show(dgvnamen, e.Location)
