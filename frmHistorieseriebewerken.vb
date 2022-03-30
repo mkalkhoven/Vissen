@@ -46,43 +46,13 @@ Public Class frmHistorieseriebewerken
     End Sub
     Private Sub Fillgrid()
 
-        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, n.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE Datum = {GetISODate(datum.Datum)} AND Serieid = {serie.Id} ORDER BY l.Plaats"
+        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum.Datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
         Dim dt = ModDatabase.Selecteer(sql)
-
-        Select Case serie.Id
-            Case 1, 2, 3 'Senioren
-                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
-            Case 6
-                sql = $"SELECT Naamid, Naam, null As Plaats FROM Namen WHERE Naamid NOT IN (SELECT n.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE Datum = {GetISODate(datum.Datum)} AND Serieid = {serie.Id}) AND Vijftigplus = 1 ORDER BY Achternaam"
-            Case 9, 10, 11 'Winter
-                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Winter = 1 ORDER BY Achternaam"
-            Case 12, 13 'Jeugd
-                sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Jeugd = 1 ORDER BY Achternaam"
-            Case Else 'Alle enkele series
-                Toonmelding("De serie kan niet opgehaald worden")
-                Return
-        End Select
-
-        Dim dt2 = ModDatabase.Selecteer(sql)
-
-        For Each row As DataRow In dt2.Rows
-            Dim regel As DataRow
-            regel = dt.NewRow
-            With regel
-                .Item(0) = 0
-                .Item(1) = row("Naam")
-                .Item(2) = row("Plaats")
-                .Item(3) = row("Naamid")
-            End With
-            dt.Rows.Add(regel)
-            dt.AcceptChanges()
-        Next
 
         dgvLoting.DataSource = dt
         dgvLoting.Columns(0).Visible = False
         dgvLoting.Columns(1).Width = 300
         dgvLoting.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-        dgvLoting.Columns(3).Visible = False
 
     End Sub
     Private Sub btnSluiten_Click(sender As Object, e As EventArgs) Handles btnSluiten.Click

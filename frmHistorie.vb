@@ -87,8 +87,6 @@ Public Class frmHistorie
             Return
         End If
 
-
-
         For Each row As DataRow In dt2.Rows
             dt.Columns.Add(row("Serienummer"), Type.GetType("System.String"))
         Next
@@ -103,7 +101,7 @@ Public Class frmHistorie
                 inaam += 1
                 'Application.DoEvents()
 
-                sql = $"SELECT * FROM Loting2 WHERE Naamid = {row("Naamid")} AND Seizoenid = {seizoenid} AND Serieid = {serieid} AND Serienummer = '{row2("Serienummer")}'"
+                sql = $"SELECT * FROM Loting2 WHERE Naamid = {row("Naamid")} AND Seizoenid = {seizoenid} AND Serieid = {serieid} AND Serienummer = '{row2("Serienummer")}' AND Plaats > 0"
                 Dim dt3 = ModDatabase.Selecteer(sql)
                 If dt3.Rows.Count = 0 Then
                     'Streepje
