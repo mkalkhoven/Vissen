@@ -116,6 +116,12 @@
     <Compile Include="frmklassement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmLotingnieuw.Designer.vb">
+      <DependentUpon>frmLotingnieuw.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLotingnieuw.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmklassement.resx">
       <DependentUpon>frmklassement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLotingnieuw.resx">
+      <DependentUpon>frmLotingnieuw.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

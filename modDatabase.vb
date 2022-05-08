@@ -18,7 +18,7 @@ Module ModDatabase
 
     End Sub
 
-    Public function Uitvoeren(sql As String) As Boolean
+    Public Function Uitvoeren(sql As String) As Boolean
 
         OpenDB()
 
@@ -33,6 +33,26 @@ Module ModDatabase
 
         Return True
     End Function
+    Public Function Selecteeragenda(Datum As Date, Serieid As Long) As Datalaag.Classes.Agenda
+
+        Dim sql = $"SELECT * FROM Agenda WHERE Datum = {GetISODate(Datum)} AND Serieid = {Serieid}"
+        Dim dt = Globaal.Selecteer(sql, Databasetype.Ruisvoorn)
+
+        Dim Agenda = New Datalaag.Classes.Agenda()
+
+        If dt.Rows.Count = 1 Then
+            Dim row = dt.Rows(0)
+            Agenda.Agendaid = row("Agendaid")
+            Agenda.Serienaamnummer = row("Serie")
+            Agenda.Datum = row("Datum")
+            If Not IsDBNull(row("Serieid")) Then
+                Agenda.Serieid = Long.Parse(row("Serieid").ToString())
+            End If
+        End If
+
+        Return Agenda
+
+    End Function
     Public Function Selecteeragenda(Datum As Date) As Datalaag.Classes.Agenda
 
         Dim sql = $"SELECT * FROM Agenda WHERE Datum = {GetISODate(Datum)}"
@@ -45,6 +65,9 @@ Module ModDatabase
             Agenda.Agendaid = row("Agendaid")
             Agenda.Serienaamnummer = row("Serie")
             Agenda.Datum = row("Datum")
+            If Not IsDBNull(row("Serieid")) Then
+                Agenda.Serieid = Long.Parse(row("Serieid").ToString())
+            End If
         End If
 
         Return Agenda

@@ -77,4 +77,36 @@ Public Class frmHistorieserie
         Vulgrid()
 
     End Sub
+
+    Private Sub btnLegen_Click(sender As Object, e As EventArgs)
+
+        If dgvloting.SelectedRows.Count = 0 Then
+            Return
+        End If
+
+        Dim Datumid = Selecteerid(dgvloting, "Datumid")
+        Dim datum = Datumweeretcrepo.Get(Datumid)
+
+    End Sub
+
+    Private Sub btnVerwijdeen_Click(sender As Object, e As EventArgs) Handles btnVerwijdeen.Click
+
+        If dgvloting.SelectedRows.Count = 0 Then
+            Return
+        End If
+
+        Dim Datumid = Selecteerid(dgvloting, "Datumid")
+        Dim datum = Datumweeretcrepo.Get(Datumid)
+
+    End Sub
+
+    Private Sub btnNieuw_Click(sender As Object, e As EventArgs) Handles btnNieuw.Click
+
+        frmLotingnieuw.ShowDialog()
+
+        Lotingrepo.Deleteemptyrow()
+
+        Vulgrid()
+
+    End Sub
 End Class

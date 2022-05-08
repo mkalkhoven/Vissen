@@ -46,13 +46,14 @@ Public Class frmHistorieseriebewerken
     End Sub
     Private Sub Fillgrid()
 
-        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum.Datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
+        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, l.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum.Datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
         Dim dt = ModDatabase.Selecteer(sql)
 
         dgvLoting.DataSource = dt
         dgvLoting.Columns(0).Visible = False
         dgvLoting.Columns(1).Width = 300
         dgvLoting.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        dgvLoting.Columns(3).Visible = False
 
     End Sub
     Private Sub btnSluiten_Click(sender As Object, e As EventArgs) Handles btnSluiten.Click

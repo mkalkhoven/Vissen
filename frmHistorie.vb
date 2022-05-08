@@ -9,7 +9,14 @@ Public Class frmHistorie
         VulSeriecombo(cboSerie)
 
         Icon = FrmMain.Icon
+
+        Dim seizoen = Seizoenrepo.Get(Sorting.descending)
+        cboSeizoen.DataSource = seizoen
+        cboSeizoen.DisplayMember = "Jaar"
+        cboSeizoen.ValueMember = "ID"
+
         pnlWachtem.Visible = False
+
     End Sub
     Public Sub VulSeriecombo(cbo As ComboBox)
 
@@ -41,14 +48,15 @@ Public Class frmHistorie
 
         Try
             Dim serieid = cboSerie.SelectedValue
-            If serieid > 0 Then
-                Dim seizoen = Seizoenrepo.Get(Sorting.descending)
-                RemoveHandler cboSeizoen.SelectedIndexChanged, AddressOf cboSeizoen_SelectedIndexChanged
-                cboSeizoen.DataSource = seizoen
-                AddHandler cboSeizoen.SelectedIndexChanged, AddressOf cboSeizoen_SelectedIndexChanged
-                cboSeizoen.DisplayMember = "Jaar"
-                cboSeizoen.ValueMember = "ID"
-            End If
+            'If serieid > 0 Then
+            '    Dim seizoen = Seizoenrepo.Get(Sorting.descending)
+            '    cboSeizoen.DataSource = seizoen
+            '    'RemoveHandler cboSeizoen.SelectedIndexChanged, AddressOf cboSeizoen_SelectedIndexChanged
+            '    'cboSeizoen.DataSource = seizoen
+            '    'AddHandler cboSeizoen.SelectedIndexChanged, AddressOf cboSeizoen_SelectedIndexChanged
+            '    cboSeizoen.DisplayMember = "Jaar"
+            '    cboSeizoen.ValueMember = "ID"
+            'End If
         Catch ex As Exception
             dgvLoting.DataSource = Nothing
         End Try

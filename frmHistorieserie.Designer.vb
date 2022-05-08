@@ -29,6 +29,8 @@ Partial Class frmHistorieserie
         Me.lblSerie = New System.Windows.Forms.Label()
         Me.dgvloting = New System.Windows.Forms.DataGridView()
         Me.btnBewerken = New System.Windows.Forms.Button()
+        Me.btnVerwijdeen = New System.Windows.Forms.Button()
+        Me.btnNieuw = New System.Windows.Forms.Button()
         CType(Me.dgvloting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -104,11 +106,33 @@ Partial Class frmHistorieserie
         Me.btnBewerken.Text = "Bewerken"
         Me.btnBewerken.UseVisualStyleBackColor = True
         '
+        'btnVerwijdeen
+        '
+        Me.btnVerwijdeen.Location = New System.Drawing.Point(650, 161)
+        Me.btnVerwijdeen.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.btnVerwijdeen.Name = "btnVerwijdeen"
+        Me.btnVerwijdeen.Size = New System.Drawing.Size(143, 42)
+        Me.btnVerwijdeen.TabIndex = 310
+        Me.btnVerwijdeen.Text = "Verwijderen"
+        Me.btnVerwijdeen.UseVisualStyleBackColor = True
+        '
+        'btnNieuw
+        '
+        Me.btnNieuw.Location = New System.Drawing.Point(650, 215)
+        Me.btnNieuw.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.btnNieuw.Name = "btnNieuw"
+        Me.btnNieuw.Size = New System.Drawing.Size(143, 42)
+        Me.btnNieuw.TabIndex = 311
+        Me.btnNieuw.Text = "Nieuw"
+        Me.btnNieuw.UseVisualStyleBackColor = True
+        '
         'frmHistorieserie
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(802, 651)
+        Me.Controls.Add(Me.btnNieuw)
+        Me.Controls.Add(Me.btnVerwijdeen)
         Me.Controls.Add(Me.btnBewerken)
         Me.Controls.Add(Me.dgvloting)
         Me.Controls.Add(Me.lblSeizoen)
@@ -138,4 +162,6 @@ Partial Class frmHistorieserie
     Friend WithEvents lblSerie As Label
     Friend WithEvents dgvloting As DataGridView
     Friend WithEvents btnBewerken As Button
+    Friend WithEvents btnVerwijdeen As Button
+    Friend WithEvents btnNieuw As Button
 End Class

@@ -34,6 +34,7 @@ Partial Class frmHistorieseriebewerken
         Me.btnOpslaan = New System.Windows.Forms.Button()
         Me.btnNieuw = New System.Windows.Forms.Button()
         Me.btnVerwijderen = New System.Windows.Forms.Button()
+        Me.btnLegen = New System.Windows.Forms.Button()
         CType(Me.dgvLoting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -151,12 +152,22 @@ Partial Class frmHistorieseriebewerken
         Me.btnVerwijderen.Text = "Verwijderen"
         Me.btnVerwijderen.UseVisualStyleBackColor = True
         '
+        'btnLegen
+        '
+        Me.btnLegen.Location = New System.Drawing.Point(444, 299)
+        Me.btnLegen.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.btnLegen.Name = "btnLegen"
+        Me.btnLegen.Size = New System.Drawing.Size(143, 42)
+        Me.btnLegen.TabIndex = 318
+        Me.btnLegen.Text = "Legen"
+        Me.btnLegen.UseVisualStyleBackColor = True
+        '
         'frmHistorieseriebewerken
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(601, 693)
-        Me.ControlBox = False
+        Me.Controls.Add(Me.btnLegen)
         Me.Controls.Add(Me.btnVerwijderen)
         Me.Controls.Add(Me.btnNieuw)
         Me.Controls.Add(Me.btnOpslaan)
@@ -171,6 +182,8 @@ Partial Class frmHistorieseriebewerken
         Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmHistorieseriebewerken"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -192,4 +205,5 @@ Partial Class frmHistorieseriebewerken
     Friend WithEvents btnOpslaan As Button
     Friend WithEvents btnNieuw As Button
     Friend WithEvents btnVerwijderen As Button
+    Friend WithEvents btnLegen As Button
 End Class

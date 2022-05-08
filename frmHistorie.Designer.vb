@@ -38,7 +38,6 @@ Partial Class frmHistorie
         '
         'btnBewerken
         '
-        Me.btnBewerken.Enabled = False
         Me.btnBewerken.Location = New System.Drawing.Point(934, 73)
         Me.btnBewerken.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.btnBewerken.Name = "btnBewerken"

@@ -538,7 +538,7 @@ Public Class FrmMain
             lblDatumtitel.Visible = True
             txtGewicht1.Enabled = False
             txtGewicht2.Enabled = False
-            txtAantal.Enabled = False
+            txtAantal.Enabled = True
             lblDatumid.Text = datum.ID
             lblDatum.Text = datum.Datum.Value.ToString("d-MM-yyyy")
 
