@@ -11,6 +11,8 @@ Public Class frmHistorieserie
 
     Private Sub frmHistorieserie_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Lotingrepo.Deleteemptyrow()
+
         Icon = FrmMain.Icon
 
         lblSeizoen.Text = seizoen.Jaar
@@ -104,7 +106,11 @@ Public Class frmHistorieserie
 
         frmLotingnieuw.ShowDialog()
 
-        Lotingrepo.Deleteemptyrow()
+        Try
+            Lotingrepo.Deleteemptyrow()
+        Catch ex As Exception
+            'Nothing
+        End Try
 
         Vulgrid()
 
