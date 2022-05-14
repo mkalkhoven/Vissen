@@ -15,8 +15,17 @@ Public Class Frmklassement
         
         Icon = FrmMain.Icon
 
-        lblseizoen.Text = Seizoen.Jaar
-        lblSerie.Text = Serie.Naam
+        If Serie.Id <> 9 And Serie.Id <> 10 And Serie.Id <> 11 Then
+            'Alleen eerste jaar
+            lblseizoen.Text = Seizoen.Jaar.Substring(0, 4)
+        Else
+            lblseizoen.Text = Seizoen.Jaar
+        End If
+
+
+
+        ''lblseizoen.Text = "2022"
+        'lblSerie.Text = Serie.Naam
 
         Dim correctie = Selecteercorrectie()
         If correctie Is Nothing Then
