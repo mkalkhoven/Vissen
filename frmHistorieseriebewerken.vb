@@ -11,6 +11,7 @@ Public Class frmHistorieseriebewerken
 
         lblSerie.Text = serie.Naam
         lblSeizoen.Text = seizoen.Jaar
+
         lblDatum.Text = datum.Datum.Value.ToString("d MMMM yyyy")
         Icon = FrmMain.Icon
 
@@ -24,7 +25,7 @@ Public Class frmHistorieseriebewerken
             Dim Sql As String
 
             Select Case serie.Id
-                Case 1, 2, 3 'Senioren
+                Case 1, 2, 3, 17 'Senioren
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
                 Case 6
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Vijftigplus = 1 ORDER BY Achternaam"
@@ -33,7 +34,7 @@ Public Class frmHistorieseriebewerken
                 Case 12, 13 'Jeugd
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Jeugd = 1 ORDER BY Achternaam"
                 Case Else 'Alle enkele series
-                    Toonmelding("De serie kan niet opgehaald worden")
+                    Toonmelding("De serie is niet gedefinieerd in de functie frmHistorieseriebewerken_Load")
                     Return
             End Select
             Dim dt = ModDatabase.Selecteer(Sql)

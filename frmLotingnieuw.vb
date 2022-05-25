@@ -64,6 +64,12 @@ Public Class frmLotingnieuw
         Hide()
 
         Dim datumweeretc As DatumWeerEtc = Datumweeretcrepo.Get(datum, Long.Parse(cboserie.SelectedValue.ToString))
+
+        If IsNothing(datumweeretc) Then
+            Toonmelding("De datum is niet terug te vinden in de tabel DatumWeerEtc")
+            Exit Sub
+        End If
+
         Dim seizoen = Seizoenrepo.Get(Long.Parse(cboSeizoen.SelectedValue.ToString))
         Dim serie = Naamserierepo.Get(Long.Parse(cboserie.SelectedValue.ToString))
 

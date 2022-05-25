@@ -515,12 +515,12 @@ Partial Class FrmMain
         '
         Me.cmsUitslag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerwijderenToolStripMenuItem})
         Me.cmsUitslag.Name = "cmsUitslag"
-        Me.cmsUitslag.Size = New System.Drawing.Size(136, 26)
+        Me.cmsUitslag.Size = New System.Drawing.Size(181, 48)
         '
         'VerwijderenToolStripMenuItem
         '
         Me.VerwijderenToolStripMenuItem.Name = "VerwijderenToolStripMenuItem"
-        Me.VerwijderenToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.VerwijderenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.VerwijderenToolStripMenuItem.Text = "Verwijderen"
         '
         'lblMelding

@@ -213,10 +213,14 @@ Public Class FrmMain
     End Sub
 
     Private Sub dgvnamen_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvnamen.MouseUp
+        Try
+            If e.Button = MouseButtons.Right And _deelnemer1.Id > 0 Then
+                cmsMouse.Show(dgvnamen, e.Location)
+            End If
+        Catch ex As Exception
 
-        If e.Button = MouseButtons.Right And _deelnemer1.Id > 0 Then
-            cmsMouse.Show(dgvnamen, e.Location)
-        End If
+        End Try
+
 
     End Sub
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
@@ -746,11 +750,16 @@ Public Class FrmMain
     End Sub
     Private Sub Berekenpunten()
 
+
         Dim punten As Double = 1
         Dim plaats As Long = 0
         Dim naamserie = Naamserierepo.Get(_datum.SerieNaamNr)
         Dim uitslagen = Uitslagenrepo.Get(_datum)
         Dim teller = 0
+
+        If _datum.SerieNaamNr = 12 Or _datum.SerieNaamNr = 13 Then
+            Return
+        End If
 
         While teller < uitslagen.Count - 1
             plaats += 1
@@ -1100,7 +1109,9 @@ Public Class FrmMain
             If id > 0 Then
                 Dim uitslag = Uitslagenrepo.Get(id)
                 Dim naam = Namenrepo.Getbyoldid(uitslag.IDdeelnemer)
-
+                If uitslag.SerieNaamNr = 12 Or uitslag.SerieNaamNr = 13 Then
+                    txtAantal.Text = uitslag.Pnt.ToString()
+                End If
                 txtNaam1.Text = naam.Naam
                 lblDatumid.Text = uitslag.IDdatum
                 lblUitslagid1.Text = uitslag.Uitslagid
