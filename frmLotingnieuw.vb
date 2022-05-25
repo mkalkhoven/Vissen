@@ -27,7 +27,6 @@ Public Class frmLotingnieuw
 
         'MessageBox.Show(dtpDatum.Value.ToString)
 
-
         Dim serieid = cboserie.SelectedValue
         Dim visdatum As Date = dtpDatum.Value
 
@@ -74,7 +73,7 @@ Public Class frmLotingnieuw
         Dim serie = Naamserierepo.Get(Long.Parse(cboserie.SelectedValue.ToString))
 
         Dim f As New frmHistorieseriebewerken With {
-            .datum = datumweeretc,
+            .datum = datumweeretc.Datum,
             .serie = serie,
             .seizoen = seizoen,
             .Agendaid = Long.Parse(lblDatumid.Text)

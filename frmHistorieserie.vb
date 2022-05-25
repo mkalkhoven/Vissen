@@ -1,5 +1,6 @@
 ﻿Imports Datalaag
 Imports Datalaag.Global
+Imports Datalaag.Database
 Public Class frmHistorieserie
     Public serie As NaamSerie
     Public seizoen As Seizoen
@@ -24,13 +25,34 @@ Public Class frmHistorieserie
     End Sub
     Private Sub Vulgrid()
 
-        Dim sql = $"SELECT DISTINCT d.ID AS Datumid, l.Datum, l.Serienummer, a.Locatie FROM VisSeizoen.dbo.Loting2 l JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum WHERE (l.Serieid = {serie.Id} AND l.Seizoenid = {seizoen.ID}) ORDER BY l.Datum"
+        '        Dim sql = $"SELECT DISTINCT 
+        '            d.ID AS Datumid, 
+        '            l.Datum, 
+        '            l.Serienummer, 
+        '            a.Locatie 
+        'FROM VisSeizoen.dbo.Loting2 l 
+        'JOIN DeRuisvoorn.dbo.Agenda a ON l.Datum = a.Datum 
+        'JOIN VisSeizoen.dbo.DatumWeerEtc d ON a.Datum = d.Datum 
+        'WHERE 
+        '    l.Serieid = {serie.Id} AND 
+        '    l.Seizoenid = {seizoen.ID} AND
+        '    a.Serieid = {serie.Id}
+        '    AND l.Serienummer <> '' 
+        '    ORDER BY l.Datum"
+
+        Dim sql = $"SELECT DISTINCT l.Datum, s.Naam, l.Serienummer, a.Locatie, a.Agendaid
+FROM Loting2 l
+JOIN NaamSerie s ON l.Serieid = s.Id
+JOIN DeRuisvoorn.dbo.Agenda a ON l.Datumid = a.Agendaid
+WHERE l.Serieid = {serie.Id}
+AND l.Seizoenid = {seizoen.ID}"
 
         Dim dt = Selecteeragenda(sql)
 
         dgvloting.DataSource = dt
 
         dgvloting.Columns(0).Visible = False
+        dgvloting.Columns(4).Visible = False
         dgvloting.Columns(1).DefaultCellStyle.Format = "d MMMM yyyy"
         dgvloting.Columns(1).Width = 175
         dgvloting.Columns(2).Width = 125
@@ -66,8 +88,10 @@ Public Class frmHistorieserie
             Return
         End If
 
-        Dim Datumid = Selecteerid(dgvloting, "Datumid")
-        Dim datum = Datumweeretcrepo.Get(Datumid)
+        Dim Datumid = Selecteerid(dgvloting, "Agendaid")
+
+        'datum ophalen uit agenda
+        Dim datum = Getdatum(Datumid)
 
         Dim f As New frmHistorieseriebewerken With {
             .datum = datum,
@@ -97,8 +121,16 @@ Public Class frmHistorieserie
             Return
         End If
 
+        If Toonvraag("Wilt u deze loting verwijderen?") = DialogResult.No Then
+            Exit Sub
+        End If
+
         Dim Datumid = Selecteerid(dgvloting, "Datumid")
         Dim datum = Datumweeretcrepo.Get(Datumid)
+
+        Lotingrepo.Delete(datum)
+
+        Vulgrid()
 
     End Sub
 

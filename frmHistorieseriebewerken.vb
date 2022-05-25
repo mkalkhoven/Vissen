@@ -2,7 +2,7 @@
 Imports Datalaag.Global
 Public Class frmHistorieseriebewerken
 
-    Public datum As DatumWeerEtc
+    Public datum As DateTime
     Public Agendaid As Long 'Komt uit agenda in deruisvoorn database
     Public serie As NaamSerie
     Public seizoen As Seizoen
@@ -12,7 +12,7 @@ Public Class frmHistorieseriebewerken
         lblSerie.Text = serie.Naam
         lblSeizoen.Text = seizoen.Jaar
 
-        lblDatum.Text = datum.Datum.Value.ToString("d MMMM yyyy")
+        lblDatum.Text = datum.ToString("d MMMM yyyy")
         Icon = FrmMain.Icon
 
         Legeloting = False
@@ -47,7 +47,7 @@ Public Class frmHistorieseriebewerken
     End Sub
     Private Sub Fillgrid()
 
-        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, l.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum.Datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
+        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, l.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
         Dim dt = ModDatabase.Selecteer(sql)
 
         dgvLoting.DataSource = dt
@@ -65,48 +65,50 @@ Public Class frmHistorieseriebewerken
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
 
+        Dim loting As Loting2
+
         If Legeloting = False Then
             For Each row As DataGridViewRow In dgvLoting.Rows
-                Dim lotingid = Getid(row)
-                Dim Plaats = 0
-                Long.TryParse(row.Cells(2).Value.ToString, Plaats)
-                Dim Naamid = Long.Parse(row.Cells(3).Value.ToString)
-                Dim Sql As String
-                If lotingid = 0 And Plaats > 0 Then
-                    'Eerst alle gegevens ophalen
-                    Dim loting = Lotingrepo.Getbydatumid(Agendaid)
 
-                    If IsNothing(loting) Then
-                        Dim datum2 As Date = datum.Datum
-                        loting = Lotingrepo.Get(datum2)
-                    End If
-                    'Insert
-                    Sql = $"INSERT INTO Loting2(Naamid, Seizoenid, Serieid, Datum, Nummer, Plaats, Datumid, Serienummer)VALUES({Naamid}, {loting.Seizoenid}, {loting.Serieid}, {GetISODate(loting.Datum)}, 0, {Plaats}, {loting.Datumid}, '{loting.Serienummer}')"
-                        Opslaan(Sql)
-                    Else
-                        'Update
-                        If Plaats > 0 Then
-                        Sql = $"UPDATE Loting2 SET Plaats = {Plaats} WHERE Lotingid = {lotingid}"
-                        Opslaan(Sql)
-                    End If
-                End If
+                Dim Plaats = 0
+                Dim lotingid = Getid(row)
+                Long.TryParse(row.Cells(2).Value.ToString, Plaats)
+
+                loting = Lotingrepo.Get(lotingid)
+                loting.Plaats = Plaats
+                Lotingrepo.Save(loting)
             Next
         Else
-            'Nieuwe loting aanmaken
+            'Nieuwe loting aanmaken op basis van nul loting
+            Dim nulloting = Lotingrepo.getnulloting(serie.Id)
+
+            If IsNothing(nulloting) Then
+                Exit Sub
+            End If
+
             For Each row As DataGridViewRow In dgvLoting.Rows
                 Try
-                    Dim datum2 As Date = datum.Datum
-                    Dim agenda = Selecteeragenda(datum2)
+                    'Dim datum2 As Date = datum.Datum
+                    'Dim agenda = Selecteeragenda(datum2)
                     Dim Naamid = Long.Parse(row.Cells(0).Value.ToString)
                     Dim Plaats = Long.Parse(row.Cells(2).Value.ToString)
-                    If Plaats > 0 Then
-                        Dim Sql = $"INSERT INTO Loting2(Naamid, Seizoenid, Serieid, Datum, Nummer, Plaats, Datumid, Serienummer)VALUES({Naamid}, {seizoen.ID}, {serie.Id}, {GetISODate(datum.Datum)}, 0, {Plaats}, {Agendaid}, '{agenda.Serienaamnummer}')"
-                        Opslaan(Sql)
-                    End If
+
+                    loting = New Loting2 With {
+                        .Naamid = Naamid,
+                        .Seizoenid = seizoen.ID,
+                        .Serieid = serie.Id,
+                        .Datum = nulloting.Datum,
+                        .Nummer = 0,
+                        .Plaats = Plaats,
+                        .Datumid = nulloting.Datumid,
+                        .Serienummer = nulloting.Serienummer
+                    }
+                    Lotingrepo.Save(loting)
                 Catch ex As Exception
                     'Geen plaats, niet opslaan
                 End Try
             Next
+            Lotingrepo.Delete(nulloting)
         End If
         Fillgrid()
 

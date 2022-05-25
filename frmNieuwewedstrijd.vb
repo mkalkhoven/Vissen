@@ -1,5 +1,6 @@
 ﻿Imports Datalaag
 Imports Datalaag.Global
+Imports Datalaag.Database
 Public Class FrmNieuwewedstrijd
     public Datum As New DatumWeerEtc
     public Serie As New NaamSerie
@@ -36,7 +37,13 @@ Public Class FrmNieuwewedstrijd
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnNieuwOpslaan.Click
 
-        If txtNieuwLocatievissen.text ="" Then txtNieuwLocatievissen.text = "?":txtNieuwLocatievissen.Focus(): Return 
+        'Eerst controleren of datum icm serie bestaat in DeRuisvoorn.Agenda
+        If Controleervisdatum(DateTimePickerNieuw.Value.Date, Serie.Id) = False Then
+            Toonmelding("Geen geldige datum gevonden in De Ruisvoorn Agenda")
+            Exit Sub
+        End If
+
+        If txtNieuwLocatievissen.Text = "" Then txtNieuwLocatievissen.Text = "?" : txtNieuwLocatievissen.Focus() : Return
         If Not IsNumeric(txtNieuwLuchtdruk.text) Then txtNieuwLuchtdruk.text = "0": txtNieuwLuchtdruk.Focus(): Return
         if txtNieuwWeerAlgemeen.text = "" Then txtNieuwWeerAlgemeen.text = "?": txtNieuwWeerAlgemeen.Focus(): Return
         If txtNieuwWindsnelheid.text = "" Then txtNieuwWindsnelheid.text = "?": txtNieuwWindsnelheid.Focus():  Return	
