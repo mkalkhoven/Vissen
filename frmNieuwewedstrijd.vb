@@ -7,7 +7,7 @@ Public Class FrmNieuwewedstrijd
     public Seizoen As New Seizoen
     public Nummer As Long
     Private Sub frmNieuwewedstrijd_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        
+
         Icon = FrmMain.Icon
 
         Dim wind = Windrepo.Get()
@@ -37,7 +37,10 @@ Public Class FrmNieuwewedstrijd
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnNieuwOpslaan.Click
 
+        'Serie.Id = 6
         'Eerst controleren of datum icm serie bestaat in DeRuisvoorn.Agenda
+
+        'Uit gecommentarieerd en dan werkt hij wel ????        '
         If Controleervisdatum(DateTimePickerNieuw.Value.Date, Serie.Id) = False Then
             Toonmelding("Geen geldige datum gevonden in De Ruisvoorn Agenda")
             Exit Sub
@@ -55,14 +58,14 @@ Public Class FrmNieuwewedstrijd
                 .IDseizoen = Seizoen.ID,
                 .IDserieNummer = Nummer,
                 .SerieNaamNr = Serie.Id,
-                .Plaats = txtNieuwLocatievissen.text,
-                .MB = txtNieuwLuchtdruk.text,
-                .Wind = CboNieuwWindrichting.text,
-                .WindSnelheid = txtNieuwWindsnelheid.text,
-                .Temp = txtNieuwTemperatuur.text,
-                .Datum = DateTimePickerNieuw.text,
-                .Weer = txtNieuwWeerAlgemeen.text,
-                .Verhaal = txtNieuwVerhaal.text
+                .Plaats = txtNieuwLocatievissen.Text,
+                .MB = txtNieuwLuchtdruk.Text,
+                .Wind = CboNieuwWindrichting.Text,
+                .WindSnelheid = txtNieuwWindsnelheid.Text,
+                .Temp = txtNieuwTemperatuur.Text,
+                .Datum = DateTimePickerNieuw.Text,
+                .Weer = txtNieuwWeerAlgemeen.Text,
+                .Verhaal = txtNieuwVerhaal.Text
                 }
             Datum.ID = Datumweeretcrepo.Getid()
         Else 

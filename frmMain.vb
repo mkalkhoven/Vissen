@@ -9,6 +9,7 @@ Public Class FrmMain
     Private _deelnemer2 As New Namen
     Private _uitslag As New Uitslagen
     Dim _koppelvissen = New Nachtvissen
+    Dim _serie As New Serie
     Private nachtvis As Nachtvissen ' = New Nachtvissen
 
     Dim _datum As New DatumWeerEtc
@@ -862,7 +863,9 @@ Public Class FrmMain
     End Sub
     Private Sub btnWijzigverhaal_Click(sender As Object, e As EventArgs) Handles btnWijzigverhaal.Click
         Dim f As New FrmNieuwewedstrijd With {
-            .Datum = _datum
+            .Datum = _datum,
+            .Seizoen = _seizoen,
+            .Serie = Naamserierepo.Get(_datum.SerieNaamNr)
         }
         f.ShowDialog()
         _datum = f.Datum
