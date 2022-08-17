@@ -111,8 +111,8 @@ Public Class FrmNaambewerken
         Naam.Verwijderd = chkVerwijderd.Checked
 
         Namenrepo.Save(Naam)
-        If Not Naam.NaamID.HasValue
-            Naam.NaamID = Naam.Id + 1000
+        If Not Naam.NaamID.HasValue Then
+            Naam.NaamID = Namenrepo.Getid()
             Namenrepo.Save(Naam)
         End If
 

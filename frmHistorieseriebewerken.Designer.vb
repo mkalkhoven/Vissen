@@ -140,7 +140,7 @@ Partial Class frmHistorieseriebewerken
         Me.btnNieuw.Name = "btnNieuw"
         Me.btnNieuw.Size = New System.Drawing.Size(143, 42)
         Me.btnNieuw.TabIndex = 316
-        Me.btnNieuw.Text = "Nieuw"
+        Me.btnNieuw.Text = "Nieuwe naam"
         Me.btnNieuw.UseVisualStyleBackColor = True
         '
         'btnVerwijderen

@@ -74,6 +74,7 @@ Partial Class FrmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsMouse.SuspendLayout()
         CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -515,12 +516,12 @@ Partial Class FrmMain
         '
         Me.cmsUitslag.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerwijderenToolStripMenuItem})
         Me.cmsUitslag.Name = "cmsUitslag"
-        Me.cmsUitslag.Size = New System.Drawing.Size(181, 48)
+        Me.cmsUitslag.Size = New System.Drawing.Size(136, 26)
         '
         'VerwijderenToolStripMenuItem
         '
         Me.VerwijderenToolStripMenuItem.Name = "VerwijderenToolStripMenuItem"
-        Me.VerwijderenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.VerwijderenToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.VerwijderenToolStripMenuItem.Text = "Verwijderen"
         '
         'lblMelding
@@ -561,11 +562,21 @@ Partial Class FrmMain
         Me.btnLoting.Text = "Loting"
         Me.btnLoting.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(1005, 394)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(219, 130)
+        Me.Button1.TabIndex = 187
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1343, 831)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -650,4 +661,5 @@ Partial Class FrmMain
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
+    Friend WithEvents Button1 As Button
 End Class
