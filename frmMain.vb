@@ -696,7 +696,17 @@ Public Class FrmMain
                 End If
 
                 nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
-                nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
+
+                If _deelnemer1.Naam.ToLower().Contains("alleen") Or _deelnemer2.Naam.ToLower().Contains("alleen") Then
+                    If _deelnemer1.Naam.ToLower().Contains("alleen") Then
+                        nachtvis.Namen = $"{_deelnemer1.Naam} (alleen)"
+                    Else
+                        nachtvis.Namen = $"{_deelnemer2.Naam} (alleen)"
+                    End If
+                Else
+                    nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
+                End If
+
                 Nachtvissenrepo.Save(nachtvis)
                 Vuluitslaggrid(_datum)
                 Optellen()

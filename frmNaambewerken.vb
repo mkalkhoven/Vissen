@@ -95,6 +95,11 @@ Public Class FrmNaambewerken
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnOpslaan.Click
 
+        If txtVoornaam.Text = "" Or txtAchternaam.Text = "" Then
+            MessageBox.Show("Zowel voor- als achternaam moeten zijn gevuld zijn", "FOUT!!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
         Naam.Achternaam = txtAchternaam.Text
         Naam.Voornaam = txtVoornaam.Text
         Naam.Tussenvoegsel = txtTussenvoegsel.Text
