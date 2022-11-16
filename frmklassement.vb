@@ -76,7 +76,7 @@ Public Class Frmklassement
         If dt.Rows.Count > 0 Then
 
 
-            dgvKlassement.DataSource = dt
+        dgvKlassement.DataSource = dt
         dgvKlassement.Columns(1).DefaultCellStyle.Format = "N0"
         dgvKlassement.Columns(3).DefaultCellStyle.Format = "N1"
         dgvKlassement.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
