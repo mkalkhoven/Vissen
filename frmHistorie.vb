@@ -116,12 +116,12 @@ Public Class frmHistorie
                     dgvLoting.Rows(iRow).Cells(iCol).Value = "-"
                 Else
                     'Plaats
-                    If cboSerie.SelectedValue = 9 Then
-                        'dgvLoting.Rows(iRow).Cells(iCol).Value = $"{Plaatsrow("Onderboven")}{Plaatsrow("Plaats")}"
-                    Else
-                        'Ernout even naar kijken -> celltype integer
+                    'If cboSerie.SelectedValue = 9 Then
+                    '    'dgvLoting.Rows(iRow).Cells(iCol).Value = $"{Plaatsrow("Onderboven")}{Plaatsrow("Plaats")}"
+                    'Else
+                    '    'Ernout even naar kijken -> celltype integer
                         dgvLoting.Rows(iRow).Cells(iCol).Value = dt3.Rows(0)("Plaats").ToString
-                    End If
+                    'End If
                 End If
                 iCol += 1
             Next

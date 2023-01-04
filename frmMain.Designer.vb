@@ -74,19 +74,18 @@ Partial Class FrmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.cmsMouse.SuspendLayout()
-        CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.gpVerhaalEtc.SuspendLayout()
-        Me.gbNaamGewichtEtc.SuspendLayout()
-        Me.cmsUitslag.SuspendLayout()
-        Me.SuspendLayout()
+        CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.cmsMouse.SuspendLayout
+        CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.gpVerhaalEtc.SuspendLayout
+        Me.gbNaamGewichtEtc.SuspendLayout
+        Me.cmsUitslag.SuspendLayout
+        Me.SuspendLayout
         '
         'cboSeizoen
         '
         Me.cboSeizoen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboSeizoen.FormattingEnabled = True
+        Me.cboSeizoen.FormattingEnabled = true
         Me.cboSeizoen.Location = New System.Drawing.Point(15, 13)
         Me.cboSeizoen.Name = "cboSeizoen"
         Me.cboSeizoen.Size = New System.Drawing.Size(331, 32)
@@ -95,7 +94,7 @@ Partial Class FrmMain
         'cboNaamserie
         '
         Me.cboNaamserie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboNaamserie.FormattingEnabled = True
+        Me.cboNaamserie.FormattingEnabled = true
         Me.cboNaamserie.Location = New System.Drawing.Point(15, 51)
         Me.cboNaamserie.Name = "cboNaamserie"
         Me.cboNaamserie.Size = New System.Drawing.Size(258, 32)
@@ -103,14 +102,14 @@ Partial Class FrmMain
         '
         'dgvnamen
         '
-        Me.dgvnamen.AllowUserToAddRows = False
-        Me.dgvnamen.AllowUserToDeleteRows = False
+        Me.dgvnamen.AllowUserToAddRows = false
+        Me.dgvnamen.AllowUserToDeleteRows = false
         Me.dgvnamen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvnamen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvnamen.Location = New System.Drawing.Point(13, 128)
-        Me.dgvnamen.MultiSelect = False
+        Me.dgvnamen.MultiSelect = false
         Me.dgvnamen.Name = "dgvnamen"
-        Me.dgvnamen.RowHeadersVisible = False
+        Me.dgvnamen.RowHeadersVisible = false
         Me.dgvnamen.Size = New System.Drawing.Size(331, 496)
         Me.dgvnamen.TabIndex = 2
         '
@@ -128,7 +127,7 @@ Partial Class FrmMain
         Me.btnToonalles.Size = New System.Drawing.Size(110, 30)
         Me.btnToonalles.TabIndex = 5
         Me.btnToonalles.Text = "Toon alles"
-        Me.btnToonalles.UseVisualStyleBackColor = True
+        Me.btnToonalles.UseVisualStyleBackColor = true
         '
         'cmsMouse
         '
@@ -157,7 +156,7 @@ Partial Class FrmMain
         'CboSerieVolgnummer
         '
         Me.CboSerieVolgnummer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CboSerieVolgnummer.FormattingEnabled = True
+        Me.CboSerieVolgnummer.FormattingEnabled = true
         Me.CboSerieVolgnummer.Location = New System.Drawing.Point(279, 51)
         Me.CboSerieVolgnummer.Name = "CboSerieVolgnummer"
         Me.CboSerieVolgnummer.Size = New System.Drawing.Size(67, 32)
@@ -165,14 +164,14 @@ Partial Class FrmMain
         '
         'dgvUitslagen
         '
-        Me.dgvUitslagen.AllowUserToAddRows = False
-        Me.dgvUitslagen.AllowUserToDeleteRows = False
+        Me.dgvUitslagen.AllowUserToAddRows = false
+        Me.dgvUitslagen.AllowUserToDeleteRows = false
         Me.dgvUitslagen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUitslagen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvUitslagen.Location = New System.Drawing.Point(350, 211)
-        Me.dgvUitslagen.MultiSelect = False
+        Me.dgvUitslagen.MultiSelect = false
         Me.dgvUitslagen.Name = "dgvUitslagen"
-        Me.dgvUitslagen.RowHeadersVisible = False
+        Me.dgvUitslagen.RowHeadersVisible = false
         Me.dgvUitslagen.RowTemplate.Height = 27
         Me.dgvUitslagen.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvUitslagen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -186,47 +185,47 @@ Partial Class FrmMain
         Me.lblVerhaal.Size = New System.Drawing.Size(453, 496)
         Me.lblVerhaal.TabIndex = 20
         Me.lblVerhaal.Text = "Verhaal:"
-        Me.lblVerhaal.Visible = False
+        Me.lblVerhaal.Visible = false
         '
         'lblNieuwVerhaal
         '
-        Me.lblNieuwVerhaal.AutoSize = True
+        Me.lblNieuwVerhaal.AutoSize = true
         Me.lblNieuwVerhaal.Location = New System.Drawing.Point(836, 211)
         Me.lblNieuwVerhaal.Name = "lblNieuwVerhaal"
         Me.lblNieuwVerhaal.Size = New System.Drawing.Size(80, 24)
         Me.lblNieuwVerhaal.TabIndex = 157
         Me.lblNieuwVerhaal.Text = "Verhaal:"
-        Me.lblNieuwVerhaal.Visible = False
+        Me.lblNieuwVerhaal.Visible = false
         '
         'lblUitslagid1
         '
-        Me.lblUitslagid1.AutoSize = True
+        Me.lblUitslagid1.AutoSize = true
         Me.lblUitslagid1.Location = New System.Drawing.Point(523, 85)
         Me.lblUitslagid1.Name = "lblUitslagid1"
         Me.lblUitslagid1.Size = New System.Drawing.Size(95, 24)
         Me.lblUitslagid1.TabIndex = 167
         Me.lblUitslagid1.Text = "Uitslagid1"
-        Me.lblUitslagid1.Visible = False
+        Me.lblUitslagid1.Visible = false
         '
         'lblUitslagid2
         '
-        Me.lblUitslagid2.AutoSize = True
+        Me.lblUitslagid2.AutoSize = true
         Me.lblUitslagid2.Location = New System.Drawing.Point(523, 117)
         Me.lblUitslagid2.Name = "lblUitslagid2"
         Me.lblUitslagid2.Size = New System.Drawing.Size(95, 24)
         Me.lblUitslagid2.TabIndex = 168
         Me.lblUitslagid2.Text = "Uitslagid2"
-        Me.lblUitslagid2.Visible = False
+        Me.lblUitslagid2.Visible = false
         '
         'lblDatumid
         '
-        Me.lblDatumid.AutoSize = True
+        Me.lblDatumid.AutoSize = true
         Me.lblDatumid.Location = New System.Drawing.Point(421, 85)
         Me.lblDatumid.Name = "lblDatumid"
         Me.lblDatumid.Size = New System.Drawing.Size(82, 24)
         Me.lblDatumid.TabIndex = 169
         Me.lblDatumid.Text = "Datumid"
-        Me.lblDatumid.Visible = False
+        Me.lblDatumid.Visible = false
         '
         'gpVerhaalEtc
         '
@@ -249,22 +248,22 @@ Partial Class FrmMain
         Me.gpVerhaalEtc.Name = "gpVerhaalEtc"
         Me.gpVerhaalEtc.Size = New System.Drawing.Size(799, 207)
         Me.gpVerhaalEtc.TabIndex = 170
-        Me.gpVerhaalEtc.TabStop = False
-        Me.gpVerhaalEtc.Visible = False
+        Me.gpVerhaalEtc.TabStop = false
+        Me.gpVerhaalEtc.Visible = false
         '
         'lblDatumtitel
         '
-        Me.lblDatumtitel.AutoSize = True
+        Me.lblDatumtitel.AutoSize = true
         Me.lblDatumtitel.Location = New System.Drawing.Point(5, 12)
         Me.lblDatumtitel.Name = "lblDatumtitel"
         Me.lblDatumtitel.Size = New System.Drawing.Size(79, 24)
         Me.lblDatumtitel.TabIndex = 181
         Me.lblDatumtitel.Text = "Datum: "
-        Me.lblDatumtitel.Visible = False
+        Me.lblDatumtitel.Visible = false
         '
         'lblTemperatuur
         '
-        Me.lblTemperatuur.AutoSize = True
+        Me.lblTemperatuur.AutoSize = true
         Me.lblTemperatuur.Location = New System.Drawing.Point(187, 173)
         Me.lblTemperatuur.Name = "lblTemperatuur"
         Me.lblTemperatuur.Size = New System.Drawing.Size(30, 24)
@@ -273,7 +272,7 @@ Partial Class FrmMain
         '
         'lblWindsnelheid
         '
-        Me.lblWindsnelheid.AutoSize = True
+        Me.lblWindsnelheid.AutoSize = true
         Me.lblWindsnelheid.Location = New System.Drawing.Point(187, 146)
         Me.lblWindsnelheid.Name = "lblWindsnelheid"
         Me.lblWindsnelheid.Size = New System.Drawing.Size(135, 24)
@@ -282,7 +281,7 @@ Partial Class FrmMain
         '
         'lblWind
         '
-        Me.lblWind.AutoSize = True
+        Me.lblWind.AutoSize = true
         Me.lblWind.Location = New System.Drawing.Point(187, 120)
         Me.lblWind.Name = "lblWind"
         Me.lblWind.Size = New System.Drawing.Size(59, 24)
@@ -291,7 +290,7 @@ Partial Class FrmMain
         '
         'lblWeeralgemeen
         '
-        Me.lblWeeralgemeen.AutoSize = True
+        Me.lblWeeralgemeen.AutoSize = true
         Me.lblWeeralgemeen.Location = New System.Drawing.Point(187, 93)
         Me.lblWeeralgemeen.Name = "lblWeeralgemeen"
         Me.lblWeeralgemeen.Size = New System.Drawing.Size(147, 24)
@@ -300,7 +299,7 @@ Partial Class FrmMain
         '
         'lblLuchtdrukMB
         '
-        Me.lblLuchtdrukMB.AutoSize = True
+        Me.lblLuchtdrukMB.AutoSize = true
         Me.lblLuchtdrukMB.Location = New System.Drawing.Point(187, 66)
         Me.lblLuchtdrukMB.Name = "lblLuchtdrukMB"
         Me.lblLuchtdrukMB.Size = New System.Drawing.Size(154, 24)
@@ -309,7 +308,7 @@ Partial Class FrmMain
         '
         'lblLocatieVissen
         '
-        Me.lblLocatieVissen.AutoSize = True
+        Me.lblLocatieVissen.AutoSize = true
         Me.lblLocatieVissen.Location = New System.Drawing.Point(187, 39)
         Me.lblLocatieVissen.Name = "lblLocatieVissen"
         Me.lblLocatieVissen.Size = New System.Drawing.Size(135, 24)
@@ -318,7 +317,7 @@ Partial Class FrmMain
         '
         'lblNieuwTemperatuur
         '
-        Me.lblNieuwTemperatuur.AutoSize = True
+        Me.lblNieuwTemperatuur.AutoSize = true
         Me.lblNieuwTemperatuur.Location = New System.Drawing.Point(5, 173)
         Me.lblNieuwTemperatuur.Name = "lblNieuwTemperatuur"
         Me.lblNieuwTemperatuur.Size = New System.Drawing.Size(125, 24)
@@ -327,7 +326,7 @@ Partial Class FrmMain
         '
         'lblNieuwWindsnelheid
         '
-        Me.lblNieuwWindsnelheid.AutoSize = True
+        Me.lblNieuwWindsnelheid.AutoSize = true
         Me.lblNieuwWindsnelheid.Location = New System.Drawing.Point(5, 146)
         Me.lblNieuwWindsnelheid.Name = "lblNieuwWindsnelheid"
         Me.lblNieuwWindsnelheid.Size = New System.Drawing.Size(135, 24)
@@ -336,7 +335,7 @@ Partial Class FrmMain
         '
         'lblNieuwWind
         '
-        Me.lblNieuwWind.AutoSize = True
+        Me.lblNieuwWind.AutoSize = true
         Me.lblNieuwWind.Location = New System.Drawing.Point(5, 120)
         Me.lblNieuwWind.Name = "lblNieuwWind"
         Me.lblNieuwWind.Size = New System.Drawing.Size(59, 24)
@@ -345,7 +344,7 @@ Partial Class FrmMain
         '
         'lblNieuwWeer
         '
-        Me.lblNieuwWeer.AutoSize = True
+        Me.lblNieuwWeer.AutoSize = true
         Me.lblNieuwWeer.Location = New System.Drawing.Point(5, 93)
         Me.lblNieuwWeer.Name = "lblNieuwWeer"
         Me.lblNieuwWeer.Size = New System.Drawing.Size(147, 24)
@@ -354,7 +353,7 @@ Partial Class FrmMain
         '
         'lblNieuwLuchtdrukMB
         '
-        Me.lblNieuwLuchtdrukMB.AutoSize = True
+        Me.lblNieuwLuchtdrukMB.AutoSize = true
         Me.lblNieuwLuchtdrukMB.Location = New System.Drawing.Point(5, 66)
         Me.lblNieuwLuchtdrukMB.Name = "lblNieuwLuchtdrukMB"
         Me.lblNieuwLuchtdrukMB.Size = New System.Drawing.Size(154, 24)
@@ -363,7 +362,7 @@ Partial Class FrmMain
         '
         'lblNieuwLocatievissen
         '
-        Me.lblNieuwLocatievissen.AutoSize = True
+        Me.lblNieuwLocatievissen.AutoSize = true
         Me.lblNieuwLocatievissen.Location = New System.Drawing.Point(5, 39)
         Me.lblNieuwLocatievissen.Name = "lblNieuwLocatievissen"
         Me.lblNieuwLocatievissen.Size = New System.Drawing.Size(135, 24)
@@ -377,11 +376,11 @@ Partial Class FrmMain
         Me.btnWijzigverhaal.Size = New System.Drawing.Size(142, 33)
         Me.btnWijzigverhaal.TabIndex = 167
         Me.btnWijzigverhaal.Text = "Wijzig verhaal"
-        Me.btnWijzigverhaal.UseVisualStyleBackColor = True
+        Me.btnWijzigverhaal.UseVisualStyleBackColor = true
         '
         'lblDatum
         '
-        Me.lblDatum.AutoSize = True
+        Me.lblDatum.AutoSize = true
         Me.lblDatum.Location = New System.Drawing.Point(187, 12)
         Me.lblDatum.Name = "lblDatum"
         Me.lblDatum.Size = New System.Drawing.Size(79, 24)
@@ -409,35 +408,35 @@ Partial Class FrmMain
         Me.gbNaamGewichtEtc.Name = "gbNaamGewichtEtc"
         Me.gbNaamGewichtEtc.Size = New System.Drawing.Size(628, 150)
         Me.gbNaamGewichtEtc.TabIndex = 171
-        Me.gbNaamGewichtEtc.TabStop = False
-        Me.gbNaamGewichtEtc.Visible = False
+        Me.gbNaamGewichtEtc.TabStop = false
+        Me.gbNaamGewichtEtc.Visible = false
         '
         'btnOpslaan
         '
-        Me.btnOpslaan.Enabled = False
+        Me.btnOpslaan.Enabled = false
         Me.btnOpslaan.Location = New System.Drawing.Point(502, 41)
         Me.btnOpslaan.Name = "btnOpslaan"
         Me.btnOpslaan.Size = New System.Drawing.Size(105, 33)
         Me.btnOpslaan.TabIndex = 182
         Me.btnOpslaan.Text = "Opslaan"
-        Me.btnOpslaan.UseVisualStyleBackColor = True
+        Me.btnOpslaan.UseVisualStyleBackColor = true
         '
         'txtNaam1
         '
         Me.txtNaam1.BackColor = System.Drawing.Color.White
         Me.txtNaam1.Location = New System.Drawing.Point(6, 43)
         Me.txtNaam1.Name = "txtNaam1"
-        Me.txtNaam1.ReadOnly = True
+        Me.txtNaam1.ReadOnly = true
         Me.txtNaam1.Size = New System.Drawing.Size(330, 30)
         Me.txtNaam1.TabIndex = 173
         '
         'txtGewichtTotaal
         '
         Me.txtGewichtTotaal.BackColor = System.Drawing.Color.White
-        Me.txtGewichtTotaal.Enabled = False
+        Me.txtGewichtTotaal.Enabled = false
         Me.txtGewichtTotaal.Location = New System.Drawing.Point(339, 114)
         Me.txtGewichtTotaal.Name = "txtGewichtTotaal"
-        Me.txtGewichtTotaal.ReadOnly = True
+        Me.txtGewichtTotaal.ReadOnly = true
         Me.txtGewichtTotaal.Size = New System.Drawing.Size(79, 30)
         Me.txtGewichtTotaal.TabIndex = 181
         '
@@ -451,7 +450,7 @@ Partial Class FrmMain
         '
         'lblGewichtTotaal
         '
-        Me.lblGewichtTotaal.AutoSize = True
+        Me.lblGewichtTotaal.AutoSize = true
         Me.lblGewichtTotaal.Location = New System.Drawing.Point(200, 117)
         Me.lblGewichtTotaal.Name = "lblGewichtTotaal"
         Me.lblGewichtTotaal.Size = New System.Drawing.Size(138, 24)
@@ -460,7 +459,7 @@ Partial Class FrmMain
         '
         'LblNaam1
         '
-        Me.LblNaam1.AutoSize = True
+        Me.LblNaam1.AutoSize = true
         Me.LblNaam1.Location = New System.Drawing.Point(2, 15)
         Me.LblNaam1.Name = "LblNaam1"
         Me.LblNaam1.Size = New System.Drawing.Size(58, 24)
@@ -477,7 +476,7 @@ Partial Class FrmMain
         '
         'lblGewicht
         '
-        Me.lblGewicht.AutoSize = True
+        Me.lblGewicht.AutoSize = true
         Me.lblGewicht.Location = New System.Drawing.Point(339, 15)
         Me.lblGewicht.Name = "lblGewicht"
         Me.lblGewicht.Size = New System.Drawing.Size(80, 24)
@@ -489,7 +488,7 @@ Partial Class FrmMain
         Me.txtNaam2.BackColor = System.Drawing.Color.White
         Me.txtNaam2.Location = New System.Drawing.Point(6, 79)
         Me.txtNaam2.Name = "txtNaam2"
-        Me.txtNaam2.ReadOnly = True
+        Me.txtNaam2.ReadOnly = true
         Me.txtNaam2.Size = New System.Drawing.Size(330, 30)
         Me.txtNaam2.TabIndex = 178
         '
@@ -500,17 +499,17 @@ Partial Class FrmMain
         Me.txtAantal.Name = "txtAantal"
         Me.txtAantal.Size = New System.Drawing.Size(79, 30)
         Me.txtAantal.TabIndex = 176
-        Me.txtAantal.Visible = False
+        Me.txtAantal.Visible = false
         '
         'lblAantal
         '
-        Me.lblAantal.AutoSize = True
+        Me.lblAantal.AutoSize = true
         Me.lblAantal.Location = New System.Drawing.Point(427, 15)
         Me.lblAantal.Name = "lblAantal"
         Me.lblAantal.Size = New System.Drawing.Size(65, 24)
         Me.lblAantal.TabIndex = 177
         Me.lblAantal.Text = "Aantal"
-        Me.lblAantal.Visible = False
+        Me.lblAantal.Visible = false
         '
         'cmsUitslag
         '
@@ -526,7 +525,7 @@ Partial Class FrmMain
         '
         'lblMelding
         '
-        Me.lblMelding.AutoSize = True
+        Me.lblMelding.AutoSize = true
         Me.lblMelding.Location = New System.Drawing.Point(12, 782)
         Me.lblMelding.Name = "lblMelding"
         Me.lblMelding.Size = New System.Drawing.Size(89, 24)
@@ -535,13 +534,13 @@ Partial Class FrmMain
         '
         'btnKlassement
         '
-        Me.btnKlassement.Enabled = False
+        Me.btnKlassement.Enabled = false
         Me.btnKlassement.Location = New System.Drawing.Point(699, 635)
         Me.btnKlassement.Name = "btnKlassement"
         Me.btnKlassement.Size = New System.Drawing.Size(131, 33)
         Me.btnKlassement.TabIndex = 183
         Me.btnKlassement.Text = "Klassement"
-        Me.btnKlassement.UseVisualStyleBackColor = True
+        Me.btnKlassement.UseVisualStyleBackColor = true
         '
         'btnVisser
         '
@@ -550,8 +549,8 @@ Partial Class FrmMain
         Me.btnVisser.Size = New System.Drawing.Size(131, 33)
         Me.btnVisser.TabIndex = 184
         Me.btnVisser.Text = "Visser"
-        Me.btnVisser.UseVisualStyleBackColor = True
-        Me.btnVisser.Visible = False
+        Me.btnVisser.UseVisualStyleBackColor = true
+        Me.btnVisser.Visible = false
         '
         'btnLoting
         '
@@ -560,23 +559,13 @@ Partial Class FrmMain
         Me.btnLoting.Size = New System.Drawing.Size(131, 33)
         Me.btnLoting.TabIndex = 186
         Me.btnLoting.Text = "Loting"
-        Me.btnLoting.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(1005, 394)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(219, 130)
-        Me.Button1.TabIndex = 187
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnLoting.UseVisualStyleBackColor = true
         '
         'FrmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 24.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1343, 831)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -592,24 +581,24 @@ Partial Class FrmMain
         Me.Controls.Add(Me.dgvnamen)
         Me.Controls.Add(Me.cboNaamserie)
         Me.Controls.Add(Me.cboSeizoen)
-        Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
-        CType(Me.dgvnamen, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.cmsMouse.ResumeLayout(False)
-        CType(Me.dgvUitslagen, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.gpVerhaalEtc.ResumeLayout(False)
-        Me.gpVerhaalEtc.PerformLayout()
-        Me.gbNaamGewichtEtc.ResumeLayout(False)
-        Me.gbNaamGewichtEtc.PerformLayout()
-        Me.cmsUitslag.ResumeLayout(False)
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).EndInit
+        Me.cmsMouse.ResumeLayout(false)
+        CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).EndInit
+        Me.gpVerhaalEtc.ResumeLayout(false)
+        Me.gpVerhaalEtc.PerformLayout
+        Me.gbNaamGewichtEtc.ResumeLayout(false)
+        Me.gbNaamGewichtEtc.PerformLayout
+        Me.cmsUitslag.ResumeLayout(false)
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents cboSeizoen As ComboBox
     Friend WithEvents cboNaamserie As ComboBox
@@ -661,5 +650,4 @@ Partial Class FrmMain
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
-    Friend WithEvents Button1 As Button
 End Class

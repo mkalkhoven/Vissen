@@ -47,7 +47,7 @@ Public Class frmHistorieseriebewerken
     End Sub
     Private Sub Fillgrid()
 
-        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, l.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum)}  AND l.Serieid = {serie.Id} AND l.Plaats > 0 ORDER BY l.Plaats"
+        Dim sql = $"SELECT l.Lotingid, n.Naam, l.Plaats, l.Naamid FROM Loting2 l JOIN Namen n ON l.Naamid = n.NaamID WHERE l.Datum = {GetISODate(datum)}  AND l.Serieid = {serie.Id} ORDER BY l.Plaats"
         Dim dt = ModDatabase.Selecteer(sql)
 
         dgvLoting.DataSource = dt

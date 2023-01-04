@@ -1136,8 +1136,4 @@ Public Class FrmMain
         'dgvUitslagen.ClearSelection()
 
     End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        MessageBox.Show(Namenrepo.Getid)
-    End Sub
 End Class
