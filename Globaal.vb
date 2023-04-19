@@ -162,4 +162,22 @@ Module Globaal
 
     End Function
 
+    Public Function IsImage(fileName As String) As Boolean
+    Dim img As Image = Nothing
+
+    Try
+        Using stream = New IO.FileStream(fileName, IO.FileMode.Open)
+            img = Image.FromStream(stream)
+            Return True
+        End Using
+
+    Catch oome As OutOfMemoryException
+        Return False
+    Finally
+        If img IsNot Nothing Then img.Dispose()
+    End Try
+    Return False
+
+End Function
+
 End Module

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmMain
+Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class FrmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMain))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.cboSeizoen = New System.Windows.Forms.ComboBox()
         Me.cboNaamserie = New System.Windows.Forms.ComboBox()
         Me.dgvnamen = New System.Windows.Forms.DataGridView()
@@ -74,12 +74,18 @@ Partial Class FrmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
+        Me.btnfoto = New System.Windows.Forms.Button()
+        Me.picfoto = New System.Windows.Forms.PictureBox()
+        Me.txtfoto = New System.Windows.Forms.TextBox()
+        Me.panfoto = New System.Windows.Forms.Panel()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.gpVerhaalEtc.SuspendLayout
         Me.gbNaamGewichtEtc.SuspendLayout
         Me.cmsUitslag.SuspendLayout
+        CType(Me.picfoto,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.panfoto.SuspendLayout
         Me.SuspendLayout
         '
         'cboSeizoen
@@ -180,6 +186,7 @@ Partial Class FrmMain
         '
         'lblVerhaal
         '
+        Me.lblVerhaal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblVerhaal.Location = New System.Drawing.Point(836, 239)
         Me.lblVerhaal.Name = "lblVerhaal"
         Me.lblVerhaal.Size = New System.Drawing.Size(453, 496)
@@ -561,11 +568,52 @@ Partial Class FrmMain
         Me.btnLoting.Text = "Loting"
         Me.btnLoting.UseVisualStyleBackColor = true
         '
-        'FrmMain
+        'btnfoto
         '
+        Me.btnfoto.Location = New System.Drawing.Point(1295, 200)
+        Me.btnfoto.Name = "btnfoto"
+        Me.btnfoto.Size = New System.Drawing.Size(142, 33)
+        Me.btnfoto.TabIndex = 182
+        Me.btnfoto.Text = "Opslaan foto"
+        Me.btnfoto.UseVisualStyleBackColor = true
+        Me.btnfoto.Visible = false
+        '
+        'picfoto
+        '
+        Me.picfoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picfoto.Location = New System.Drawing.Point(0, 0)
+        Me.picfoto.Name = "picfoto"
+        Me.picfoto.Size = New System.Drawing.Size(277, 421)
+        Me.picfoto.TabIndex = 189
+        Me.picfoto.TabStop = false
+        '
+        'txtfoto
+        '
+        Me.txtfoto.Location = New System.Drawing.Point(1295, 666)
+        Me.txtfoto.Name = "txtfoto"
+        Me.txtfoto.Size = New System.Drawing.Size(184, 30)
+        Me.txtfoto.TabIndex = 190
+        Me.txtfoto.Visible = false
+        '
+        'panfoto
+        '
+        Me.panfoto.AllowDrop = true
+        Me.panfoto.Controls.Add(Me.picfoto)
+        Me.panfoto.Location = New System.Drawing.Point(1295, 239)
+        Me.panfoto.Name = "panfoto"
+        Me.panfoto.Size = New System.Drawing.Size(277, 421)
+        Me.panfoto.TabIndex = 191
+        Me.panfoto.Visible = false
+        '
+        'frmMain
+        '
+        Me.AllowDrop = true
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1343, 831)
+        Me.ClientSize = New System.Drawing.Size(1681, 831)
+        Me.Controls.Add(Me.panfoto)
+        Me.Controls.Add(Me.txtfoto)
+        Me.Controls.Add(Me.btnfoto)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -584,9 +632,10 @@ Partial Class FrmMain
         Me.Font = New System.Drawing.Font("Trebuchet MS", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
-        Me.Name = "FrmMain"
+        Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).EndInit
         Me.cmsMouse.ResumeLayout(false)
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).EndInit
@@ -595,6 +644,8 @@ Partial Class FrmMain
         Me.gbNaamGewichtEtc.ResumeLayout(false)
         Me.gbNaamGewichtEtc.PerformLayout
         Me.cmsUitslag.ResumeLayout(false)
+        CType(Me.picfoto,System.ComponentModel.ISupportInitialize).EndInit
+        Me.panfoto.ResumeLayout(false)
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -650,4 +701,8 @@ End Sub
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
+    Friend WithEvents btnfoto As Button
+    Friend WithEvents picfoto As PictureBox
+    Friend WithEvents txtfoto As TextBox
+    Friend WithEvents panfoto As Panel
 End Class

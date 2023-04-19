@@ -1,8 +1,10 @@
-﻿Imports Datalaag
+﻿Imports System.IO
+Imports System.Net
+Imports Datalaag
 Imports Datalaag.Classes
 Imports Datalaag.Global
 Imports Vissen.Globaal
-Public Class FrmMain
+Public Class frmMain
     Private klaarmetladen As Boolean = False
     Private _toonalles As Boolean = False
     Private _deelnemer1 As New Namen
@@ -539,6 +541,8 @@ Public Class FrmMain
     Private Sub Vuldetails(datum As DatumWeerEtc)
 
         If datum.ID > 0 Then
+            panfoto.Visible = True
+            btnfoto.Visible = True
             dgvnamen.Enabled = True
             lblDatumtitel.Visible = True
             txtGewicht1.Enabled = False
@@ -570,7 +574,9 @@ Public Class FrmMain
                 btnWijzigverhaal.Visible = False
                 gbNaamGewichtEtc.Visible = False
             End If
-            'Piet
+            If Not IsNothing(datum.Afbeelding) then
+                picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{datum.Afbeelding}"
+            End If
         Else
             Leegdetails()
             btnWijzigverhaal.Visible = False
@@ -588,6 +594,8 @@ Public Class FrmMain
         lblWind.Text = ""
         lblWindsnelheid.Text = ""
         lblTemperatuur.Text = ""
+        picfoto.Image = Nothing
+        btnfoto.Visible = False
 
     End Sub
     Private Sub dgvUitslagen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvUitslagen.DataBindingComplete
@@ -653,6 +661,8 @@ Public Class FrmMain
         txtNaam2.Text = ""
         lblLocatieVissen.Text = ""
         lblMelding.Text = ""
+        panfoto.Visible = False
+        picfoto.Image = Nothing
     End Sub
     Private Sub Opslaan()
 
@@ -1134,6 +1144,70 @@ Public Class FrmMain
         txtGewicht1.Enabled = True
         txtGewicht2.Enabled = True
         'dgvUitslagen.ClearSelection()
+
+    End Sub
+
+    Private Sub picfoto_DragEnter(sender As Object, e As DragEventArgs) Handles picfoto.DragEnter
+        
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.All
+        End If
+
+    End Sub
+
+    Private Sub picfoto_DragDrop(sender As Object, e As DragEventArgs) Handles picfoto.DragDrop
+
+    End Sub
+
+    Private Sub frmMain_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+        
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.All
+        End If
+
+    End Sub
+
+    Private Sub frmMain_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+        
+    End Sub
+
+    Private Sub panfoto_DragDrop(sender As Object, e As DragEventArgs) Handles panfoto.DragDrop
+        
+        Dim data = e.Data.GetData(DataFormats.FileDrop)
+        If data IsNot Nothing Then
+            Dim bestandsnamen As String() = data
+            If IsImage(bestandsnamen(0)) then
+                txtfoto.Text = bestandsnamen(0)
+                picfoto.Image = Image.FromFile(bestandsnamen(0))
+            End If
+        End If
+
+    End Sub
+
+    Private Sub panfoto_DragEnter(sender As Object, e As DragEventArgs) Handles panfoto.DragEnter
+        
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.All
+        End If
+
+    End Sub
+
+    Private Sub btnfoto_Click(sender As Object, e As EventArgs) Handles btnfoto.Click
+
+        If Not String.IsNullOrEmpty(txtfoto.Text) Then
+            Dim extension As String = Path.GetExtension(txtfoto.Text)
+            _datum.Afbeelding = $"{_datum.ID}{extension}"
+            Dim uploadbestand = $"ftp://ftp.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}"
+            Dim client = New WebClient With {.Credentials = New NetworkCredential("pietline", "fn8565fn")}
+            Try
+                client.UploadFile(uploadbestand, txtfoto.Text)
+                Datumweeretcrepo.Save(_datum)
+                picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}"
+            Catch ex As Exception
+                MessageBox.Show("Er is iets fout gegaan met het uploaden.")
+            End Try
+
+        End If
 
     End Sub
 End Class
