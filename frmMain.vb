@@ -3,7 +3,6 @@ Imports System.Net
 Imports Datalaag
 Imports Datalaag.Classes
 Imports Datalaag.Global
-Imports Vissen.Globaal
 Public Class frmMain
     Private klaarmetladen As Boolean = False
     Private _toonalles As Boolean = False
@@ -542,7 +541,7 @@ Public Class frmMain
 
         If datum.ID > 0 Then
             panfoto.Visible = True
-            btnfoto.Visible = True
+            lblSleep.Visible = True
             dgvnamen.Enabled = True
             lblDatumtitel.Visible = True
             txtGewicht1.Enabled = False
@@ -576,11 +575,16 @@ Public Class frmMain
             End If
             If Not IsNothing(datum.Afbeelding) then
                 picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{datum.Afbeelding}"
+                btnfotowissen.Visible = True
+            Else
+                btnfotowissen.Visible = False
             End If
         Else
             Leegdetails()
             btnWijzigverhaal.Visible = False
+            btnfotowissen.Visible = False
         End If
+        panfoto.Visible = true
 
     End Sub
     Private Sub Leegdetails()
@@ -595,7 +599,8 @@ Public Class frmMain
         lblWindsnelheid.Text = ""
         lblTemperatuur.Text = ""
         picfoto.Image = Nothing
-        btnfoto.Visible = False
+        btnfotoopslaan.Visible = False
+        btnfotowissen.Visible = False
 
     End Sub
     Private Sub dgvUitslagen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvUitslagen.DataBindingComplete
@@ -651,6 +656,7 @@ Public Class frmMain
     End Sub
     Private Sub Legen()
         'Piet
+
         lblUitslagid1.Text = ""
         lblUitslagid2.Text = ""
         txtGewicht1.Text = ""
@@ -661,8 +667,9 @@ Public Class frmMain
         txtNaam2.Text = ""
         lblLocatieVissen.Text = ""
         lblMelding.Text = ""
-        panfoto.Visible = False
         picfoto.Image = Nothing
+        btnfotoopslaan.Visible = False
+
     End Sub
     Private Sub Opslaan()
 
@@ -707,11 +714,11 @@ Public Class frmMain
 
                 nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
 
-                If _deelnemer1.Naam.ToLower().Contains("alleen") Or _deelnemer2.Naam.ToLower().Contains("alleen") Then
-                    If _deelnemer1.Naam.ToLower().Contains("alleen") Then
-                        nachtvis.Namen = $"{_deelnemer1.Naam} (alleen)"
+                If _deelnemer1.Naam.ToLower().Contains("geen partner") Or _deelnemer2.Naam.ToLower().Contains("geen partner") Then
+                    If _deelnemer1.Naam.ToLower().Contains("geen partner") Then
+                        nachtvis.Namen = $"{_deelnemer2.Naam} (geen partner)"
                     Else
-                        nachtvis.Namen = $"{_deelnemer2.Naam} (alleen)"
+                        nachtvis.Namen = $"{_deelnemer1.Naam} (geen partner)"
                     End If
                 Else
                     nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
@@ -1148,7 +1155,7 @@ Public Class frmMain
     End Sub
 
     Private Sub picfoto_DragEnter(sender As Object, e As DragEventArgs) Handles picfoto.DragEnter
-        
+
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.All
         End If
@@ -1160,7 +1167,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
-        
+
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.All
         End If
@@ -1168,33 +1175,36 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
-        
+
     End Sub
 
     Private Sub panfoto_DragDrop(sender As Object, e As DragEventArgs) Handles panfoto.DragDrop
-        
+
         Dim data = e.Data.GetData(DataFormats.FileDrop)
         If data IsNot Nothing Then
             Dim bestandsnamen As String() = data
             If IsImage(bestandsnamen(0)) then
                 txtfoto.Text = bestandsnamen(0)
                 picfoto.Image = Image.FromFile(bestandsnamen(0))
+                btnfotoopslaan.Visible = True
             End If
         End If
 
     End Sub
 
     Private Sub panfoto_DragEnter(sender As Object, e As DragEventArgs) Handles panfoto.DragEnter
-        
+
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.All
         End If
 
     End Sub
 
-    Private Sub btnfoto_Click(sender As Object, e As EventArgs) Handles btnfoto.Click
+    Private Sub btnfoto_Click(sender As Object, e As EventArgs) Handles btnfotoopslaan.Click
 
         If Not String.IsNullOrEmpty(txtfoto.Text) Then
+            Dim folder As String = Path.GetDirectoryName(txtfoto.Text)
+            Schrijfregister("visfotomap", folder)
             Dim extension As String = Path.GetExtension(txtfoto.Text)
             _datum.Afbeelding = $"{_datum.ID}{extension}"
             Dim uploadbestand = $"ftp://ftp.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}"
@@ -1203,11 +1213,55 @@ Public Class frmMain
                 client.UploadFile(uploadbestand, txtfoto.Text)
                 Datumweeretcrepo.Save(_datum)
                 picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}"
+                btnfotowissen.Visible = True
             Catch ex As Exception
                 MessageBox.Show("Er is iets fout gegaan met het uploaden.")
             End Try
 
         End If
 
+    End Sub
+
+    Private Sub btnfotowissen_Click(sender As Object, e As EventArgs) Handles btnfotowissen.Click
+
+        If Not String.IsNullOrEmpty(_datum.Afbeelding) Then
+            Try
+                Dim request As FtpWebRequest = WebRequest.Create($"ftp://ftp.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}")
+                request.Credentials = New NetworkCredential("pietline", "fn8565fn")
+                request.Method = WebRequestMethods.Ftp.DeleteFile
+                Dim response = request.GetResponse()
+                picfoto.Image = Nothing
+                _datum.Afbeelding = nothing
+                Datumweeretcrepo.Save(_datum)
+                btnfotowissen.Visible = False
+                btnfotoopslaan.Visible = False
+            Catch ex As Exception
+                MessageBox.Show("Er is iets fout gegaan met het VERWIJDEREN VAN DE AFBEELDING.")
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub picfoto_Click(sender As Object, e As EventArgs) Handles picfoto.Click
+
+        Dim map = Leesregister("visfotomap")
+        If String.IsNullOrEmpty(map) Then
+            map = "D:\Documenten\De Ruisvoorn"
+        End If
+
+        dim ofd = New OpenFileDialog With {
+            .InitialDirectory = map,
+            .Filter = "Afbeeldingen (*.png *.jpg *.jpeg) |*.png; *.jpg; *.jpeg|Alle bestanden(*.*) |*.*",
+            .FilterIndex = 1
+        }
+        If ofd.ShowDialog <> DialogResult.Cancel Then
+             If IsImage(ofd.FileName) then
+                txtfoto.Text = ofd.FileName
+                picfoto.Image = Image.FromFile(ofd.FileName)
+                Dim folder As String = Path.GetDirectoryName(ofd.FileName)
+                Schrijfregister("visfotomap", folder)
+                btnfotoopslaan.Visible = True
+            End If
+        End If
     End Sub
 End Class

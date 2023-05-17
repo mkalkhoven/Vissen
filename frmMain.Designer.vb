@@ -74,10 +74,12 @@ Partial Class frmMain
         Me.btnKlassement = New System.Windows.Forms.Button()
         Me.btnVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
-        Me.btnfoto = New System.Windows.Forms.Button()
+        Me.btnfotoopslaan = New System.Windows.Forms.Button()
         Me.picfoto = New System.Windows.Forms.PictureBox()
         Me.txtfoto = New System.Windows.Forms.TextBox()
         Me.panfoto = New System.Windows.Forms.Panel()
+        Me.btnfotowissen = New System.Windows.Forms.Button()
+        Me.lblSleep = New System.Windows.Forms.Label()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -568,28 +570,29 @@ Partial Class frmMain
         Me.btnLoting.Text = "Loting"
         Me.btnLoting.UseVisualStyleBackColor = true
         '
-        'btnfoto
+        'btnfotoopslaan
         '
-        Me.btnfoto.Location = New System.Drawing.Point(1295, 200)
-        Me.btnfoto.Name = "btnfoto"
-        Me.btnfoto.Size = New System.Drawing.Size(142, 33)
-        Me.btnfoto.TabIndex = 182
-        Me.btnfoto.Text = "Opslaan foto"
-        Me.btnfoto.UseVisualStyleBackColor = true
-        Me.btnfoto.Visible = false
+        Me.btnfotoopslaan.Location = New System.Drawing.Point(1295, 200)
+        Me.btnfotoopslaan.Name = "btnfotoopslaan"
+        Me.btnfotoopslaan.Size = New System.Drawing.Size(142, 33)
+        Me.btnfotoopslaan.TabIndex = 182
+        Me.btnfotoopslaan.Text = "Opslaan foto"
+        Me.btnfotoopslaan.UseVisualStyleBackColor = true
+        Me.btnfotoopslaan.Visible = false
         '
         'picfoto
         '
         Me.picfoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.picfoto.Location = New System.Drawing.Point(0, 0)
         Me.picfoto.Name = "picfoto"
-        Me.picfoto.Size = New System.Drawing.Size(277, 421)
+        Me.picfoto.Size = New System.Drawing.Size(617, 904)
+        Me.picfoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picfoto.TabIndex = 189
         Me.picfoto.TabStop = false
         '
         'txtfoto
         '
-        Me.txtfoto.Location = New System.Drawing.Point(1295, 666)
+        Me.txtfoto.Location = New System.Drawing.Point(1591, 200)
         Me.txtfoto.Name = "txtfoto"
         Me.txtfoto.Size = New System.Drawing.Size(184, 30)
         Me.txtfoto.TabIndex = 190
@@ -601,19 +604,41 @@ Partial Class frmMain
         Me.panfoto.Controls.Add(Me.picfoto)
         Me.panfoto.Location = New System.Drawing.Point(1295, 239)
         Me.panfoto.Name = "panfoto"
-        Me.panfoto.Size = New System.Drawing.Size(277, 421)
+        Me.panfoto.Size = New System.Drawing.Size(617, 907)
         Me.panfoto.TabIndex = 191
         Me.panfoto.Visible = false
+        '
+        'btnfotowissen
+        '
+        Me.btnfotowissen.Location = New System.Drawing.Point(1443, 200)
+        Me.btnfotowissen.Name = "btnfotowissen"
+        Me.btnfotowissen.Size = New System.Drawing.Size(142, 33)
+        Me.btnfotowissen.TabIndex = 192
+        Me.btnfotowissen.Text = "Foto wissen"
+        Me.btnfotowissen.UseVisualStyleBackColor = true
+        Me.btnfotowissen.Visible = false
+        '
+        'lblSleep
+        '
+        Me.lblSleep.Location = New System.Drawing.Point(1295, 173)
+        Me.lblSleep.Name = "lblSleep"
+        Me.lblSleep.Size = New System.Drawing.Size(617, 24)
+        Me.lblSleep.TabIndex = 193
+        Me.lblSleep.Text = "Sleep een foto in het vak hieronder of klik erop"
+        Me.lblSleep.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblSleep.Visible = false
         '
         'frmMain
         '
         Me.AllowDrop = true
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1681, 831)
+        Me.ClientSize = New System.Drawing.Size(1924, 1149)
+        Me.Controls.Add(Me.lblSleep)
+        Me.Controls.Add(Me.btnfotowissen)
         Me.Controls.Add(Me.panfoto)
         Me.Controls.Add(Me.txtfoto)
-        Me.Controls.Add(Me.btnfoto)
+        Me.Controls.Add(Me.btnfotoopslaan)
         Me.Controls.Add(Me.btnLoting)
         Me.Controls.Add(Me.btnVisser)
         Me.Controls.Add(Me.btnKlassement)
@@ -701,8 +726,10 @@ End Sub
     Friend WithEvents btnKlassement As Button
     Friend WithEvents btnVisser As Button
     Friend WithEvents btnLoting As Button
-    Friend WithEvents btnfoto As Button
+    Friend WithEvents btnfotoopslaan As Button
     Friend WithEvents picfoto As PictureBox
     Friend WithEvents txtfoto As TextBox
     Friend WithEvents panfoto As Panel
+    Friend WithEvents btnfotowissen As Button
+    Friend WithEvents lblSleep As Label
 End Class

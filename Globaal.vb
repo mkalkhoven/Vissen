@@ -11,6 +11,19 @@ Module Globaal
         Vissen
         Ruisvoorn
     End Enum
+
+    Public Sub Schrijfregister(key As String, value As string)
+
+        My.Computer.Registry.SetValue($"HKEY_CURRENT_USER\{IO.Path.GetFileName(Application.ExecutablePath)}", key, value)
+
+    End Sub
+    
+    Public function Leesregister(key as string)as string
+
+        Dim retval = My.Computer.Registry.GetValue($"HKEY_CURRENT_USER\{IO.Path.GetFileName(Application.ExecutablePath)}", key, Nothing)
+        Return retval
+
+    End function
     Public Function Selecteer(sql As String, type As Databasetype) As DataTable
 
         Try
