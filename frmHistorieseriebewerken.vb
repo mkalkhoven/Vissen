@@ -25,7 +25,7 @@ Public Class frmHistorieseriebewerken
             Dim Sql As String
 
             Select Case serie.Id
-                Case 1, 2, 3, 17 'Senioren
+                Case 1, 2, 3, 5, 17 'Senioren
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
                 Case 6
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Vijftigplus = 1 ORDER BY Achternaam"

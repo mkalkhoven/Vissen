@@ -80,6 +80,7 @@ Partial Class frmMain
         Me.panfoto = New System.Windows.Forms.Panel()
         Me.btnfotowissen = New System.Windows.Forms.Button()
         Me.lblSleep = New System.Windows.Forms.Label()
+        Me.btnVerwijderwedstrijd = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -238,6 +239,7 @@ Partial Class frmMain
         '
         'gpVerhaalEtc
         '
+        Me.gpVerhaalEtc.Controls.Add(Me.btnVerwijderwedstrijd)
         Me.gpVerhaalEtc.Controls.Add(Me.lblDatumtitel)
         Me.gpVerhaalEtc.Controls.Add(Me.lblTemperatuur)
         Me.gpVerhaalEtc.Controls.Add(Me.lblWindsnelheid)
@@ -380,9 +382,9 @@ Partial Class frmMain
         '
         'btnWijzigverhaal
         '
-        Me.btnWijzigverhaal.Location = New System.Drawing.Point(651, 29)
+        Me.btnWijzigverhaal.Location = New System.Drawing.Point(605, 29)
         Me.btnWijzigverhaal.Name = "btnWijzigverhaal"
-        Me.btnWijzigverhaal.Size = New System.Drawing.Size(142, 33)
+        Me.btnWijzigverhaal.Size = New System.Drawing.Size(188, 33)
         Me.btnWijzigverhaal.TabIndex = 167
         Me.btnWijzigverhaal.Text = "Wijzig verhaal"
         Me.btnWijzigverhaal.UseVisualStyleBackColor = true
@@ -628,6 +630,15 @@ Partial Class frmMain
         Me.lblSleep.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblSleep.Visible = false
         '
+        'btnVerwijderwedstrijd
+        '
+        Me.btnVerwijderwedstrijd.Location = New System.Drawing.Point(605, 68)
+        Me.btnVerwijderwedstrijd.Name = "btnVerwijderwedstrijd"
+        Me.btnVerwijderwedstrijd.Size = New System.Drawing.Size(188, 33)
+        Me.btnVerwijderwedstrijd.TabIndex = 182
+        Me.btnVerwijderwedstrijd.Text = "Verwijder wedstrijd"
+        Me.btnVerwijderwedstrijd.UseVisualStyleBackColor = true
+        '
         'frmMain
         '
         Me.AllowDrop = true
@@ -732,4 +743,5 @@ End Sub
     Friend WithEvents panfoto As Panel
     Friend WithEvents btnfotowissen As Button
     Friend WithEvents lblSleep As Label
+    Friend WithEvents btnVerwijderwedstrijd As Button
 End Class

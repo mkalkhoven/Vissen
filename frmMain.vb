@@ -565,12 +565,14 @@ Public Class frmMain
                 lblVerhaal.Visible = True
                 lblNieuwVerhaal.Visible = True
                 btnWijzigverhaal.Visible = True
+                btnVerwijderwedstrijd.Visible = True
                 gbNaamGewichtEtc.Visible = True
             Else
                 gpVerhaalEtc.Visible = False
                 lblVerhaal.Visible = False
                 lblNieuwVerhaal.Visible = False
                 btnWijzigverhaal.Visible = False
+                btnVerwijderwedstrijd.Visible = False
                 gbNaamGewichtEtc.Visible = False
             End If
             If Not IsNothing(datum.Afbeelding) then
@@ -582,6 +584,7 @@ Public Class frmMain
         Else
             Leegdetails()
             btnWijzigverhaal.Visible = False
+            btnVerwijderwedstrijd.Visible = False
             btnfotowissen.Visible = False
         End If
         panfoto.Visible = true
@@ -590,6 +593,7 @@ Public Class frmMain
     Private Sub Leegdetails()
 
         lblDatumid.Text = ""
+        lblDatumtitel.Text = "Datum:"
         lblDatum.Text = ""
         lblVerhaal.Text = ""
         lblLocatieVissen.Text = ""
@@ -601,6 +605,9 @@ Public Class frmMain
         picfoto.Image = Nothing
         btnfotoopslaan.Visible = False
         btnfotowissen.Visible = False
+        btnWijzigverhaal.Visible = False
+        btnVerwijderwedstrijd.Visible = False
+        dgvUitslagen.DataSource = Nothing
 
     End Sub
     Private Sub dgvUitslagen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvUitslagen.DataBindingComplete
@@ -1224,6 +1231,12 @@ Public Class frmMain
 
     Private Sub btnfotowissen_Click(sender As Object, e As EventArgs) Handles btnfotowissen.Click
 
+        Verwijderfoto
+
+    End Sub
+
+    Private sub VerwijderFoto
+        
         If Not String.IsNullOrEmpty(_datum.Afbeelding) Then
             Try
                 Dim request As FtpWebRequest = WebRequest.Create($"ftp://ftp.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}")
@@ -1240,7 +1253,7 @@ Public Class frmMain
             End Try
         End If
 
-    End Sub
+    End sub
 
     Private Sub picfoto_Click(sender As Object, e As EventArgs) Handles picfoto.Click
 
@@ -1263,5 +1276,38 @@ Public Class frmMain
                 btnfotoopslaan.Visible = True
             End If
         End If
+    End Sub
+
+    Private Sub btnVerwijderwedstrijd_Click(sender As Object, e As EventArgs) Handles btnVerwijderwedstrijd.Click
+
+        If MessageBox.Show("Wilt u de geselecteerde wedstrijd verwijderen", "Verwijderen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+            Return
+        End If
+        'Is er een foto? -> Verwijderen
+        VerwijderFoto
+        'Is er een uitslag? -> Uitslagen verwijderen rekening houdend met serie
+        If _datum.SerieNaamNr = 15 Or _datum.SerieNaamNr = 17 Then
+            Nachtvissenrepo.Delete(_datum)
+        Else
+            Dim uitslagen = Uitslagenrepo.Get(_datum)
+            If uitslagen.Count > 0 Then
+                For Each regel As Uitslag In uitslagen
+                    If regel.Uitslagid > 0 Then
+                        Uitslagenrepo.Delete(regel.Uitslagid)
+                    End If
+                Next
+            End If
+        End If
+
+        Dim loten = Lotingrepo.Get(_datum)
+        If loten.Count > 0 Then
+            For Each regel As Loting2 In loten
+                Lotingrepo.Delete(regel)
+            Next
+        End If
+       
+        Datumweeretcrepo.Delete(_datum)
+        Leegdetails
+
     End Sub
 End Class
