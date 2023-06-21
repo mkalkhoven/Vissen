@@ -721,15 +721,16 @@ Public Class frmMain
 
                 nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
 
-                If _deelnemer1.Naam.ToLower().Contains("geen partner") Or _deelnemer2.Naam.ToLower().Contains("geen partner") Then
-                    If _deelnemer1.Naam.ToLower().Contains("geen partner") Then
-                        nachtvis.Namen = $"{_deelnemer2.Naam} (geen partner)"
-                    Else
-                        nachtvis.Namen = $"{_deelnemer1.Naam} (geen partner)"
-                    End If
-                Else
-                    nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
-                End If
+                'If _deelnemer1.Naam.ToLower().Contains("geen partner") Or _deelnemer2.Naam.ToLower().Contains("geen partner") Then
+                '    If _deelnemer1.Naam.ToLower().Contains("geen partner") Then
+                '        nachtvis.Namen = $"{_deelnemer2.Naam} (geen partner)"
+                '    Else
+                '        nachtvis.Namen = $"{_deelnemer1.Naam} (geen partner)"
+                '    End If
+                'Else
+                '    nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
+                'End If
+                nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
 
                 Nachtvissenrepo.Save(nachtvis)
                 Vuluitslaggrid(_datum)
@@ -969,27 +970,25 @@ Public Class frmMain
         If MessageBox.Show("Wilt u de geselecteerde naam verwijderen", "Verwijderen", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
                 Nachtvissenrepo.Delete(id)
+            Else
+                Uitslagenrepo.Delete(id)
             End If
-        Else
+            _deelnemer1 = Nothing
+            _deelnemer2 = Nothing
+            Vuluitslaggrid(_datum)
+            Berekenpunten()
+            lblUitslagid1.Text = ""
+            txtNaam1.Text = ""
+            txtGewicht1.Text = ""
+            txtNaam2.Text = ""
+            txtGewicht2.Text = ""
+
+            Vuluitslaggrid(_datum)
+
             dgvUitslagen.ClearSelection()
-            Legen()
-            Return
+            dgvnamen.ClearSelection()
+            Legen()        
         End If
-
-        _deelnemer1 = Nothing
-        _deelnemer2 = Nothing
-        Vuluitslaggrid(_datum)
-        Berekenpunten()
-        lblUitslagid1.Text = ""
-        txtNaam1.Text = ""
-        txtGewicht1.Text = ""
-        txtNaam2.Text = ""
-        txtGewicht2.Text = ""
-
-        Vuluitslaggrid(_datum)
-
-        dgvUitslagen.ClearSelection()
-        dgvnamen.ClearSelection()
 
     End Sub
 
@@ -1149,6 +1148,7 @@ Public Class frmMain
                 If uitslag.SerieNaamNr = 12 Or uitslag.SerieNaamNr = 13 Then
                     txtAantal.Text = uitslag.Pnt.ToString()
                 End If
+                _deelnemer1 = naam
                 txtNaam1.Text = naam.Naam
                 lblDatumid.Text = uitslag.IDdatum
                 lblUitslagid1.Text = uitslag.Uitslagid
@@ -1308,6 +1308,12 @@ Public Class frmMain
        
         Datumweeretcrepo.Delete(_datum)
         Leegdetails
+
+    End Sub
+
+    Private Sub DeelnemerVerwijderen_Click(sender As Object, e As EventArgs) 
+
+
 
     End Sub
 End Class

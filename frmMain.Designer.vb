@@ -41,6 +41,7 @@ Partial Class frmMain
         Me.lblUitslagid2 = New System.Windows.Forms.Label()
         Me.lblDatumid = New System.Windows.Forms.Label()
         Me.gpVerhaalEtc = New System.Windows.Forms.GroupBox()
+        Me.btnVerwijderwedstrijd = New System.Windows.Forms.Button()
         Me.lblDatumtitel = New System.Windows.Forms.Label()
         Me.lblTemperatuur = New System.Windows.Forms.Label()
         Me.lblWindsnelheid = New System.Windows.Forms.Label()
@@ -80,7 +81,6 @@ Partial Class frmMain
         Me.panfoto = New System.Windows.Forms.Panel()
         Me.btnfotowissen = New System.Windows.Forms.Button()
         Me.lblSleep = New System.Windows.Forms.Label()
-        Me.btnVerwijderwedstrijd = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -261,6 +261,15 @@ Partial Class frmMain
         Me.gpVerhaalEtc.TabIndex = 170
         Me.gpVerhaalEtc.TabStop = false
         Me.gpVerhaalEtc.Visible = false
+        '
+        'btnVerwijderwedstrijd
+        '
+        Me.btnVerwijderwedstrijd.Location = New System.Drawing.Point(605, 68)
+        Me.btnVerwijderwedstrijd.Name = "btnVerwijderwedstrijd"
+        Me.btnVerwijderwedstrijd.Size = New System.Drawing.Size(188, 33)
+        Me.btnVerwijderwedstrijd.TabIndex = 182
+        Me.btnVerwijderwedstrijd.Text = "Verwijder wedstrijd"
+        Me.btnVerwijderwedstrijd.UseVisualStyleBackColor = true
         '
         'lblDatumtitel
         '
@@ -629,15 +638,6 @@ Partial Class frmMain
         Me.lblSleep.Text = "Sleep een foto in het vak hieronder of klik erop"
         Me.lblSleep.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblSleep.Visible = false
-        '
-        'btnVerwijderwedstrijd
-        '
-        Me.btnVerwijderwedstrijd.Location = New System.Drawing.Point(605, 68)
-        Me.btnVerwijderwedstrijd.Name = "btnVerwijderwedstrijd"
-        Me.btnVerwijderwedstrijd.Size = New System.Drawing.Size(188, 33)
-        Me.btnVerwijderwedstrijd.TabIndex = 182
-        Me.btnVerwijderwedstrijd.Text = "Verwijder wedstrijd"
-        Me.btnVerwijderwedstrijd.UseVisualStyleBackColor = true
         '
         'frmMain
         '
