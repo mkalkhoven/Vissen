@@ -702,7 +702,7 @@ Public Class frmMain
                 End If
 
                 'Opslaan in aparte tabel: nachtvissen
-                If IsNothing(nachtvis) Then
+                If IsNothing(nachtvis.ID) Then
                     nachtvis = New Nachtvissen With {
                         .Nachtvisid = Nachtvissenrepo.Getid(),
                         .ID = _datum.ID
