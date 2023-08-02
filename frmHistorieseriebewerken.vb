@@ -25,7 +25,7 @@ Public Class frmHistorieseriebewerken
             Dim Sql As String
 
             Select Case serie.Id
-                Case 1, 2, 3, 5, 17 'Senioren
+                Case 1, 2, 3, 5, 15, 17 'Senioren
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Senioren = 1 ORDER BY Achternaam"
                 Case 6
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Vijftigplus = 1 ORDER BY Achternaam"
@@ -33,6 +33,8 @@ Public Class frmHistorieseriebewerken
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Winter = 1 ORDER BY Achternaam"
                 Case 12, 13 'Jeugd
                     Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Jeugd = 1 ORDER BY Achternaam"
+                    case 15, 17
+                    Sql = "Select Naamid, Naam, null AS Plaats from namen WHERE Nachtvissen = 1 ORDER BY Achternaam"
                 Case Else 'Alle enkele series
                     Toonmelding("De serie is niet gedefinieerd in de functie frmHistorieseriebewerken_Load")
                     Return
