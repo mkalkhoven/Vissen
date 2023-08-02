@@ -11,7 +11,7 @@ Public Class frmMain
     Private _uitslag As New Uitslagen
     Dim _koppelvissen = New Nachtvissen
     Dim _serie As New Serie
-    Private nachtvis As Nachtvissen ' = New Nachtvissen
+    Private nachtvis As Nachtvissen = New Nachtvissen
 
     Dim _datum As New DatumWeerEtc
     Private _seizoen As New Seizoen
@@ -551,6 +551,11 @@ Public Class frmMain
             lblDatum.Text = datum.Datum.Value.ToString("d-MM-yyyy")
 
             lblDatumtitel.Text = $"Datum: (id = {datum.ID})"
+
+            nachtvis = New Nachtvissen With {
+                        .Nachtvisid = Nachtvissenrepo.Getid(),
+                        .ID = _datum.ID
+            }
 
             lblVerhaal.Text = datum.Verhaal
             lblLocatieVissen.Text = datum.Plaats
