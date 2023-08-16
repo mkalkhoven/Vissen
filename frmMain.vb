@@ -21,11 +21,11 @@ Public Class frmMain
 
         Dim seizoenen = Seizoenrepo.Getsorted()
         Dim seizoennaam = seizoenen.First
-        Dim seizoen = New Seizoen With {
-            .Jaar = "Nieuw seizoen",
-            .ID = 0
-        }
-        seizoenen.Insert(0, seizoen)
+        'Dim seizoen = New Seizoen With {
+        '    .Jaar = "Nieuw seizoen",
+        '    .ID = 0
+        '}
+        'seizoenen.Insert(0, seizoen)
         cboSeizoen.DataSource = seizoenen
         cboSeizoen.ValueMember = "ID"
         cboSeizoen.DisplayMember = "Jaar"
@@ -38,6 +38,21 @@ Public Class frmMain
 
     End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Nieuw seizoen aanmaken
+        'laatste seizoen ophalen
+        Dim controleseizoen = Seizoenrepo.Getlaatsteseizoen
+        'laatste jaar van laatste seizoen opzoeken
+        Dim jaar = Long.Parse(controleseizoen.jaar.Substring(5,4))
+        'Als jaar kleiner is dan datum + na 1 maart dan nieuw seizoen
+        Dim datum As New Date(Now.Year,3,1)
+        If jaar = Date.Now.Year And Date.Now > datum Then
+            ' nieuw seizoen aanmaken
+            Dim nieuwseizoen = New Seizoen With {
+                .ID = controleseizoen.ID + 1,
+                .Jaar = $"{jaar}-{jaar + 1}"
+            }
+            Seizoenrepo.Save(nieuwseizoen)
+        End if
 
         Legen()
 
@@ -1229,7 +1244,7 @@ Public Class frmMain
             Catch ex As Exception
                 MessageBox.Show("Er is iets fout gegaan met het uploaden.")
             End Try
-
+            File.Copy(txtfoto.Text, $"D:\Programmeren\De Ruisvoorn website\WebApplication1\Afbeeldingen\{_datum.Afbeelding}")
         End If
 
     End Sub
