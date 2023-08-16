@@ -134,6 +134,12 @@
     <Compile Include="frmNaambewerken.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNamenbewerken.Designer.vb">
+      <DependentUpon>frmNamenbewerken.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNamenbewerken.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNieuwewedstrijd.Designer.vb">
       <DependentUpon>frmNieuwewedstrijd.vb</DependentUpon>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNaambewerken.resx">
       <DependentUpon>frmNaambewerken.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNamenbewerken.resx">
+      <DependentUpon>frmNamenbewerken.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNieuwewedstrijd.resx">
       <DependentUpon>frmNieuwewedstrijd.vb</DependentUpon>

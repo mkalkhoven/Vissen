@@ -81,6 +81,7 @@ Partial Class frmMain
         Me.panfoto = New System.Windows.Forms.Panel()
         Me.btnfotowissen = New System.Windows.Forms.Button()
         Me.lblSleep = New System.Windows.Forms.Label()
+        Me.btnNamen = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         Me.cmsMouse.SuspendLayout
         CType(Me.dgvUitslagen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -639,12 +640,22 @@ Partial Class frmMain
         Me.lblSleep.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblSleep.Visible = false
         '
+        'btnNamen
+        '
+        Me.btnNamen.Location = New System.Drawing.Point(699, 753)
+        Me.btnNamen.Name = "btnNamen"
+        Me.btnNamen.Size = New System.Drawing.Size(131, 33)
+        Me.btnNamen.TabIndex = 194
+        Me.btnNamen.Text = "Namen"
+        Me.btnNamen.UseVisualStyleBackColor = true
+        '
         'frmMain
         '
         Me.AllowDrop = true
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1924, 1149)
+        Me.Controls.Add(Me.btnNamen)
         Me.Controls.Add(Me.lblSleep)
         Me.Controls.Add(Me.btnfotowissen)
         Me.Controls.Add(Me.panfoto)
@@ -744,4 +755,5 @@ End Sub
     Friend WithEvents btnfotowissen As Button
     Friend WithEvents lblSleep As Label
     Friend WithEvents btnVerwijderwedstrijd As Button
+    Friend WithEvents btnNamen As Button
 End Class

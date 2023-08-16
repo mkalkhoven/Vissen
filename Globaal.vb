@@ -107,23 +107,30 @@ Module Globaal
         kolom.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
     End Sub
-    Public Function Selecteerid(dgv As DataGridView, kolom As String) As Long
+    'Public Function Selecteerid(dgv As DataGridView, kolom As String) As Long
 
-        Try
-            Dim index = dgv.Columns(kolom).Index
-            Dim id As Long = Long.Parse(dgv.Item(index, dgv.CurrentRow.Index).Value.ToString())
-            Return id
-        Catch ex As Exception
-            Return 0
-        End Try
+    '    Try
+    '        Dim index = dgv.Columns(kolom).Index
+    '        Dim id As Long = Long.Parse(dgv.Item(index, dgv.CurrentRow.Index).Value.ToString())
+    '        Return id
+    '    Catch ex As Exception
+    '        Return 0
+    '    End Try
 
-    End Function
+    'End Function
     Public Function Selecteerid(row As DataGridViewRow, kolom As String) As Long
 
         Dim id = Long.Parse(row.Cells(kolom).Value.ToString())
         Return id
 
     End Function
+    Public Function Selecteerid(dgv As DataGridView, column As Short) As Long
+
+        Dim id As Long = Long.Parse(dgv.Item(column, dgv.CurrentRow.Index).Value.ToString())
+        Return id
+
+    End Function
+
     Public Function Selecteerid(dgv As DataGridView) As Long
 
         Dim id As Long = Long.Parse(dgv.Item(0, dgv.CurrentRow.Index).Value.ToString())

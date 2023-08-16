@@ -1336,4 +1336,12 @@ Public Class frmMain
 
 
     End Sub
+
+    Private Sub btnNamen_Click(sender As Object, e As EventArgs) Handles btnNamen.Click
+
+        frmnamenbewerken.ShowDialog
+
+        Vulgrid
+
+    End Sub
 End Class
