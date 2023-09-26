@@ -242,7 +242,10 @@ Public Class frmMain
     End Sub
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
 
-        Dim id As Long = Selecteerid(dgvnamen, "NaamId")
+        'Dim id As Long = Selecteerid(dgvnamen, "NaamId")
+
+        Dim id As long = Long.Parse(dgvnamen.Rows(e.RowIndex).Cells(1).Value.ToString())
+        Dim oldid As long = Long.Parse(dgvnamen.Rows(e.RowIndex).Cells(0).Value.ToString())
 
         If id = 0 Then
             Return
@@ -270,7 +273,8 @@ Public Class frmMain
             btnOpslaan.Enabled = False
             dgvUitslagen.ClearSelection()
             If id > 0 Then
-                _deelnemer1 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                '_deelnemer1 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                _deelnemer1 = Namenrepo.Getbyoldid(oldid)
                 txtNaam1.Text = _deelnemer1.Naam
                 txtGewicht1.Focus()
             End If
@@ -1135,8 +1139,8 @@ Public Class frmMain
     End Sub
 
     Private Sub dgvUitslagen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUitslagen.CellClick
-
-        Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
+        'testen
+        Dim id = Selecteerid(dgvUitslagen, 0)
 
         Legen()
         If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) Then
@@ -1339,8 +1343,9 @@ Public Class frmMain
 
     Private Sub btnNamen_Click(sender As Object, e As EventArgs) Handles btnNamen.Click
 
+        
+        Cursor.Current = Cursors.WaitCursor
         frmnamenbewerken.ShowDialog
-
         Vulgrid
 
     End Sub

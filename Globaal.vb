@@ -1,5 +1,7 @@
 ﻿
 Imports System.Data.SqlClient
+Imports System.Net
+
 Module Globaal
     Public IsStarted = False
     Private ReadOnly CnKaarten = New SqlConnection("Server=h2865773.stratoserver.net;Database=seizoen;User Id=sa;Password=!!fn8565fn##;")
@@ -10,20 +12,33 @@ Module Globaal
         Kaarten
         Vissen
         Ruisvoorn
+        Klaverjassen
+        Jokeren
     End Enum
 
-    Public Sub Schrijfregister(key As String, value As string)
+    Public Sub Uploaden(lokaalBestand As String, uploadBestand As String)
+
+        Dim client = New WebClient With {.Credentials = New NetworkCredential("pietline", "fn8565fn")}
+
+        Try
+            client.UploadFile(uploadBestand, lokaalBestand)
+        Catch ex As Exception
+            MessageBox.Show("Er is iets fout gegaan met het uploaden.")
+        End Try
+
+    End Sub
+    Public Sub Schrijfregister(key As String, value As String)
 
         My.Computer.Registry.SetValue($"HKEY_CURRENT_USER\{IO.Path.GetFileName(Application.ExecutablePath)}", key, value)
 
     End Sub
-    
-    Public function Leesregister(key as string)as string
+
+    Public Function Leesregister(key As String) As String
 
         Dim retval = My.Computer.Registry.GetValue($"HKEY_CURRENT_USER\{IO.Path.GetFileName(Application.ExecutablePath)}", key, Nothing)
         Return retval
 
-    End function
+    End Function
     Public Function Selecteer(sql As String, type As Databasetype) As DataTable
 
         Try
@@ -56,6 +71,13 @@ Module Globaal
         End Try
 
     End Function
+    Public Function Getid(dgv As DataGridView, col As Integer) As Long
+
+        For Each row As DataGridViewRow In dgv.SelectedRows
+            Return row.Cells(col).Value
+        Next
+        Return 0
+    End Function
     Public Function Getid(dgv As DataGridView) As Long
 
         For Each row As DataGridViewRow In dgv.SelectedRows
@@ -65,6 +87,9 @@ Module Globaal
     End Function
     Public Function Getid(row As DataGridViewRow) As Long
         Return row.Cells(0).Value
+    End Function
+    Public Function Getid(row As DataGridViewRow, col As Integer) As Long
+        Return row.Cells(col).Value
     End Function
     Public Function Getid(cbo As ComboBox) As Long
 
@@ -183,21 +208,21 @@ Module Globaal
     End Function
 
     Public Function IsImage(fileName As String) As Boolean
-    Dim img As Image = Nothing
+        Dim img As Image = Nothing
 
-    Try
-        Using stream = New IO.FileStream(fileName, IO.FileMode.Open)
-            img = Image.FromStream(stream)
-            Return True
-        End Using
+        Try
+            Using stream = New IO.FileStream(fileName, IO.FileMode.Open)
+                img = Image.FromStream(stream)
+                Return True
+            End Using
 
-    Catch oome As OutOfMemoryException
+        Catch oome As OutOfMemoryException
+            Return False
+        Finally
+            If img IsNot Nothing Then img.Dispose()
+        End Try
         Return False
-    Finally
-        If img IsNot Nothing Then img.Dispose()
-    End Try
-    Return False
 
-End Function
+    End Function
 
 End Module

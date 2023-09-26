@@ -88,8 +88,7 @@ AND l.Seizoenid = {seizoen.ID}"
             Return
         End If
 
-        Dim Datumid = Selecteerid(dgvloting, "Agendaid")
-
+        Dim Datumid = Getid(dgvloting, 4)
         'datum ophalen uit agenda
         Dim datum = Getdatum(Datumid)
 
