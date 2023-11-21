@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bdb7e82fea904bda98e75a83688cd0a8" Name="Diagram1">
+        <EntityTypeShape EntityType="VisSeizoenModel.DatumWeerEtc" Width="1.5" PointX="5" PointY="9.25" />
+        <EntityTypeShape EntityType="VisSeizoenModel.KlassementCorrectie" Width="1.5" PointX="2.75" PointY="7.625" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Loting2" Width="1.5" PointX="5.75" PointY="2.125" />
+        <EntityTypeShape EntityType="VisSeizoenModel.NaamSerie" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Nachtvissen" Width="1.5" PointX="1.75" PointY="11.625" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Namen" Width="1.5" PointX="10.375" PointY="0.875" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Seizoen" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Uitslagen" Width="1.5" PointX="2" PointY="2.75" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Wind" Width="1.5" PointX="8.75" PointY="7.125" />
+        <AssociationConnector Association="VisSeizoenModel.FK_DatumWeerEtc_Seizoen" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Nachtvissen_DatumWeerEtc" />
+        <AssociationConnector Association="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" />
+        <AssociationConnector Association="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Uitslagen_Seizoen" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Partner" Width="1.5" PointX="12.625" PointY="1.875" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Partner_Namen" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

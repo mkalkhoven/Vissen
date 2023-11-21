@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VisSeizoenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DatumWeerEtc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IDseizoen" Type="int" />
+          <Property Name="SerieNaamNr" Type="int" />
+          <Property Name="SerieNaam" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDserieNummer" Type="int" />
+          <Property Name="Plaats" Type="nvarchar" MaxLength="255" />
+          <Property Name="MB" Type="nvarchar" MaxLength="255" />
+          <Property Name="Wind" Type="nvarchar" MaxLength="255" />
+          <Property Name="WindSnelheid" Type="nvarchar" MaxLength="255" />
+          <Property Name="Temp" Type="nvarchar" MaxLength="255" />
+          <Property Name="DatumVolgende" Type="nvarchar" MaxLength="255" />
+          <Property Name="LocatieVolgende" Type="nvarchar" MaxLength="255" />
+          <Property Name="Inschrijven" Type="nvarchar" MaxLength="255" />
+          <Property Name="Loten" Type="nvarchar" MaxLength="255" />
+          <Property Name="Datum" Type="datetime2" Precision="0" />
+          <Property Name="Weer" Type="nvarchar" MaxLength="255" />
+          <Property Name="StartTijd" Type="nvarchar" MaxLength="255" />
+          <Property Name="EindTijd" Type="nvarchar" MaxLength="255" />
+          <Property Name="Verhaal" Type="nvarchar(max)" />
+          <Property Name="Albumid" Type="int" />
+          <Property Name="Afbeelding" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="KlassementCorrectie">
+          <Key>
+            <PropertyRef Name="Correctieid" />
+          </Key>
+          <Property Name="Seizoenid" Type="int" Nullable="false" />
+          <Property Name="Serieid" Type="int" Nullable="false" />
+          <Property Name="Correctie" Type="int" />
+          <Property Name="Correctieid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loting2">
+          <Key>
+            <PropertyRef Name="Lotingid" />
+          </Key>
+          <Property Name="Lotingid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naamid" Type="int" Nullable="false" />
+          <Property Name="Seizoenid" Type="int" Nullable="false" />
+          <Property Name="Serieid" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+          <Property Name="Nummer" Type="int" Nullable="false" />
+          <Property Name="Plaats" Type="int" Nullable="false" />
+          <Property Name="Datumid" Type="int" Nullable="false" />
+          <Property Name="Serienummer" Type="varchar" MaxLength="6" />
+          <Property Name="Onderboven" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="NaamSerie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="255" />
+          <Property Name="Vissen" Type="bit" />
+          <Property Name="Maxaantal" Type="int" />
+          <Property Name="Punten" Type="int" />
+          <Property Name="Tonen" Type="bit" />
+        </EntityType>
+        <EntityType Name="Nachtvissen">
+          <Key>
+            <PropertyRef Name="Nachtvisid" />
+          </Key>
+          <Property Name="Nachtvisid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" />
+          <Property Name="Namen" Type="nvarchar" MaxLength="255" />
+          <Property Name="Gewicht" Type="int" />
+          <Property Name="Deelnemerid1" Type="int" />
+          <Property Name="Gewicht1" Type="int" />
+          <Property Name="Deelnemerid2" Type="int" />
+          <Property Name="Gewicht2" Type="int" />
+          <Property Name="Hoogstegewicht" Type="int" />
+        </EntityType>
+        <EntityType Name="Namen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="NaamID" Type="int" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="255" />
+          <Property Name="KoppelID" Type="nvarchar" MaxLength="255" />
+          <Property Name="50Plus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Afbeelding" Type="nvarchar" MaxLength="255" />
+          <Property Name="Vijftigplus" Type="bit" />
+          <Property Name="Senioren" Type="bit" />
+          <Property Name="Jeugd" Type="bit" />
+          <Property Name="Verwijderd" Type="bit" />
+          <Property Name="Koppelvissen" Type="bit" />
+          <Property Name="Voornaam" Type="varchar" MaxLength="64" />
+          <Property Name="Tussenvoegsel" Type="varchar" MaxLength="16" />
+          <Property Name="Achternaam" Type="varchar" MaxLength="64" />
+          <Property Name="Winter" Type="bit" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="Partnerid" />
+          </Key>
+          <Property Name="Partnerid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naamid" Type="int" Nullable="false" />
+          <Property Name="Serieid" Type="int" Nullable="false" />
+          <Property Name="Partnernaamid" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seizoen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Jaar" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Uitslagen">
+          <Key>
+            <PropertyRef Name="Uitslagid" />
+          </Key>
+          <Property Name="IDseizoen" Type="int" Nullable="false" />
+          <Property Name="IDdatum" Type="int" Nullable="false" />
+          <Property Name="IDdeelnemer" Type="int" Nullable="false" />
+          <Property Name="Kilo" Type="float" />
+          <Property Name="Pnt" Type="float" />
+          <Property Name="SerieNaamNr" Type="float" />
+          <Property Name="SerieNummerNr" Type="float" />
+          <Property Name="Ploegen" Type="nvarchar" MaxLength="255" />
+          <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Uitslagid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wind">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Wind" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_DatumWeerEtc_Seizoen">
+          <End Role="Seizoen" Type="Self.Seizoen" Multiplicity="0..1" />
+          <End Role="DatumWeerEtc" Type="Self.DatumWeerEtc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatumWeerEtc">
+              <PropertyRef Name="IDseizoen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlassementCorrectie_NaamSerie">
+          <End Role="NaamSerie" Type="Self.NaamSerie" Multiplicity="1" />
+          <End Role="KlassementCorrectie" Type="Self.KlassementCorrectie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NaamSerie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KlassementCorrectie">
+              <PropertyRef Name="Serieid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlassementCorrectie_Seizoen">
+          <End Role="Seizoen" Type="Self.Seizoen" Multiplicity="1" />
+          <End Role="KlassementCorrectie" Type="Self.KlassementCorrectie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KlassementCorrectie">
+              <PropertyRef Name="Seizoenid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nachtvissen_DatumWeerEtc">
+          <End Role="DatumWeerEtc" Type="Self.DatumWeerEtc" Multiplicity="0..1" />
+          <End Role="Nachtvissen" Type="Self.Nachtvissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatumWeerEtc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nachtvissen">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_Namen">
+          <End Role="Namen" Type="Self.Namen" Multiplicity="1" />
+          <End Role="Partner" Type="Self.Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uitslagen_Seizoen">
+          <End Role="Seizoen" Type="Self.Seizoen" Multiplicity="1" />
+          <End Role="Uitslagen" Type="Self.Uitslagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Uitslagen">
+              <PropertyRef Name="IDseizoen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VisSeizoenModelStoreContainer">
+          <EntitySet Name="DatumWeerEtc" EntityType="Self.DatumWeerEtc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KlassementCorrectie" EntityType="Self.KlassementCorrectie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loting2" EntityType="Self.Loting2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NaamSerie" EntityType="Self.NaamSerie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nachtvissen" EntityType="Self.Nachtvissen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Namen" EntityType="Self.Namen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner" EntityType="Self.Partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seizoen" EntityType="Self.Seizoen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uitslagen" EntityType="Self.Uitslagen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wind" EntityType="Self.Wind" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DatumWeerEtc_Seizoen" Association="Self.FK_DatumWeerEtc_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlassementCorrectie_NaamSerie" Association="Self.FK_KlassementCorrectie_NaamSerie">
+            <End Role="NaamSerie" EntitySet="NaamSerie" />
+            <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlassementCorrectie_Seizoen" Association="Self.FK_KlassementCorrectie_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nachtvissen_DatumWeerEtc" Association="Self.FK_Nachtvissen_DatumWeerEtc">
+            <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+            <End Role="Nachtvissen" EntitySet="Nachtvissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_Namen" Association="Self.FK_Partner_Namen">
+            <End Role="Namen" EntitySet="Namen" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uitslagen_Seizoen" Association="Self.FK_Uitslagen_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="Uitslagen" EntitySet="Uitslagen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VisSeizoenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VisSeizoenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DatumWeerEtc" EntityType="VisSeizoenModel.DatumWeerEtc" />
+          <EntitySet Name="KlassementCorrectie" EntityType="VisSeizoenModel.KlassementCorrectie" />
+          <EntitySet Name="Loting2" EntityType="VisSeizoenModel.Loting2" />
+          <EntitySet Name="NaamSerie" EntityType="VisSeizoenModel.NaamSerie" />
+          <EntitySet Name="Nachtvissen" EntityType="VisSeizoenModel.Nachtvissen" />
+          <EntitySet Name="Namen" EntityType="VisSeizoenModel.Namen" />
+          <EntitySet Name="Seizoen" EntityType="VisSeizoenModel.Seizoen" />
+          <EntitySet Name="Uitslagen" EntityType="VisSeizoenModel.Uitslagen" />
+          <EntitySet Name="Wind" EntityType="VisSeizoenModel.Wind" />
+          <AssociationSet Name="FK_DatumWeerEtc_Seizoen" Association="VisSeizoenModel.FK_DatumWeerEtc_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nachtvissen_DatumWeerEtc" Association="VisSeizoenModel.FK_Nachtvissen_DatumWeerEtc">
+            <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+            <End Role="Nachtvissen" EntitySet="Nachtvissen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlassementCorrectie_NaamSerie" Association="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie">
+            <End Role="NaamSerie" EntitySet="NaamSerie" />
+            <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KlassementCorrectie_Seizoen" Association="VisSeizoenModel.FK_KlassementCorrectie_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uitslagen_Seizoen" Association="VisSeizoenModel.FK_Uitslagen_Seizoen">
+            <End Role="Seizoen" EntitySet="Seizoen" />
+            <End Role="Uitslagen" EntitySet="Uitslagen" />
+          </AssociationSet>
+          <EntitySet Name="Partner" EntityType="VisSeizoenModel.Partner" />
+          <AssociationSet Name="FK_Partner_Namen" Association="VisSeizoenModel.FK_Partner_Namen">
+            <End Role="Namen" EntitySet="Namen" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DatumWeerEtc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IDseizoen" Type="Int32" />
+          <Property Name="SerieNaamNr" Type="Int32" />
+          <Property Name="SerieNaam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IDserieNummer" Type="Int32" />
+          <Property Name="Plaats" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Wind" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WindSnelheid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Temp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DatumVolgende" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LocatieVolgende" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Inschrijven" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Loten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="Weer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StartTijd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EindTijd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Verhaal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Albumid" Type="Int32" />
+          <NavigationProperty Name="Seizoen" Relationship="VisSeizoenModel.FK_DatumWeerEtc_Seizoen" FromRole="DatumWeerEtc" ToRole="Seizoen" />
+          <NavigationProperty Name="Nachtvissen" Relationship="VisSeizoenModel.FK_Nachtvissen_DatumWeerEtc" FromRole="DatumWeerEtc" ToRole="Nachtvissen" />
+          <Property Name="Afbeelding" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="KlassementCorrectie">
+          <Key>
+            <PropertyRef Name="Correctieid" />
+          </Key>
+          <Property Name="Seizoenid" Type="Int32" Nullable="false" />
+          <Property Name="Serieid" Type="Int32" Nullable="false" />
+          <Property Name="Correctie" Type="Int32" />
+          <Property Name="Correctieid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="NaamSerie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" FromRole="KlassementCorrectie" ToRole="NaamSerie" />
+          <NavigationProperty Name="Seizoen" Relationship="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" FromRole="KlassementCorrectie" ToRole="Seizoen" />
+        </EntityType>
+        <EntityType Name="Loting2">
+          <Key>
+            <PropertyRef Name="Lotingid" />
+          </Key>
+          <Property Name="Lotingid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naamid" Type="Int32" Nullable="false" />
+          <Property Name="Seizoenid" Type="Int32" Nullable="false" />
+          <Property Name="Serieid" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nummer" Type="Int32" Nullable="false" />
+          <Property Name="Plaats" Type="Int32" Nullable="false" />
+          <Property Name="Datumid" Type="Int32" Nullable="false" />
+          <Property Name="Serienummer" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Onderboven" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="NaamSerie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Vissen" Type="Boolean" />
+          <Property Name="Maxaantal" Type="Int32" />
+          <Property Name="Punten" Type="Int32" />
+          <Property Name="Tonen" Type="Boolean" />
+          <NavigationProperty Name="KlassementCorrectie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" FromRole="NaamSerie" ToRole="KlassementCorrectie" />
+        </EntityType>
+        <EntityType Name="Nachtvissen">
+          <Key>
+            <PropertyRef Name="Nachtvisid" />
+          </Key>
+          <Property Name="Nachtvisid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" />
+          <Property Name="Namen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Gewicht" Type="Int32" />
+          <Property Name="Deelnemerid1" Type="Int32" />
+          <Property Name="Gewicht1" Type="Int32" />
+          <Property Name="Deelnemerid2" Type="Int32" />
+          <Property Name="Gewicht2" Type="Int32" />
+          <NavigationProperty Name="DatumWeerEtc" Relationship="VisSeizoenModel.FK_Nachtvissen_DatumWeerEtc" FromRole="Nachtvissen" ToRole="DatumWeerEtc" />
+          <Property Name="Hoogstegewicht" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Namen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="NaamID" Type="Int32" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KoppelID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="C50Plus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Afbeelding" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Vijftigplus" Type="Boolean" />
+          <Property Name="Senioren" Type="Boolean" />
+          <Property Name="Jeugd" Type="Boolean" />
+          <Property Name="Verwijderd" Type="Boolean" />
+          <Property Name="Koppelvissen" Type="Boolean" />
+          <Property Name="Voornaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Tussenvoegsel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Achternaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Winter" Type="Boolean" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Partner" Relationship="VisSeizoenModel.FK_Partner_Namen" FromRole="Namen" ToRole="Partner" />
+        </EntityType>
+        <EntityType Name="Seizoen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Jaar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DatumWeerEtc" Relationship="VisSeizoenModel.FK_DatumWeerEtc_Seizoen" FromRole="Seizoen" ToRole="DatumWeerEtc" />
+          <NavigationProperty Name="KlassementCorrectie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" FromRole="Seizoen" ToRole="KlassementCorrectie" />
+          <NavigationProperty Name="Uitslagen" Relationship="VisSeizoenModel.FK_Uitslagen_Seizoen" FromRole="Seizoen" ToRole="Uitslagen" />
+        </EntityType>
+        <EntityType Name="Uitslagen">
+          <Key>
+            <PropertyRef Name="Uitslagid" />
+          </Key>
+          <Property Name="IDseizoen" Type="Int32" Nullable="false" />
+          <Property Name="IDdatum" Type="Int32" Nullable="false" />
+          <Property Name="IDdeelnemer" Type="Int32" Nullable="false" />
+          <Property Name="Kilo" Type="Double" />
+          <Property Name="Pnt" Type="Double" />
+          <Property Name="SerieNaamNr" Type="Double" />
+          <Property Name="SerieNummerNr" Type="Double" />
+          <Property Name="Ploegen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SSMA_TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Uitslagid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Seizoen" Relationship="VisSeizoenModel.FK_Uitslagen_Seizoen" FromRole="Uitslagen" ToRole="Seizoen" />
+        </EntityType>
+        <EntityType Name="Wind">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Wind1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_DatumWeerEtc_Seizoen">
+          <End Type="VisSeizoenModel.Seizoen" Role="Seizoen" Multiplicity="0..1" />
+          <End Type="VisSeizoenModel.DatumWeerEtc" Role="DatumWeerEtc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DatumWeerEtc">
+              <PropertyRef Name="IDseizoen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nachtvissen_DatumWeerEtc">
+          <End Type="VisSeizoenModel.DatumWeerEtc" Role="DatumWeerEtc" Multiplicity="0..1" />
+          <End Type="VisSeizoenModel.Nachtvissen" Role="Nachtvissen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatumWeerEtc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nachtvissen">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlassementCorrectie_NaamSerie">
+          <End Type="VisSeizoenModel.NaamSerie" Role="NaamSerie" Multiplicity="1" />
+          <End Type="VisSeizoenModel.KlassementCorrectie" Role="KlassementCorrectie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NaamSerie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KlassementCorrectie">
+              <PropertyRef Name="Serieid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KlassementCorrectie_Seizoen">
+          <End Type="VisSeizoenModel.Seizoen" Role="Seizoen" Multiplicity="1" />
+          <End Type="VisSeizoenModel.KlassementCorrectie" Role="KlassementCorrectie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KlassementCorrectie">
+              <PropertyRef Name="Seizoenid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uitslagen_Seizoen">
+          <End Type="VisSeizoenModel.Seizoen" Role="Seizoen" Multiplicity="1" />
+          <End Type="VisSeizoenModel.Uitslagen" Role="Uitslagen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seizoen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Uitslagen">
+              <PropertyRef Name="IDseizoen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="Partnerid" />
+          </Key>
+          <Property Name="Partnerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naamid" Type="Int32" Nullable="false" />
+          <Property Name="Serieid" Type="Int32" Nullable="false" />
+          <Property Name="Partnernaamid" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Namen" Relationship="VisSeizoenModel.FK_Partner_Namen" FromRole="Partner" ToRole="Namen" />
+        </EntityType>
+        <Association Name="FK_Partner_Namen">
+          <End Type="VisSeizoenModel.Namen" Role="Namen" Multiplicity="1" />
+          <End Type="VisSeizoenModel.Partner" Role="Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VisSeizoenModelStoreContainer" CdmEntityContainer="VisSeizoenEntities">
+          <EntitySetMapping Name="DatumWeerEtc">
+            <EntityTypeMapping TypeName="VisSeizoenModel.DatumWeerEtc">
+              <MappingFragment StoreEntitySet="DatumWeerEtc">
+                <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+                <ScalarProperty Name="Albumid" ColumnName="Albumid" />
+                <ScalarProperty Name="Verhaal" ColumnName="Verhaal" />
+                <ScalarProperty Name="EindTijd" ColumnName="EindTijd" />
+                <ScalarProperty Name="StartTijd" ColumnName="StartTijd" />
+                <ScalarProperty Name="Weer" ColumnName="Weer" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Loten" ColumnName="Loten" />
+                <ScalarProperty Name="Inschrijven" ColumnName="Inschrijven" />
+                <ScalarProperty Name="LocatieVolgende" ColumnName="LocatieVolgende" />
+                <ScalarProperty Name="DatumVolgende" ColumnName="DatumVolgende" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="WindSnelheid" ColumnName="WindSnelheid" />
+                <ScalarProperty Name="Wind" ColumnName="Wind" />
+                <ScalarProperty Name="MB" ColumnName="MB" />
+                <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+                <ScalarProperty Name="IDserieNummer" ColumnName="IDserieNummer" />
+                <ScalarProperty Name="SerieNaam" ColumnName="SerieNaam" />
+                <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+                <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KlassementCorrectie">
+            <EntityTypeMapping TypeName="VisSeizoenModel.KlassementCorrectie">
+              <MappingFragment StoreEntitySet="KlassementCorrectie">
+                <ScalarProperty Name="Correctieid" ColumnName="Correctieid" />
+                <ScalarProperty Name="Correctie" ColumnName="Correctie" />
+                <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+                <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loting2">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Loting2">
+              <MappingFragment StoreEntitySet="Loting2">
+                <ScalarProperty Name="Onderboven" ColumnName="Onderboven" />
+                <ScalarProperty Name="Serienummer" ColumnName="Serienummer" />
+                <ScalarProperty Name="Datumid" ColumnName="Datumid" />
+                <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+                <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+                <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+                <ScalarProperty Name="Naamid" ColumnName="Naamid" />
+                <ScalarProperty Name="Lotingid" ColumnName="Lotingid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NaamSerie">
+            <EntityTypeMapping TypeName="VisSeizoenModel.NaamSerie">
+              <MappingFragment StoreEntitySet="NaamSerie">
+                <ScalarProperty Name="Tonen" ColumnName="Tonen" />
+                <ScalarProperty Name="Punten" ColumnName="Punten" />
+                <ScalarProperty Name="Maxaantal" ColumnName="Maxaantal" />
+                <ScalarProperty Name="Vissen" ColumnName="Vissen" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nachtvissen">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Nachtvissen">
+              <MappingFragment StoreEntitySet="Nachtvissen">
+                <ScalarProperty Name="Hoogstegewicht" ColumnName="Hoogstegewicht" />
+                <ScalarProperty Name="Gewicht2" ColumnName="Gewicht2" />
+                <ScalarProperty Name="Deelnemerid2" ColumnName="Deelnemerid2" />
+                <ScalarProperty Name="Gewicht1" ColumnName="Gewicht1" />
+                <ScalarProperty Name="Deelnemerid1" ColumnName="Deelnemerid1" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="Namen" ColumnName="Namen" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nachtvisid" ColumnName="Nachtvisid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Namen">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Namen">
+              <MappingFragment StoreEntitySet="Namen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Winter" ColumnName="Winter" />
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Koppelvissen" ColumnName="Koppelvissen" />
+                <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+                <ScalarProperty Name="Jeugd" ColumnName="Jeugd" />
+                <ScalarProperty Name="Senioren" ColumnName="Senioren" />
+                <ScalarProperty Name="Vijftigplus" ColumnName="Vijftigplus" />
+                <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+                <ScalarProperty Name="C50Plus" ColumnName="50Plus" />
+                <ScalarProperty Name="KoppelID" ColumnName="KoppelID" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="NaamID" ColumnName="NaamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seizoen">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Seizoen">
+              <MappingFragment StoreEntitySet="Seizoen">
+                <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uitslagen">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Uitslagen">
+              <MappingFragment StoreEntitySet="Uitslagen">
+                <ScalarProperty Name="Uitslagid" ColumnName="Uitslagid" />
+                <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+                <ScalarProperty Name="Ploegen" ColumnName="Ploegen" />
+                <ScalarProperty Name="SerieNummerNr" ColumnName="SerieNummerNr" />
+                <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+                <ScalarProperty Name="Pnt" ColumnName="Pnt" />
+                <ScalarProperty Name="Kilo" ColumnName="Kilo" />
+                <ScalarProperty Name="IDdeelnemer" ColumnName="IDdeelnemer" />
+                <ScalarProperty Name="IDdatum" ColumnName="IDdatum" />
+                <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wind">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Wind">
+              <MappingFragment StoreEntitySet="Wind">
+                <ScalarProperty Name="Wind1" ColumnName="Wind" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partner">
+            <EntityTypeMapping TypeName="VisSeizoenModel.Partner">
+              <MappingFragment StoreEntitySet="Partner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Partnernaamid" ColumnName="Partnernaamid" />
+                <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+                <ScalarProperty Name="Naamid" ColumnName="Naamid" />
+                <ScalarProperty Name="Partnerid" ColumnName="Partnerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

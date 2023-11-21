@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="977623c791354c22b0c4bf38785aec30" Name="Diagram1">
+        <EntityTypeShape EntityType="VisSeizoenModel.Agenda" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.DatumWeerEtc" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Loten" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Loting" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Lotingdeelnemer" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.NaamSerie" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Nachtvissen" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Namen" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Seizoen" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.SerieNummer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Uitslagen" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Wind" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.BerekenPunten" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Instellingen" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisSeizoenModel.Leden" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="VisSeizoenModel.FK__DatumWeer__IDser__4B8221F7" ManuallyRouted="false" />
+        <AssociationConnector Association="VisSeizoenModel.FK_DatumWeerEtc_Seizoen" ManuallyRouted="false" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Nachtvissen_DatumWeerEtc" ManuallyRouted="false" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Lotingdeelnemer_Lotingdeelnemer" ManuallyRouted="false" />
+        <AssociationConnector Association="VisSeizoenModel.FK_Uitslagen_Seizoen" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VisSeizoenModel.KlassementCorrectie" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" />
+        <AssociationConnector Association="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

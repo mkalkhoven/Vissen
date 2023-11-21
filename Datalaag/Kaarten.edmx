@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KaartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Deelnemer">
+          <Key>
+            <PropertyRef Name="Nr" />
+          </Key>
+          <Property Name="Nr" Type="float" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="255" />
+          <Property Name="VolledigeNaam" Type="nvarchar" MaxLength="255" />
+          <Property Name="Afbeelding" Type="nvarchar" MaxLength="255" />
+          <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Verwijderd" Type="bit" />
+          <Property Name="Voornaam" Type="varchar" MaxLength="64" />
+          <Property Name="Tussenvoegsel" Type="varchar" MaxLength="16" />
+          <Property Name="Achternaam" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="DeelnemerJ">
+          <Key>
+            <PropertyRef Name="NrJ" />
+          </Key>
+          <Property Name="NrJ" Type="int" Nullable="false" />
+          <Property Name="NaamJ" Type="nvarchar" MaxLength="255" />
+          <Property Name="VolledigeNaamJ" Type="nvarchar" MaxLength="255" />
+          <Property Name="Afbeelding" Type="nvarchar" MaxLength="255" />
+          <Property Name="Verwijderd" Type="bit" />
+          <Property Name="Voornaam" Type="varchar" MaxLength="64" />
+          <Property Name="Tussenvoegsel" Type="varchar" MaxLength="16" />
+          <Property Name="Achternaam" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityContainer Name="KaartenModelStoreContainer">
+          <EntitySet Name="Deelnemer" EntityType="Self.Deelnemer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeelnemerJ" EntityType="Self.DeelnemerJ" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KaartenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DeelnemerK">
+          <Key>
+            <PropertyRef Name="Nr" />
+          </Key>
+          <Property Name="Nr" Type="Double" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VolledigeNaam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Afbeelding" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Verwijderd" Type="Boolean" />
+          <Property Name="Voornaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Tussenvoegsel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Achternaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DeelnemerJ">
+          <Key>
+            <PropertyRef Name="NrJ" />
+          </Key>
+          <Property Name="NrJ" Type="Int32" Nullable="false" />
+          <Property Name="NaamJ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VolledigeNaamJ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Afbeelding" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Verwijderd" Type="Boolean" />
+          <Property Name="Voornaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Tussenvoegsel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Achternaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="KaartenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Deelnemer" EntityType="KaartenModel.DeelnemerK" />
+          <EntitySet Name="DeelnemerJ" EntityType="Self.DeelnemerJ" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KaartenModelStoreContainer" CdmEntityContainer="KaartenEntities">
+          <EntitySetMapping Name="Deelnemer">
+            <EntityTypeMapping TypeName="KaartenModel.DeelnemerK">
+              <MappingFragment StoreEntitySet="Deelnemer">
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+                <ScalarProperty Name="Nr" ColumnName="Nr" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
+                <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+                <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeelnemerJ">
+            <EntityTypeMapping TypeName="KaartenModel.DeelnemerJ">
+              <MappingFragment StoreEntitySet="DeelnemerJ">
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+                <ScalarProperty Name="NrJ" ColumnName="NrJ" />
+                <ScalarProperty Name="NaamJ" ColumnName="NaamJ" />
+                <ScalarProperty Name="VolledigeNaamJ" ColumnName="VolledigeNaamJ" />
+                <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VisSeizoenModelStoreContainer" CdmEntityContainer="VisSeizoenEntities">
+    <EntitySetMapping Name="DatumWeerEtc">
+      <EntityTypeMapping TypeName="VisSeizoenModel.DatumWeerEtc">
+        <MappingFragment StoreEntitySet="DatumWeerEtc">
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+          <ScalarProperty Name="Albumid" ColumnName="Albumid" />
+          <ScalarProperty Name="Verhaal" ColumnName="Verhaal" />
+          <ScalarProperty Name="EindTijd" ColumnName="EindTijd" />
+          <ScalarProperty Name="StartTijd" ColumnName="StartTijd" />
+          <ScalarProperty Name="Weer" ColumnName="Weer" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Loten" ColumnName="Loten" />
+          <ScalarProperty Name="Inschrijven" ColumnName="Inschrijven" />
+          <ScalarProperty Name="LocatieVolgende" ColumnName="LocatieVolgende" />
+          <ScalarProperty Name="DatumVolgende" ColumnName="DatumVolgende" />
+          <ScalarProperty Name="Temp" ColumnName="Temp" />
+          <ScalarProperty Name="WindSnelheid" ColumnName="WindSnelheid" />
+          <ScalarProperty Name="Wind" ColumnName="Wind" />
+          <ScalarProperty Name="MB" ColumnName="MB" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="IDserieNummer" ColumnName="IDserieNummer" />
+          <ScalarProperty Name="SerieNaam" ColumnName="SerieNaam" />
+          <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+          <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KlassementCorrectie">
+      <EntityTypeMapping TypeName="VisSeizoenModel.KlassementCorrectie">
+        <MappingFragment StoreEntitySet="KlassementCorrectie">
+          <ScalarProperty Name="Correctieid" ColumnName="Correctieid" />
+          <ScalarProperty Name="Correctie" ColumnName="Correctie" />
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loting2">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Loting2">
+        <MappingFragment StoreEntitySet="Loting2">
+          <ScalarProperty Name="Onderboven" ColumnName="Onderboven" />
+          <ScalarProperty Name="Serienummer" ColumnName="Serienummer" />
+          <ScalarProperty Name="Datumid" ColumnName="Datumid" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+          <ScalarProperty Name="Naamid" ColumnName="Naamid" />
+          <ScalarProperty Name="Lotingid" ColumnName="Lotingid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NaamSerie">
+      <EntityTypeMapping TypeName="VisSeizoenModel.NaamSerie">
+        <MappingFragment StoreEntitySet="NaamSerie">
+          <ScalarProperty Name="Tonen" ColumnName="Tonen" />
+          <ScalarProperty Name="Punten" ColumnName="Punten" />
+          <ScalarProperty Name="Maxaantal" ColumnName="Maxaantal" />
+          <ScalarProperty Name="Vissen" ColumnName="Vissen" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nachtvissen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Nachtvissen">
+        <MappingFragment StoreEntitySet="Nachtvissen">
+          <ScalarProperty Name="Hoogstegewicht" ColumnName="Hoogstegewicht" />
+          <ScalarProperty Name="Gewicht2" ColumnName="Gewicht2" />
+          <ScalarProperty Name="Deelnemerid2" ColumnName="Deelnemerid2" />
+          <ScalarProperty Name="Gewicht1" ColumnName="Gewicht1" />
+          <ScalarProperty Name="Deelnemerid1" ColumnName="Deelnemerid1" />
+          <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+          <ScalarProperty Name="Namen" ColumnName="Namen" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nachtvisid" ColumnName="Nachtvisid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Namen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Namen">
+        <MappingFragment StoreEntitySet="Namen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Winter" ColumnName="Winter" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Koppelvissen" ColumnName="Koppelvissen" />
+          <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+          <ScalarProperty Name="Jeugd" ColumnName="Jeugd" />
+          <ScalarProperty Name="Senioren" ColumnName="Senioren" />
+          <ScalarProperty Name="Vijftigplus" ColumnName="Vijftigplus" />
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+          <ScalarProperty Name="C50Plus" ColumnName="50Plus" />
+          <ScalarProperty Name="KoppelID" ColumnName="KoppelID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="NaamID" ColumnName="NaamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seizoen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Seizoen">
+        <MappingFragment StoreEntitySet="Seizoen">
+          <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uitslagen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Uitslagen">
+        <MappingFragment StoreEntitySet="Uitslagen">
+          <ScalarProperty Name="Uitslagid" ColumnName="Uitslagid" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+          <ScalarProperty Name="Ploegen" ColumnName="Ploegen" />
+          <ScalarProperty Name="SerieNummerNr" ColumnName="SerieNummerNr" />
+          <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+          <ScalarProperty Name="Pnt" ColumnName="Pnt" />
+          <ScalarProperty Name="Kilo" ColumnName="Kilo" />
+          <ScalarProperty Name="IDdeelnemer" ColumnName="IDdeelnemer" />
+          <ScalarProperty Name="IDdatum" ColumnName="IDdatum" />
+          <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wind">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Wind">
+        <MappingFragment StoreEntitySet="Wind">
+          <ScalarProperty Name="Wind1" ColumnName="Wind" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partner">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Partner">
+        <MappingFragment StoreEntitySet="Partner">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Partnernaamid" ColumnName="Partnernaamid" />
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Naamid" ColumnName="Naamid" />
+          <ScalarProperty Name="Partnerid" ColumnName="Partnerid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,14 @@
+﻿ALTER TABLE Uitslagen
+   ADD Uitslagid INT IDENTITY
+       CONSTRAINT PK_Uitslagen PRIMARY KEY CLUSTERED
+
+
+ALTER TABLE Uitslagen
+ALTER COLUMN IDseizoen INT NOT NULL;
+
+ALTER TABLE dbo.Uitslagen
+ALTER COLUMN IDDeelnemer INT
+
+ALTER TABLE  tblDomare with nocheck
+ADD FOREIGN KEY (PersNR)
+REFERENCES tblBana(BanNR);

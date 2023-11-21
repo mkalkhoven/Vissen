@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VisSeizoenModelStoreContainer" CdmEntityContainer="VisSeizoenEntities1">
+    <EntitySetMapping Name="Agenda">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Agenda">
+        <MappingFragment StoreEntitySet="Agenda">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Serie_id" ColumnName="Serie_id" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Serie" ColumnName="Serie" />
+          <ScalarProperty Name="Agenda_type" ColumnName="Agenda_type" />
+          <ScalarProperty Name="Locatie" ColumnName="Locatie" />
+          <ScalarProperty Name="Vistijd" ColumnName="Vistijd" />
+          <ScalarProperty Name="Inschr" ColumnName="Inschr" />
+          <ScalarProperty Name="Vislocatie" ColumnName="Vislocatie" />
+          <ScalarProperty Name="Inleg" ColumnName="Inleg" />
+          <ScalarProperty Name="Opmerking" ColumnName="Opmerking" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatumWeerEtc">
+      <EntityTypeMapping TypeName="VisSeizoenModel.DatumWeerEtc">
+        <MappingFragment StoreEntitySet="DatumWeerEtc">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+          <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+          <ScalarProperty Name="SerieNaam" ColumnName="SerieNaam" />
+          <ScalarProperty Name="IDserieNummer" ColumnName="IDserieNummer" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="MB" ColumnName="MB" />
+          <ScalarProperty Name="Wind" ColumnName="Wind" />
+          <ScalarProperty Name="WindSnelheid" ColumnName="WindSnelheid" />
+          <ScalarProperty Name="Temp" ColumnName="Temp" />
+          <ScalarProperty Name="DatumVolgende" ColumnName="DatumVolgende" />
+          <ScalarProperty Name="LocatieVolgende" ColumnName="LocatieVolgende" />
+          <ScalarProperty Name="Inschrijven" ColumnName="Inschrijven" />
+          <ScalarProperty Name="Loten" ColumnName="Loten" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Weer" ColumnName="Weer" />
+          <ScalarProperty Name="StartTijd" ColumnName="StartTijd" />
+          <ScalarProperty Name="EindTijd" ColumnName="EindTijd" />
+          <ScalarProperty Name="Verhaal" ColumnName="Verhaal" />
+          <ScalarProperty Name="Albumid" ColumnName="Albumid" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loten">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Loten">
+        <MappingFragment StoreEntitySet="Loten">
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Naamid" ColumnName="Naamid" />
+          <ScalarProperty Name="Sectie1" ColumnName="Sectie1" />
+          <ScalarProperty Name="Sectie2" ColumnName="Sectie2" />
+          <ScalarProperty Name="Sectie3" ColumnName="Sectie3" />
+          <ScalarProperty Name="Sectie4" ColumnName="Sectie4" />
+          <ScalarProperty Name="Sectie5" ColumnName="Sectie5" />
+          <ScalarProperty Name="Sectie6" ColumnName="Sectie6" />
+          <ScalarProperty Name="Sectie7" ColumnName="Sectie7" />
+          <ScalarProperty Name="Sectie8" ColumnName="Sectie8" />
+          <ScalarProperty Name="Sectie9" ColumnName="Sectie9" />
+          <ScalarProperty Name="Sectie10" ColumnName="Sectie10" />
+          <ScalarProperty Name="Sectie11" ColumnName="Sectie11" />
+          <ScalarProperty Name="Sectie12" ColumnName="Sectie12" />
+          <ScalarProperty Name="Sectie13" ColumnName="Sectie13" />
+          <ScalarProperty Name="Sectie14" ColumnName="Sectie14" />
+          <ScalarProperty Name="Sectie15" ColumnName="Sectie15" />
+          <ScalarProperty Name="Sectie16" ColumnName="Sectie16" />
+          <ScalarProperty Name="Sectie17" ColumnName="Sectie17" />
+          <ScalarProperty Name="Sectie18" ColumnName="Sectie18" />
+          <ScalarProperty Name="Sectie19" ColumnName="Sectie19" />
+          <ScalarProperty Name="Sectie20" ColumnName="Sectie20" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loting">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Loting">
+        <MappingFragment StoreEntitySet="Loting">
+          <ScalarProperty Name="Lotingid" ColumnName="Lotingid" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Sectieid" ColumnName="Sectieid" />
+          <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lotingdeelnemer">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Lotingdeelnemer">
+        <MappingFragment StoreEntitySet="Lotingdeelnemer">
+          <ScalarProperty Name="Lotingdeelnemerid" ColumnName="Lotingdeelnemerid" />
+          <ScalarProperty Name="Lotingid" ColumnName="Lotingid" />
+          <ScalarProperty Name="NaamID" ColumnName="NaamID" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="Onderboven" ColumnName="Onderboven" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NaamSerie">
+      <EntityTypeMapping TypeName="VisSeizoenModel.NaamSerie">
+        <MappingFragment StoreEntitySet="NaamSerie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Vissen" ColumnName="Vissen" />
+          <ScalarProperty Name="Maxaantal" ColumnName="Maxaantal" />
+          <ScalarProperty Name="Punten" ColumnName="Punten" />
+          <ScalarProperty Name="Tonen" ColumnName="Tonen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nachtvissen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Nachtvissen">
+        <MappingFragment StoreEntitySet="Nachtvissen">
+          <ScalarProperty Name="Nachtvisid" ColumnName="Nachtvisid" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Namen" ColumnName="Namen" />
+          <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+          <ScalarProperty Name="Deelnemerid1" ColumnName="Deelnemerid1" />
+          <ScalarProperty Name="Gewicht1" ColumnName="Gewicht1" />
+          <ScalarProperty Name="Deelnemerid2" ColumnName="Deelnemerid2" />
+          <ScalarProperty Name="Gewicht2" ColumnName="Gewicht2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Namen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Namen">
+        <MappingFragment StoreEntitySet="Namen">
+          <ScalarProperty Name="NaamID" ColumnName="NaamID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="KoppelID" ColumnName="KoppelID" />
+          <ScalarProperty Name="C50Plus" ColumnName="50Plus" />
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+          <ScalarProperty Name="Vijftigplus" ColumnName="Vijftigplus" />
+          <ScalarProperty Name="Senioren" ColumnName="Senioren" />
+          <ScalarProperty Name="Jeugd" ColumnName="Jeugd" />
+          <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+          <ScalarProperty Name="Koppelvissen" ColumnName="Koppelvissen" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Winter" ColumnName="Winter" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seizoen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Seizoen">
+        <MappingFragment StoreEntitySet="Seizoen">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Jaar" ColumnName="Jaar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SerieNummer">
+      <EntityTypeMapping TypeName="VisSeizoenModel.SerieNummer">
+        <MappingFragment StoreEntitySet="SerieNummer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Snr" ColumnName="Snr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uitslagen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Uitslagen">
+        <MappingFragment StoreEntitySet="Uitslagen">
+          <ScalarProperty Name="IDseizoen" ColumnName="IDseizoen" />
+          <ScalarProperty Name="IDdatum" ColumnName="IDdatum" />
+          <ScalarProperty Name="IDdeelnemer" ColumnName="IDdeelnemer" />
+          <ScalarProperty Name="Kilo" ColumnName="Kilo" />
+          <ScalarProperty Name="Pnt" ColumnName="Pnt" />
+          <ScalarProperty Name="SerieNaamNr" ColumnName="SerieNaamNr" />
+          <ScalarProperty Name="SerieNummerNr" ColumnName="SerieNummerNr" />
+          <ScalarProperty Name="Ploegen" ColumnName="Ploegen" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+          <ScalarProperty Name="Uitslagid" ColumnName="Uitslagid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wind">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Wind">
+        <MappingFragment StoreEntitySet="Wind">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Wind1" ColumnName="Wind" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BerekenPunten">
+      <EntityTypeMapping TypeName="VisSeizoenModel.BerekenPunten">
+        <MappingFragment StoreEntitySet="BerekenPunten">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Punten" ColumnName="Punten" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Instellingen">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Instellingen">
+        <MappingFragment StoreEntitySet="Instellingen">
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Krant_email" ColumnName="Krant_email" />
+          <ScalarProperty Name="Krant_onderwerp" ColumnName="Krant_onderwerp" />
+          <ScalarProperty Name="Kabelkrant_email" ColumnName="Kabelkrant_email" />
+          <ScalarProperty Name="Kabelkrant_onderwerp" ColumnName="Kabelkrant_onderwerp" />
+          <ScalarProperty Name="Email_cc" ColumnName="Email_cc" />
+          <ScalarProperty Name="SMTP" ColumnName="SMTP" />
+          <ScalarProperty Name="Poort" ColumnName="Poort" />
+          <ScalarProperty Name="Gebruikersnaam" ColumnName="Gebruikersnaam" />
+          <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
+          <ScalarProperty Name="ssl" ColumnName="ssl" />
+          <ScalarProperty Name="Locatie_sjablonen" ColumnName="Locatie_sjablonen" />
+          <ScalarProperty Name="Locatie_afbeeldingen" ColumnName="Locatie_afbeeldingen" />
+          <ScalarProperty Name="Fotolinks_jeugd" ColumnName="Fotolinks_jeugd" />
+          <ScalarProperty Name="Fotolinks_senioren" ColumnName="Fotolinks_senioren" />
+          <ScalarProperty Name="Fotolinks_50_plus" ColumnName="Fotolinks_50_plus" />
+          <ScalarProperty Name="Fotorechts_jeugd" ColumnName="Fotorechts_jeugd" />
+          <ScalarProperty Name="Fotorechts_senioren" ColumnName="Fotorechts_senioren" />
+          <ScalarProperty Name="Fotorechts_50_plus" ColumnName="Fotorechts_50_plus" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leden">
+      <EntityTypeMapping TypeName="VisSeizoenModel.Leden">
+        <MappingFragment StoreEntitySet="Leden">
+          <ScalarProperty Name="Lidnummer" ColumnName="Lidnummer" />
+          <ScalarProperty Name="Voorletters" ColumnName="Voorletters" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+          <ScalarProperty Name="Toevoegsel" ColumnName="Toevoegsel" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+          <ScalarProperty Name="Mobiel" ColumnName="Mobiel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="BIC" ColumnName="BIC" />
+          <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KlassementCorrectie">
+      <EntityTypeMapping TypeName="VisSeizoenModel.KlassementCorrectie">
+        <MappingFragment StoreEntitySet="KlassementCorrectie">
+          <ScalarProperty Name="Correctieid" ColumnName="Correctieid" />
+          <ScalarProperty Name="Correctie" ColumnName="Correctie" />
+          <ScalarProperty Name="Serieid" ColumnName="Serieid" />
+          <ScalarProperty Name="Seizoenid" ColumnName="Seizoenid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

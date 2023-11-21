@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VisSeizoenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agenda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Serie_id" Type="Double" />
+    <Property Name="Datum" Type="DateTime" Precision="0" />
+    <Property Name="Serie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Agenda_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Locatie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Vistijd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Inschr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Vislocatie" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Inleg" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Opmerking" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="DatumWeerEtc">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IDseizoen" Type="Int32" />
+    <Property Name="SerieNaamNr" Type="Int32" />
+    <Property Name="SerieNaam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IDserieNummer" Type="Int32" />
+    <Property Name="Plaats" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Wind" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="WindSnelheid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Temp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DatumVolgende" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LocatieVolgende" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Inschrijven" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Loten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Datum" Type="DateTime" Precision="0" />
+    <Property Name="Weer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="StartTijd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="EindTijd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Verhaal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Albumid" Type="Int32" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="NaamSerie" Relationship="Self.FK__DatumWeer__IDser__4B8221F7" FromRole="DatumWeerEtc" ToRole="NaamSerie" />
+    <NavigationProperty Name="Seizoen" Relationship="Self.FK_DatumWeerEtc_Seizoen" FromRole="DatumWeerEtc" ToRole="Seizoen" />
+    <NavigationProperty Name="Nachtvissen" Relationship="Self.FK_Nachtvissen_DatumWeerEtc" FromRole="DatumWeerEtc" ToRole="Nachtvissen" />
+  </EntityType>
+  <EntityType Name="Loten">
+    <Key>
+      <PropertyRef Name="Serieid" />
+      <PropertyRef Name="Naamid" />
+    </Key>
+    <Property Name="Serieid" Type="Int32" Nullable="false" />
+    <Property Name="Naamid" Type="Int32" Nullable="false" />
+    <Property Name="Sectie1" Type="Int32" />
+    <Property Name="Sectie2" Type="Int32" />
+    <Property Name="Sectie3" Type="Int32" />
+    <Property Name="Sectie4" Type="Int32" />
+    <Property Name="Sectie5" Type="Int32" />
+    <Property Name="Sectie6" Type="Int32" />
+    <Property Name="Sectie7" Type="Int32" />
+    <Property Name="Sectie8" Type="Int32" />
+    <Property Name="Sectie9" Type="Int32" />
+    <Property Name="Sectie10" Type="Int32" />
+    <Property Name="Sectie11" Type="Int32" />
+    <Property Name="Sectie12" Type="Int32" />
+    <Property Name="Sectie13" Type="Int32" />
+    <Property Name="Sectie14" Type="Int32" />
+    <Property Name="Sectie15" Type="Int32" />
+    <Property Name="Sectie16" Type="Int32" />
+    <Property Name="Sectie17" Type="Int32" />
+    <Property Name="Sectie18" Type="Int32" />
+    <Property Name="Sectie19" Type="Int32" />
+    <Property Name="Sectie20" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Loting">
+    <Key>
+      <PropertyRef Name="Lotingid" />
+    </Key>
+    <Property Name="Lotingid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Datum" Type="DateTime" Precision="3" />
+    <Property Name="Serieid" Type="Int32" />
+    <Property Name="Sectieid" Type="Int32" />
+    <Property Name="Seizoenid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Lotingdeelnemer">
+    <Key>
+      <PropertyRef Name="Lotingdeelnemerid" />
+    </Key>
+    <Property Name="Lotingdeelnemerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lotingid" Type="Int32" />
+    <Property Name="NaamID" Type="Int32" />
+    <Property Name="Plaats" Type="Int32" />
+    <Property Name="Onderboven" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Lotingdeelnemer1" Relationship="Self.FK_Lotingdeelnemer_Lotingdeelnemer" FromRole="Lotingdeelnemer" ToRole="Lotingdeelnemer1" />
+    <NavigationProperty Name="Lotingdeelnemer2" Relationship="Self.FK_Lotingdeelnemer_Lotingdeelnemer" FromRole="Lotingdeelnemer1" ToRole="Lotingdeelnemer" />
+  </EntityType>
+  <EntityType Name="NaamSerie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Vissen" Type="Boolean" />
+    <Property Name="Maxaantal" Type="Int32" />
+    <Property Name="Punten" Type="Int32" />
+    <Property Name="Tonen" Type="Boolean" />
+    <NavigationProperty Name="DatumWeerEtc" Relationship="Self.FK__DatumWeer__IDser__4B8221F7" FromRole="NaamSerie" ToRole="DatumWeerEtc" />
+    <NavigationProperty Name="KlassementCorrectie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" FromRole="NaamSerie" ToRole="KlassementCorrectie" />
+  </EntityType>
+  <EntityType Name="Nachtvissen">
+    <Key>
+      <PropertyRef Name="Nachtvisid" />
+    </Key>
+    <Property Name="Nachtvisid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Int32" />
+    <Property Name="Namen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Gewicht" Type="Int32" />
+    <Property Name="Deelnemerid1" Type="Int32" />
+    <Property Name="Gewicht1" Type="Int32" />
+    <Property Name="Deelnemerid2" Type="Int32" />
+    <Property Name="Gewicht2" Type="Int32" />
+    <NavigationProperty Name="DatumWeerEtc" Relationship="Self.FK_Nachtvissen_DatumWeerEtc" FromRole="Nachtvissen" ToRole="DatumWeerEtc" />
+  </EntityType>
+  <EntityType Name="Namen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="NaamID" Type="Int32" />
+    <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="KoppelID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="C50Plus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Afbeelding" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Vijftigplus" Type="Boolean" />
+    <Property Name="Senioren" Type="Boolean" />
+    <Property Name="Jeugd" Type="Boolean" />
+    <Property Name="Verwijderd" Type="Boolean" />
+    <Property Name="Koppelvissen" Type="Boolean" />
+    <Property Name="Voornaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Tussenvoegsel" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Achternaam" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="Winter" Type="Boolean" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Seizoen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Jaar" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DatumWeerEtc" Relationship="Self.FK_DatumWeerEtc_Seizoen" FromRole="Seizoen" ToRole="DatumWeerEtc" />
+    <NavigationProperty Name="Uitslagen" Relationship="Self.FK_Uitslagen_Seizoen" FromRole="Seizoen" ToRole="Uitslagen" />
+    <NavigationProperty Name="KlassementCorrectie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" FromRole="Seizoen" ToRole="KlassementCorrectie" />
+  </EntityType>
+  <EntityType Name="SerieNummer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Snr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Uitslagen">
+    <Key>
+      <PropertyRef Name="Uitslagid" />
+    </Key>
+    <Property Name="IDseizoen" Type="Int32" Nullable="false" />
+    <Property Name="IDdatum" Type="Int32" Nullable="false" />
+    <Property Name="IDdeelnemer" Type="Int32" Nullable="false" />
+    <Property Name="Kilo" Type="Double" />
+    <Property Name="Pnt" Type="Double" />
+    <Property Name="SerieNaamNr" Type="Double" />
+    <Property Name="SerieNummerNr" Type="Double" />
+    <Property Name="Ploegen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Uitslagid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Seizoen" Relationship="Self.FK_Uitslagen_Seizoen" FromRole="Uitslagen" ToRole="Seizoen" />
+  </EntityType>
+  <EntityType Name="Wind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Wind1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BerekenPunten">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="SSMA_TimeStamp" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Score" Type="Int32" />
+    <Property Name="Punten" Type="Double" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Instellingen">
+    <Key>
+      <PropertyRef Name="SSMA_TimeStamp" />
+    </Key>
+    <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Krant_email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Krant_onderwerp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Kabelkrant_email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Kabelkrant_onderwerp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email_cc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SMTP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Poort" Type="Int32" />
+    <Property Name="Gebruikersnaam" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Wachtwoord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ssl" Type="Boolean" />
+    <Property Name="Locatie_sjablonen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Locatie_afbeeldingen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotolinks_jeugd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotolinks_senioren" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotolinks_50_plus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotorechts_jeugd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotorechts_senioren" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Fotorechts_50_plus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Leden">
+    <Key>
+      <PropertyRef Name="SSMA_TimeStamp" />
+    </Key>
+    <Property Name="Lidnummer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Voorletters" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Tussenvoegsel" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Achternaam" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Straat" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Huisnummer" Type="Int32" />
+    <Property Name="Toevoegsel" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Postcode" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="Plaats" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Telefoonnummer" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Mobiel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IBAN" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BIC" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="Verwijderd" Type="Boolean" />
+    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <Association Name="FK__DatumWeer__IDser__4B8221F7">
+    <End Role="NaamSerie" Type="Self.NaamSerie" Multiplicity="0..1" />
+    <End Role="DatumWeerEtc" Type="Self.DatumWeerEtc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaamSerie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DatumWeerEtc">
+        <PropertyRef Name="IDserieNummer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DatumWeerEtc_Seizoen">
+    <End Role="Seizoen" Type="Self.Seizoen" Multiplicity="0..1" />
+    <End Role="DatumWeerEtc" Type="Self.DatumWeerEtc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seizoen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DatumWeerEtc">
+        <PropertyRef Name="IDseizoen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nachtvissen_DatumWeerEtc">
+    <End Role="DatumWeerEtc" Type="Self.DatumWeerEtc" Multiplicity="0..1" />
+    <End Role="Nachtvissen" Type="Self.Nachtvissen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DatumWeerEtc">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Nachtvissen">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lotingdeelnemer_Lotingdeelnemer">
+    <End Role="Lotingdeelnemer" Type="Self.Lotingdeelnemer" Multiplicity="1" />
+    <End Role="Lotingdeelnemer1" Type="Self.Lotingdeelnemer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Lotingdeelnemer">
+        <PropertyRef Name="Lotingdeelnemerid" />
+      </Principal>
+      <Dependent Role="Lotingdeelnemer1">
+        <PropertyRef Name="Lotingdeelnemerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Uitslagen_Seizoen">
+    <End Role="Seizoen" Type="Self.Seizoen" Multiplicity="1" />
+    <End Role="Uitslagen" Type="Self.Uitslagen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seizoen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Uitslagen">
+        <PropertyRef Name="IDseizoen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VisSeizoenEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agenda" EntityType="Self.Agenda" />
+    <EntitySet Name="DatumWeerEtc" EntityType="Self.DatumWeerEtc" />
+    <EntitySet Name="Loten" EntityType="Self.Loten" />
+    <EntitySet Name="Loting" EntityType="Self.Loting" />
+    <EntitySet Name="Lotingdeelnemer" EntityType="Self.Lotingdeelnemer" />
+    <EntitySet Name="NaamSerie" EntityType="Self.NaamSerie" />
+    <EntitySet Name="Nachtvissen" EntityType="Self.Nachtvissen" />
+    <EntitySet Name="Namen" EntityType="Self.Namen" />
+    <EntitySet Name="Seizoen" EntityType="Self.Seizoen" />
+    <EntitySet Name="SerieNummer" EntityType="Self.SerieNummer" />
+    <EntitySet Name="Uitslagen" EntityType="Self.Uitslagen" />
+    <EntitySet Name="Wind" EntityType="Self.Wind" />
+    <EntitySet Name="BerekenPunten" EntityType="Self.BerekenPunten" />
+    <EntitySet Name="Instellingen" EntityType="Self.Instellingen" />
+    <EntitySet Name="Leden" EntityType="Self.Leden" />
+    <AssociationSet Name="FK__DatumWeer__IDser__4B8221F7" Association="Self.FK__DatumWeer__IDser__4B8221F7">
+      <End Role="NaamSerie" EntitySet="NaamSerie" />
+      <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DatumWeerEtc_Seizoen" Association="Self.FK_DatumWeerEtc_Seizoen">
+      <End Role="Seizoen" EntitySet="Seizoen" />
+      <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nachtvissen_DatumWeerEtc" Association="Self.FK_Nachtvissen_DatumWeerEtc">
+      <End Role="DatumWeerEtc" EntitySet="DatumWeerEtc" />
+      <End Role="Nachtvissen" EntitySet="Nachtvissen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lotingdeelnemer_Lotingdeelnemer" Association="Self.FK_Lotingdeelnemer_Lotingdeelnemer">
+      <End Role="Lotingdeelnemer" EntitySet="Lotingdeelnemer" />
+      <End Role="Lotingdeelnemer1" EntitySet="Lotingdeelnemer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Uitslagen_Seizoen" Association="Self.FK_Uitslagen_Seizoen">
+      <End Role="Seizoen" EntitySet="Seizoen" />
+      <End Role="Uitslagen" EntitySet="Uitslagen" />
+    </AssociationSet>
+    <EntitySet Name="KlassementCorrectie" EntityType="VisSeizoenModel.KlassementCorrectie" />
+    <AssociationSet Name="FK_KlassementCorrectie_NaamSerie" Association="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie">
+      <End Role="NaamSerie" EntitySet="NaamSerie" />
+      <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KlassementCorrectie_Seizoen" Association="VisSeizoenModel.FK_KlassementCorrectie_Seizoen">
+      <End Role="Seizoen" EntitySet="Seizoen" />
+      <End Role="KlassementCorrectie" EntitySet="KlassementCorrectie" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="KlassementCorrectie">
+    <Key>
+      <PropertyRef Name="Correctieid" />
+    </Key>
+    <Property Name="Seizoenid" Type="Int32" Nullable="false" />
+    <Property Name="Serieid" Type="Int32" Nullable="false" />
+    <Property Name="Correctie" Type="Int32" />
+    <Property Name="Correctieid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="NaamSerie" Relationship="VisSeizoenModel.FK_KlassementCorrectie_NaamSerie" FromRole="KlassementCorrectie" ToRole="NaamSerie" />
+    <NavigationProperty Name="Seizoen" Relationship="VisSeizoenModel.FK_KlassementCorrectie_Seizoen" FromRole="KlassementCorrectie" ToRole="Seizoen" />
+  </EntityType>
+  <Association Name="FK_KlassementCorrectie_NaamSerie">
+    <End Type="VisSeizoenModel.NaamSerie" Role="NaamSerie" Multiplicity="1" />
+    <End Type="VisSeizoenModel.KlassementCorrectie" Role="KlassementCorrectie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NaamSerie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KlassementCorrectie">
+        <PropertyRef Name="Serieid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KlassementCorrectie_Seizoen">
+    <End Type="VisSeizoenModel.Seizoen" Role="Seizoen" Multiplicity="1" />
+    <End Type="VisSeizoenModel.KlassementCorrectie" Role="KlassementCorrectie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seizoen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KlassementCorrectie">
+        <PropertyRef Name="Seizoenid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

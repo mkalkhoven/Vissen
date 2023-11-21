@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KaartenModelStoreContainer" CdmEntityContainer="KaartenEntities">
+    <EntitySetMapping Name="Deelnemer">
+      <EntityTypeMapping TypeName="KaartenModel.DeelnemerK">
+        <MappingFragment StoreEntitySet="Deelnemer">
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+          <ScalarProperty Name="Nr" ColumnName="Nr" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="VolledigeNaam" ColumnName="VolledigeNaam" />
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+          <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeelnemerJ">
+      <EntityTypeMapping TypeName="KaartenModel.DeelnemerJ">
+        <MappingFragment StoreEntitySet="DeelnemerJ">
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Verwijderd" ColumnName="Verwijderd" />
+          <ScalarProperty Name="NrJ" ColumnName="NrJ" />
+          <ScalarProperty Name="NaamJ" ColumnName="NaamJ" />
+          <ScalarProperty Name="VolledigeNaamJ" ColumnName="VolledigeNaamJ" />
+          <ScalarProperty Name="Afbeelding" ColumnName="Afbeelding" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KaartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Deelnemer">
+    <Key>
+      <PropertyRef Name="Nr" />
+    </Key>
+    <Property Name="Nr" Type="float" Nullable="false" />
+    <Property Name="Naam" Type="nvarchar" MaxLength="255" />
+    <Property Name="VolledigeNaam" Type="nvarchar" MaxLength="255" />
+    <Property Name="Afbeelding" Type="nvarchar" MaxLength="255" />
+    <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Verwijderd" Type="bit" />
+    <Property Name="Voornaam" Type="varchar" MaxLength="64" />
+    <Property Name="Tussenvoegsel" Type="varchar" MaxLength="16" />
+    <Property Name="Achternaam" Type="varchar" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="DeelnemerJ">
+    <Key>
+      <PropertyRef Name="NrJ" />
+    </Key>
+    <Property Name="NrJ" Type="int" Nullable="false" />
+    <Property Name="NaamJ" Type="nvarchar" MaxLength="255" />
+    <Property Name="VolledigeNaamJ" Type="nvarchar" MaxLength="255" />
+    <Property Name="Afbeelding" Type="nvarchar" MaxLength="255" />
+    <Property Name="Verwijderd" Type="bit" />
+    <Property Name="Voornaam" Type="varchar" MaxLength="64" />
+    <Property Name="Tussenvoegsel" Type="varchar" MaxLength="16" />
+    <Property Name="Achternaam" Type="varchar" MaxLength="64" />
+  </EntityType>
+  <EntityContainer Name="KaartenModelStoreContainer">
+    <EntitySet Name="Deelnemer" EntityType="Self.Deelnemer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeelnemerJ" EntityType="Self.DeelnemerJ" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
