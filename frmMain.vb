@@ -12,13 +12,13 @@ Public Class frmMain
     Dim _koppelvissen = New Nachtvissen
     Dim _serie As New Serie
     Private nachtvis As Nachtvissen = New Nachtvissen
-
     Dim _datum As New DatumWeerEtc
     Private _seizoen As New Seizoen
+    dim klik As String = 0
+    dim nieuw As String = 0
+    Dim verwijderdnachtvis = 0
     Private _isstarted As Boolean = False
-
-    Private Sub Vulseizoencombo()
-
+        Private Sub Vulseizoencombo()
         Dim seizoenen = Seizoenrepo.Getsorted()
         Dim seizoennaam = seizoenen.First
         'Dim seizoen = New Seizoen With {
@@ -66,7 +66,7 @@ Public Class frmMain
     End Sub
 
     Private Sub Fillcombo()
-
+        'If klik=1 then return
         If klaarmetladen = False Then
             Return
         End If
@@ -93,13 +93,28 @@ Public Class frmMain
             For i = 1 To aantal + 1
                 lijst.Add(i, $"{i}e.")
             Next
-
+            nieuw=aantal
+            
             CboSerieVolgnummer.DataSource = New BindingSource(lijst, Nothing)
             CboSerieVolgnummer.DisplayMember = "Value"
             CboSerieVolgnummer.ValueMember = "Key"
+            If nieuw=0 Then return
         Catch ex As Exception
+            
         End Try
-
+       
+        If IsStarted = True Then
+            Try
+                
+                'CboSerieVolgnummer.SelectedIndex = 1                  
+            Catch ex As Exception
+                'Nothing
+            Finally
+                
+            End Try
+        Else
+            CboSerieVolgnummer.SelectedIndex = -1
+        End If
         _isstarted = True
 
     End Sub
@@ -128,9 +143,10 @@ Public Class frmMain
 
     End Function
     Private Sub Vulgrid(Optional zoeken As String = "")
-
+        _isstarted=true
+        dgvnamen.ClearSelection
         Dim vistype As Vistype
-
+        frmNamenbewerken.lblVissen.Text="Vissen"
         If _toonalles = True Then
             vistype = Vistype.Toonalles
         Else
@@ -151,22 +167,44 @@ Public Class frmMain
             Dim serie As NaamSerie = cboNaamserie.SelectedValue
             value = serie.Id
         End Try
+        Try
+            If value = 15 Or value = 17 Then
+                For Each row As DataGridViewRow In dgvUitslagen.Rows
 
-        If value = 15 Or value = 17 Then
-            For Each row As DataGridViewRow In dgvUitslagen.Rows
+                    Dim id As String = row.Cells(0).Value.ToString() '= Uitslagid
 
-                'Dim tmp As String = row.Cells(0).Value.ToString()
+                    'Dim id As Long = Long.Parse(row.Cells(1).Value.ToString())
+                    Dim nv = Nachtvissenrepo.Get(id)
+                    numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid1}"
 
-                'Dim id As Long = Long.Parse(row.Cells(1).Value.ToString())
-                'Dim nv = Nachtvissenrepo.Get(id)
-                'numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid1}"
-                'id = Long.Parse(row.Cells("Deelnemerid2").Value.ToString())
-                'nv = Nachtvissenrepo.Get(id)
-                'numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
-            Next
-        Else
-            numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
-        End If
+                    id = Long.Parse(row.Cells("Deelnemerid2").Value.ToString())
+                    nv = Nachtvissenrepo.Get(id)
+                    numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
+                Next
+                
+            Else
+                numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+            End If
+        Catch ex As Exception
+
+        End Try
+
+        'If value = 15 Or value = 17 Then
+        '    For Each row As DataGridViewRow In dgvUitslagen.Rows
+
+        '        Dim id As String = row.Cells(0).Value.ToString()'= Uitslagid
+
+        '        'Dim id As Long = Long.Parse(row.Cells(1).Value.ToString())
+        '        Dim nv = Nachtvissenrepo.Get(id)
+        '        numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid1}"
+
+        '        id = Long.Parse(row.Cells("Deelnemerid2").Value.ToString())
+        '        nv = Nachtvissenrepo.Get(id)
+        '        numbers = $"{numbers}#{nv.Deelnemerid1}##{nv.Deelnemerid2}"
+        '    Next
+        'Else
+        '    numbers = dgvUitslagen.Rows.Cast(Of DataGridViewRow)().Aggregate("", Function(current, row) $"{current}#{row.Cells("NaamID").Value}#")
+        'End If
 
         If dgvUitslagen.Rows.Count > 0 Then
             For Each row As DataGridViewRow In dgvnamen.Rows
@@ -175,6 +213,8 @@ Public Class frmMain
                     row.Visible = False
                 End If
             Next
+            btnWijzigverhaal.Enabled=True
+            btnVerwijderwedstrijd.Enabled=True
         End If
 
 
@@ -182,7 +222,7 @@ Public Class frmMain
         cm.ResumeBinding()
         Verbergid(dgvnamen)
         Uitvullen(dgvnamen)
-
+        dgvnamen.ClearSelection
     End Sub
 
     Private Sub dgvnamen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvnamen.DataBindingComplete
@@ -204,23 +244,23 @@ Public Class frmMain
         Vulgrid()
     End Sub
 
-    Private Sub cboNaamserie_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboNaamserie.SelectedIndexChanged
+     Private Sub cboNaamserie_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboNaamserie.SelectedIndexChanged
         'Piet
+        _isstarted=False
+        If CboSerieVolgnummer.SelectedIndex = -1 = -1 Then
+        End If
         txtNaam1.Text = ""
-
         _toonalles = False
         btnToonalles.Text = "Toon alles"
 
-
-
         Vulgrid()
-
-        Fillcombo()
         txtAantal.Visible = False
         lblAantal.Visible = False
-
         Toonvelden()
-
+        CboSerieVolgnummer.SelectedIndex = -1 
+        Leegdetails
+        Fillcombo()
+        Return
     End Sub
 
     Private Sub txtZoeken_KeyUp(sender As Object, e As KeyEventArgs) Handles txtZoeken.KeyUp
@@ -241,22 +281,30 @@ Public Class frmMain
 
     End Sub
     Private Sub dgvnamen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvnamen.CellClick
-
-        'Dim id As Long = Selecteerid(dgvnamen, "NaamId")
-
+        If klik=1 Then
+            klik=0
+            txtGewicht1.Text = ""
+            txtGewicht2.Text = ""
+            txtGewichtTotaal.Text=""
+            txtNaam1.Text = ""
+            txtNaam2.Text = ""
+            txtNaam1.Focus()
+            txtNaam1.Enabled=True
+            txtNaam2.Enabled=True
+        End If
         Dim id As long = Long.Parse(dgvnamen.Rows(e.RowIndex).Cells(1).Value.ToString())
         Dim oldid As long = Long.Parse(dgvnamen.Rows(e.RowIndex).Cells(0).Value.ToString())
-
         If id = 0 Then
             Return
         End If
-
-        If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) And Not String.IsNullOrEmpty(txtNaam1.Text) Then
+       If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) And Not String.IsNullOrEmpty(txtNaam1.Text) Then
             txtGewicht2.Enabled = True
             txtGewicht2.Text = ""
             dgvUitslagen.ClearSelection()
+            btnDeelnemersVerwijderen.Visible=False
             If id > 0 Then
-                _deelnemer2 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                '_deelnemer2 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
+                _deelnemer2 = Namenrepo.Getbyoldid(oldid)
                 If _deelnemer1.Id = _deelnemer2.Id Then
                     Showmessage("U kunt niet dezelfde deelnemer selecteren. Bent u een aap, ofzo..?")
                     Return
@@ -272,6 +320,7 @@ Public Class frmMain
             txtAantal.Text = ""
             btnOpslaan.Enabled = False
             dgvUitslagen.ClearSelection()
+            btnDeelnemersVerwijderen.Visible=False
             If id > 0 Then
                 '_deelnemer1 = Namenrepo.Getbyoldid(Selecteerid(dgvnamen, "NaamId"))
                 _deelnemer1 = Namenrepo.Getbyoldid(oldid)
@@ -294,9 +343,7 @@ Public Class frmMain
             f.Dispose()
             Vulgrid()
             Selecteerregel(_deelnemer1.Id, dgvnamen)
-
         End If
-
     End Sub
 
     Private Sub cmsNieuw_Click(sender As Object, e As EventArgs) Handles cmsNieuw.Click
@@ -308,25 +355,21 @@ Public Class frmMain
         f.Dispose()
         Vulgrid()
         Selecteerregel(_deelnemer1.Id, dgvnamen)
-
     End Sub
     Private Sub cboSeizoen_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSeizoen.SelectedIndexChanged
-
         Fillcombo()
-
     End Sub
     Private Sub CboSerieVolgnummer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboSerieVolgnummer.SelectedIndexChanged
         Legen()
+        nieuw=1
         If _isstarted = False Then
             Return
         End If
-
         If IsNothing(cboSeizoen.SelectedValue) Or IsNothing(cboNaamserie.SelectedValue) Or IsNothing(CboSerieVolgnummer.SelectedValue) Then
             Return
         End If
-
+        if nieuw=0 Then Return
         lblDatumid.Text = ""
-
         Try
             If IsNumeric(cboSeizoen.SelectedValue) Then
                 _seizoen = Seizoenrepo.Get(cboSeizoen.SelectedValue)
@@ -354,8 +397,7 @@ Public Class frmMain
             If IsNothing(_seizoen) Or IsNothing(serie) Or IsNothing(nummer = 0) Then
                 Return
             End If
-
-            _datum = Datumweeretcrepo.Get(_seizoen.ID, serie.Id, nummer)
+           _datum = Datumweeretcrepo.Get(_seizoen.ID, serie.Id, nummer)
             If Not IsNothing(_datum) Then
                 Vuluitslaggrid(_datum)
             Else
@@ -374,10 +416,12 @@ Public Class frmMain
                     .Seizoen = _seizoen
                 }
                 f.ShowDialog()
+                _isstarted=false
+
                 Try
                     _datum = Datumweeretcrepo.Get(f.Datum.ID)
                     Legen()
-                    Vuluitslaggrid(_datum)
+                    'Vuluitslaggrid(_datum)
                 Catch ex As Exception
                     _datum = Nothing
                 End Try
@@ -386,9 +430,10 @@ Public Class frmMain
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+        
     End Sub
     Private Sub Vuluitslaggrid(datum As DatumWeerEtc)
-
+       
         Vuldetails(datum)
         dgvUitslagen.DataSource = Nothing
         If cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17 Then
@@ -413,22 +458,16 @@ Public Class frmMain
                 .Gewicht = totaal
             }
             koppeluitslag.Add(totaaluitslag)
-
-
             dgvUitslagen.DataSource = Maakplaats(koppeluitslag)
-
             dgvUitslagen.Columns(0).Visible = False
             dgvUitslagen.Columns(1).HeaderText = "Pl."
             dgvUitslagen.Columns(1).Width = 50
             dgvUitslagen.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvUitslagen.Columns(2).Width = 325
-
             dgvUitslagen.Columns(3).DefaultCellStyle.Format = "N0"
             dgvUitslagen.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
             dgvUitslagen.Columns(4).Visible = False
             dgvUitslagen.Columns(5).Visible = False
-
             Return
         Else
             Dim uitslagen = Uitslagenrepo.Get(datum)
@@ -441,14 +480,11 @@ Public Class frmMain
         dgvUitslagen.Columns(3).Width = 85
         dgvUitslagen.Columns(4).Width = 80
         dgvUitslagen.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-
         dgvUitslagen.Columns(2).Width = 250
         dgvUitslagen.Columns(3).DefaultCellStyle.Format = "N0"
         dgvUitslagen.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvUitslagen.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
         dgvUitslagen.Columns(5).Visible = False
-
         dgvUitslagen.Columns(4).DefaultCellStyle.Format = "N1"
         dgvUitslagen.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         If cboNaamserie.Text.ToLower.Contains("jeugd") Then
@@ -458,35 +494,23 @@ Public Class frmMain
             dgvUitslagen.Columns(2).Width = dgvUitslagen.Width = dgvUitslagen.Columns(1).Width = dgvUitslagen.Width + dgvUitslagen.Columns(3).Width
             dgvUitslagen.Columns(4).Visible = False
         ElseIf cboNaamserie.Text.ToLower.Contains("nachtvissen") Then
-
         End If
         dgvUitslagen.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter
-
-        'dim teller = 1
-        'For Each row As DataGridViewRow In dgvUitslagen.Rows
-        '    If row.Index < dgvUitslagen.Rows.Count -1 Then
-        '        row.Cells(1).Value = $"{teller}."
-        '        teller +=1
-        '    End If
-        'Next
-
         Vulgrid()
         btnKlassement.Enabled = dgvUitslagen.Rows.Count > 0
-
         Select Case cboNaamserie.SelectedValue
             Case 1, 2, 3 'Koningsvisser
-                btnVisser.Text = "Koningsvisser"
-                btnVisser.Visible = True
+                btnKoningsVisser.Text = "Koningsvisser"
+                btnKoningsVisser.Enabled = True
             Case 9, 10, 11 'Wintervisser
-                btnVisser.Text = "Wintervisser"
-                btnVisser.Visible = True
+                btnKoningsVisser.Text = "Wintervisser"
+                btnKoningsVisser.Enabled = True
             Case 12, 13 'Jeugdvisser
-                btnVisser.Text = "Jeugdvisser"
-                btnVisser.Visible = True
+                btnKoningsVisser.Enabled = "Jeugdvisser"
+                btnKoningsVisser.Visible = True
             Case Else
-                btnVisser.Visible = False
+                btnKoningsVisser.Enabled = False
         End Select
-
     End Sub
     Private Sub Toonvelden()
 
@@ -497,10 +521,7 @@ Public Class frmMain
         Else
             serie = cboNaamserie.SelectedValue
         End If
-
-        'Select Case cboNaamserie.SelectedValue
         Select Case serie.Id
-
             Case 1, 2, 3, 5, 6, 9, 10, 11 'Senioren, 50Plus, Vrijewedstrijden, winter.
                 Legen()
                 gbNaamGewichtEtc.Visible = True
@@ -517,7 +538,6 @@ Public Class frmMain
                 btnOpslaan.Visible = True
                 btnOpslaan.Enabled = False
                 btnOpslaan.Location = New Point(421, 41)
-
             Case 15, 17 'Koppelwedstrijden nachtvissen
                 Legen()
                 gbNaamGewichtEtc.Visible = True
@@ -534,7 +554,6 @@ Public Class frmMain
                 btnOpslaan.Visible = True        'Opslaan iedereen uitslag
                 btnOpslaan.Enabled = False
                 btnOpslaan.Location = New Point(421, 41)
-
             Case 12, 13 'Jeugd diversen
                 Legen()
                 gbNaamGewichtEtc.Visible = True
@@ -552,15 +571,11 @@ Public Class frmMain
                 btnOpslaan.Visible = True        'Opslaan iedereen uitslag
                 btnOpslaan.Enabled = False
                 btnOpslaan.Location = New Point(502, 41)
-
         End Select
-
     End Sub
     Private Sub Vuldetails(datum As DatumWeerEtc)
-
         If datum.ID > 0 Then
             panfoto.Visible = True
-            lblSleep.Visible = True
             dgvnamen.Enabled = True
             lblDatumtitel.Visible = True
             txtGewicht1.Enabled = False
@@ -571,7 +586,7 @@ Public Class frmMain
 
             lblDatumtitel.Text = $"Datum: (id = {datum.ID})"
 
-            nachtvis = New Nachtvissen With {
+             nachtvis = New Nachtvissen With {
                         .Nachtvisid = Nachtvissenrepo.Getid(),
                         .ID = _datum.ID
             }
@@ -589,7 +604,9 @@ Public Class frmMain
                 lblVerhaal.Visible = True
                 lblNieuwVerhaal.Visible = True
                 btnWijzigverhaal.Visible = True
+                btnWijzigverhaal.Enabled=True
                 btnVerwijderwedstrijd.Visible = True
+                btnVerwijderwedstrijd.Enabled=True
                 gbNaamGewichtEtc.Visible = True
             Else
                 gpVerhaalEtc.Visible = False
@@ -599,12 +616,18 @@ Public Class frmMain
                 btnVerwijderwedstrijd.Visible = False
                 gbNaamGewichtEtc.Visible = False
             End If
+             
             If Not IsNothing(datum.Afbeelding) then
-                picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{datum.Afbeelding}"
+                 picfoto.Visible = True
+                 picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{datum.Afbeelding}"
                 btnfotowissen.Visible = True
+            'End If
             Else
                 btnfotowissen.Visible = False
+                picfoto.Visible = True
+                lblSleep.Visible = True
             End If
+                
         Else
             Leegdetails()
             btnWijzigverhaal.Visible = False
@@ -612,10 +635,9 @@ Public Class frmMain
             btnfotowissen.Visible = False
         End If
         panfoto.Visible = true
-
     End Sub
     Private Sub Leegdetails()
-
+        'If _isstarted=False Then _isstarted=True: return
         lblDatumid.Text = ""
         lblDatumtitel.Text = "Datum:"
         lblDatum.Text = ""
@@ -632,12 +654,22 @@ Public Class frmMain
         btnWijzigverhaal.Visible = False
         btnVerwijderwedstrijd.Visible = False
         dgvUitslagen.DataSource = Nothing
-
+        btnKoningsVisser.Enabled=False
+        btnKlassement.Enabled=False
+        lblVerhaal.Text=""
+        lblLuchtdrukMB.Text=""
+        lblWind.Text=""
+        lblWindsnelheid.Text=""
+        lblDatum.Text=""
+        lblVerhaal.Text=""
+        lblLuchtdrukMB.Text=""
+        lblWind.Text=""
+        lblWindsnelheid.Text=""
+        lblTemperatuur.Text=""
     End Sub
     Private Sub dgvUitslagen_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvUitslagen.DataBindingComplete
 
         dgvUitslagen.ClearSelection()
-
 
         Dim cm As CurrencyManager = BindingContext(dgvnamen.DataSource)
 
@@ -683,25 +715,43 @@ Public Class frmMain
             Next
         End If
 
-
     End Sub
     Private Sub Legen()
         'Piet
-
+        '_isstarted=True
         lblUitslagid1.Text = ""
         lblUitslagid2.Text = ""
+        txtingavewissen
+        lblLocatieVissen.Text = ""
+        lblMelding.Text = ""
+        FrmNieuwewedstrijd.txtNieuwLocatievissen.Text=""
+        FrmNieuwewedstrijd.txtNieuwLuchtdruk.Text=""
+        FrmNieuwewedstrijd.txtNieuwTemperatuur.Text=""
+        FrmNieuwewedstrijd.txtNieuwVerhaal.Text=""
+        FrmNieuwewedstrijd.txtNieuwWeerAlgemeen.Text=""
+        FrmNieuwewedstrijd.txtNieuwWindsnelheid.Text=""
+        picfoto.Image = Nothing
+        picfoto.Visible=False
+        btnWijzigverhaal.Enabled=false
+        btnVerwijderwedstrijd.Enabled=false
+        btnfotoopslaan.Visible = False
+        btnOpslaan.Enabled=False
+        picfoto.Visible=False
+        lblSleep.Visible=False
+        btnfotowissen.Visible = False
+        lblVerhaal.Text=""
+        dgvUitslagen.Columns.Clear()
+    End Sub
+    Private sub txtingavewissen
         txtGewicht1.Text = ""
         txtAantal.Text = ""
         txtGewicht2.Text = ""
         txtGewichtTotaal.Text = ""
         txtNaam1.Text = ""
         txtNaam2.Text = ""
-        lblLocatieVissen.Text = ""
-        lblMelding.Text = ""
-        picfoto.Image = Nothing
-        btnfotoopslaan.Visible = False
-
-    End Sub
+        btnOpslaan.Enabled=False
+        btnDeelnemersVerwijderen.Visible=False
+    End sub
     Private Sub Opslaan()
 
         _datum = Datumweeretcrepo.Get(Long.Parse(lblDatumid.Text))
@@ -737,25 +787,21 @@ Public Class frmMain
                 nachtvis.Deelnemerid2 = _deelnemer2.NaamID
                 nachtvis.Gewicht2 = Long.Parse(txtGewicht2.Text)
 
+                Dim totaal = nachtvis.Gewicht1 + nachtvis.Gewicht2
+                If totaal = 0 Then
+
+                    txtGewichtTotaal.Text = 0
+                Else
+                     txtGewichtTotaal.Text = totaal
+                End If
+
                 If nachtvis.Gewicht1 >= nachtvis.Gewicht2 Then
-                    nachtvis.Hoogstegewicht = nachtvis.Gewicht1
+                    nachtvis.Hoogstegewicht = nachtvis.Gewicht1                    
                 Else
                     nachtvis.Hoogstegewicht = nachtvis.Gewicht2
                 End If
-
-                nachtvis.Gewicht = Long.Parse(txtGewichtTotaal.Text.Replace(".", ""))
-
-                'If _deelnemer1.Naam.ToLower().Contains("geen partner") Or _deelnemer2.Naam.ToLower().Contains("geen partner") Then
-                '    If _deelnemer1.Naam.ToLower().Contains("geen partner") Then
-                '        nachtvis.Namen = $"{_deelnemer2.Naam} (geen partner)"
-                '    Else
-                '        nachtvis.Namen = $"{_deelnemer1.Naam} (geen partner)"
-                '    End If
-                'Else
-                '    nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
-                'End If
+                nachtvis.Gewicht = totaal
                 nachtvis.Namen = $"{_deelnemer1.Naam} en {_deelnemer2.Naam}"
-
                 Nachtvissenrepo.Save(nachtvis)
                 Vuluitslaggrid(_datum)
                 Optellen()
@@ -921,7 +967,8 @@ Public Class frmMain
 
     End Sub
     Private Sub btnWijzigverhaal_Click(sender As Object, e As EventArgs) Handles btnWijzigverhaal.Click
-        Dim f As New FrmNieuwewedstrijd With {
+        Try
+            Dim f As New FrmNieuwewedstrijd With {
             .Datum = _datum,
             .Seizoen = _seizoen,
             .Serie = Naamserierepo.Get(_datum.SerieNaamNr)
@@ -929,6 +976,20 @@ Public Class frmMain
         f.ShowDialog()
         _datum = f.Datum
         Vuldetails(_datum)
+        Catch ex As Exception
+            Return
+        End Try
+        
+        
+        
+        'Dim f As New FrmNieuwewedstrijd With {
+        '    .Datum = _datum,
+        '    .Seizoen = _seizoen,
+        '    .Serie = Naamserierepo.Get(_datum.SerieNaamNr)
+        '}
+        'f.ShowDialog()
+        '_datum = f.Datum
+        'Vuldetails(_datum)
 
     End Sub
     Private Function Enableopslaan()
@@ -982,11 +1043,12 @@ Public Class frmMain
         End Select
 
     End Sub
-
-    Private Sub VerwijderenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerwijderenToolStripMenuItem.Click
-
-        Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
-
+    Private sub VerwijderDeelnemers 
+        If klik=0 Then Return
+        'Dim id = Selecteerid(dgvUitslagen, "Uitslagid")
+        dim id = verwijderdnachtvis
+        klik=0
+        txtingavewissen
         If id = 0 Then
             Return
         End If
@@ -1006,17 +1068,15 @@ Public Class frmMain
             txtGewicht1.Text = ""
             txtNaam2.Text = ""
             txtGewicht2.Text = ""
+            txtGewichtTotaal.Text = ""
 
             Vuluitslaggrid(_datum)
-
-            dgvUitslagen.ClearSelection()
+            'dgvUitslagen.ClearSelection()
             dgvnamen.ClearSelection()
-            Legen()        
+            'Legen()        
         End If
-
-    End Sub
-
-    Private Sub txtAantal_KeyUp(sender As Object, e As KeyEventArgs) Handles txtAantal.KeyUp
+    End sub
+            Private Sub txtAantal_KeyUp(sender As Object, e As KeyEventArgs) Handles txtAantal.KeyUp
 
         If Not IsNumeric(txtAantal.Text) Then
             txtAantal.Text = ""
@@ -1077,7 +1137,11 @@ Public Class frmMain
         If String.IsNullOrEmpty(txtGewicht1.Text) And String.IsNullOrEmpty(txtGewicht2.Text) Then
             txtGewichtTotaal.Text = ""
         Else
-            txtGewichtTotaal.Text = totaal.ToString("N0")
+            If totaal = 0 Then
+                    txtGewichtTotaal.Text = 0
+            Else
+                txtGewichtTotaal.Text = totaal.ToString("0")
+            End If
         End If
 
         If Not String.IsNullOrEmpty(txtGewicht1.Text) And Not String.IsNullOrEmpty(txtGewicht2.Text) Then
@@ -1096,7 +1160,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnVisser_Click(sender As Object, e As EventArgs) Handles btnVisser.Click
+    Private Sub btnVisser_Click(sender As Object, e As EventArgs) Handles btnKoningsVisser.Click
 
         Dim f As New FrmVisser With {
                 .Seizoen = Seizoenrepo.Get(cboSeizoen.SelectedValue),
@@ -1140,9 +1204,14 @@ Public Class frmMain
 
     Private Sub dgvUitslagen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUitslagen.CellClick
         'testen
+        klik=1
+        dgvnamen.Enabled=false
+        dgvnamen.ClearSelection()
+        txtNaam1.Enabled=False
+        txtNaam2.Enabled=False
         Dim id = Selecteerid(dgvUitslagen, 0)
-
-        Legen()
+        verwijderdnachtvis=id
+                'Legen()
         If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) Then
             If id > 0 Then
                 nachtvis = Nachtvissenrepo.Get(id)
@@ -1158,12 +1227,21 @@ Public Class frmMain
                 txtNaam2.Text = _deelnemer2.Naam
 
                 If String.IsNullOrEmpty(nachtvis.Gewicht1) Or String.IsNullOrEmpty(nachtvis.Gewicht2) Then
-                    txtGewicht1.Text = nachtvis.Gewicht / 2
+                    txtGewicht1.Text = nachtvis.Gewicht / 1
                     txtGewicht2.Text = nachtvis.Gewicht / 2
                 Else
                     txtGewicht1.Text = nachtvis.Gewicht1
                     txtGewicht2.Text = nachtvis.Gewicht2
                 End If
+                Dim totaal = nachtvis.Gewicht1 + nachtvis.Gewicht2
+                txtGewichtTotaal.Text = totaal
+                If totaal = 0 Then
+                    txtGewichtTotaal.Text = 0
+                Else
+                    txtGewichtTotaal.Text = totaal.ToString("0")
+
+                    txtGewichtTotaal.Text = totaal
+                End If                
             End If
         Else
             If id > 0 Then
@@ -1181,6 +1259,12 @@ Public Class frmMain
         End If
         txtGewicht1.Enabled = True
         txtGewicht2.Enabled = True
+        btnOpslaan.Enabled=True
+        btnDeelnemersVerwijderen.Visible=true
+        btnDeelnemersVerwijderen.Location = New Point(5, 76)
+        If (cboNaamserie.SelectedValue = 15 Or cboNaamserie.SelectedValue = 17) Then
+        btnDeelnemersVerwijderen.Location = New Point(5, 114)
+        End If
         'dgvUitslagen.ClearSelection()
 
     End Sub
@@ -1204,11 +1288,6 @@ Public Class frmMain
         End If
 
     End Sub
-
-    Private Sub frmMain_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
-
-    End Sub
-
     Private Sub panfoto_DragDrop(sender As Object, e As DragEventArgs) Handles panfoto.DragDrop
 
         Dim data = e.Data.GetData(DataFormats.FileDrop)
@@ -1245,10 +1324,11 @@ Public Class frmMain
                 Datumweeretcrepo.Save(_datum)
                 picfoto.ImageLocation = $"https://www.deruisvoornacquoy.nl/Afbeeldingen/{_datum.Afbeelding}"
                 btnfotowissen.Visible = True
+                btnfotoopslaan.Visible = False
             Catch ex As Exception
                 MessageBox.Show("Er is iets fout gegaan met het uploaden.")
             End Try
-            File.Copy(txtfoto.Text, $"D:\Programmeren\De Ruisvoorn website\WebApplication1\Afbeeldingen\{_datum.Afbeelding}")
+            File.Copy(txtfoto.Text, $"C:\Programmeren\De Ruisvoorn website\WebApplication1\Afbeeldingen\{_datum.Afbeelding}")
         End If
 
     End Sub
@@ -1267,11 +1347,13 @@ Public Class frmMain
                 request.Credentials = New NetworkCredential("pietline", "fn8565fn")
                 request.Method = WebRequestMethods.Ftp.DeleteFile
                 Dim response = request.GetResponse()
+                File.Delete($"C:\Programmeren\De Ruisvoorn website\WebApplication1\Afbeeldingen\{_datum.Afbeelding}")
                 picfoto.Image = Nothing
                 _datum.Afbeelding = nothing
                 Datumweeretcrepo.Save(_datum)
                 btnfotowissen.Visible = False
                 btnfotoopslaan.Visible = False
+
             Catch ex As Exception
                 MessageBox.Show("Er is iets fout gegaan met het VERWIJDEREN VAN DE AFBEELDING.")
             End Try
@@ -1280,10 +1362,10 @@ Public Class frmMain
     End sub
 
     Private Sub picfoto_Click(sender As Object, e As EventArgs) Handles picfoto.Click
-
+        If btnfotoopslaan.Visible=True OR btnfotowissen.Visible=True Then Return
         Dim map = Leesregister("visfotomap")
         If String.IsNullOrEmpty(map) Then
-            map = "D:\Documenten\De Ruisvoorn"
+            map = "C:\Documenten\De Ruisvoorn"
         End If
 
         dim ofd = New OpenFileDialog With {
@@ -1334,19 +1416,19 @@ Public Class frmMain
         Leegdetails
 
     End Sub
+    Private Sub btnNamen_Click(sender As Object, e As EventArgs) Handles btnNamen.Click
+        Cursor.Current = Cursors.WaitCursor
+        frmNamenbewerken.btnVerwijderdHeleNaam.Enabled=False
+        frmnamenbewerken.ShowDialog
+        Vulgrid()
+    End Sub  
 
-    Private Sub DeelnemerVerwijderen_Click(sender As Object, e As EventArgs) 
-
-
-
+    Private Sub CboSerieVolgnummer_Click(sender As Object, e As EventArgs) Handles CboSerieVolgnummer.Click
+       _isstarted=True
     End Sub
 
-    Private Sub btnNamen_Click(sender As Object, e As EventArgs) Handles btnNamen.Click
-
-        
-        Cursor.Current = Cursors.WaitCursor
-        frmnamenbewerken.ShowDialog
-        Vulgrid
-
+    Private Sub btnDeelnemersVerwijderen_Click(sender As Object, e As EventArgs) Handles btnDeelnemersVerwijderen.Click
+        btnDeelnemersVerwijderen.Location = New Point(5, 76)
+        VerwijderDeelnemers
     End Sub
 End Class

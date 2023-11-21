@@ -38,7 +38,7 @@ Partial Class frmNamenbewerken
         Me.chkWinter = New System.Windows.Forms.CheckBox()
         Me.chkKoppelvissen = New System.Windows.Forms.CheckBox()
         Me.chkVerwijderd = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblVolledigeNaam = New System.Windows.Forms.Label()
         Me.txtVolledigeNaam = New System.Windows.Forms.TextBox()
         Me.picFotoDeelnemer = New System.Windows.Forms.PictureBox()
         Me.btnWijzigfoto = New System.Windows.Forms.Button()
@@ -48,9 +48,14 @@ Partial Class frmNamenbewerken
         Me.btnKlaverjassen = New System.Windows.Forms.Button()
         Me.btnVissen = New System.Windows.Forms.Button()
         Me.lblVissen = New System.Windows.Forms.Label()
-        Me.chkVerwijderdtonen = New System.Windows.Forms.CheckBox()
         Me.dgvKlaverjassen = New System.Windows.Forms.DataGridView()
         Me.dgvJokeren = New System.Windows.Forms.DataGridView()
+        Me.txtZoeken = New System.Windows.Forms.TextBox()
+        Me.chkVerwijderdeleden = New System.Windows.Forms.CheckBox()
+        Me.cboSerie = New System.Windows.Forms.ComboBox()
+        Me.lblTotaal = New System.Windows.Forms.Label()
+        Me.txtTotaal = New System.Windows.Forms.TextBox()
+        Me.btnVerwijderdHeleNaam = New System.Windows.Forms.Button()
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picFotoDeelnemer,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dgvKlaverjassen,System.ComponentModel.ISupportInitialize).BeginInit
@@ -68,12 +73,12 @@ Partial Class frmNamenbewerken
         Me.dgvnamen.Name = "dgvnamen"
         Me.dgvnamen.RowHeadersVisible = false
         Me.dgvnamen.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvnamen.Size = New System.Drawing.Size(1060, 757)
+        Me.dgvnamen.Size = New System.Drawing.Size(630, 757)
         Me.dgvnamen.TabIndex = 3
         '
         'btnopslaan
         '
-        Me.btnopslaan.Location = New System.Drawing.Point(1220, 409)
+        Me.btnopslaan.Location = New System.Drawing.Point(824, 430)
         Me.btnopslaan.Name = "btnopslaan"
         Me.btnopslaan.Size = New System.Drawing.Size(160, 35)
         Me.btnopslaan.TabIndex = 4
@@ -82,7 +87,7 @@ Partial Class frmNamenbewerken
         '
         'btnNieuw
         '
-        Me.btnNieuw.Location = New System.Drawing.Point(1220, 450)
+        Me.btnNieuw.Location = New System.Drawing.Point(824, 470)
         Me.btnNieuw.Name = "btnNieuw"
         Me.btnNieuw.Size = New System.Drawing.Size(160, 35)
         Me.btnNieuw.TabIndex = 5
@@ -91,7 +96,7 @@ Partial Class frmNamenbewerken
         '
         'btnSluiten
         '
-        Me.btnSluiten.Location = New System.Drawing.Point(1220, 491)
+        Me.btnSluiten.Location = New System.Drawing.Point(824, 510)
         Me.btnSluiten.Name = "btnSluiten"
         Me.btnSluiten.Size = New System.Drawing.Size(160, 35)
         Me.btnSluiten.TabIndex = 6
@@ -100,7 +105,7 @@ Partial Class frmNamenbewerken
         '
         'txtVoornaam
         '
-        Me.txtVoornaam.Location = New System.Drawing.Point(1220, 54)
+        Me.txtVoornaam.Location = New System.Drawing.Point(824, 95)
         Me.txtVoornaam.Name = "txtVoornaam"
         Me.txtVoornaam.Size = New System.Drawing.Size(179, 30)
         Me.txtVoornaam.TabIndex = 7
@@ -108,7 +113,7 @@ Partial Class frmNamenbewerken
         'lblVoornaam
         '
         Me.lblVoornaam.AutoSize = true
-        Me.lblVoornaam.Location = New System.Drawing.Point(1078, 57)
+        Me.lblVoornaam.Location = New System.Drawing.Point(682, 95)
         Me.lblVoornaam.Name = "lblVoornaam"
         Me.lblVoornaam.Size = New System.Drawing.Size(93, 24)
         Me.lblVoornaam.TabIndex = 8
@@ -117,7 +122,7 @@ Partial Class frmNamenbewerken
         'chkVijftigplus
         '
         Me.chkVijftigplus.AutoSize = true
-        Me.chkVijftigplus.Location = New System.Drawing.Point(1220, 198)
+        Me.chkVijftigplus.Location = New System.Drawing.Point(824, 245)
         Me.chkVijftigplus.Name = "chkVijftigplus"
         Me.chkVijftigplus.Size = New System.Drawing.Size(90, 28)
         Me.chkVijftigplus.TabIndex = 9
@@ -126,14 +131,14 @@ Partial Class frmNamenbewerken
         '
         'txtTussenvoegsel
         '
-        Me.txtTussenvoegsel.Location = New System.Drawing.Point(1220, 90)
+        Me.txtTussenvoegsel.Location = New System.Drawing.Point(824, 130)
         Me.txtTussenvoegsel.Name = "txtTussenvoegsel"
         Me.txtTussenvoegsel.Size = New System.Drawing.Size(179, 30)
         Me.txtTussenvoegsel.TabIndex = 10
         '
         'TxtAchternaam
         '
-        Me.TxtAchternaam.Location = New System.Drawing.Point(1220, 126)
+        Me.TxtAchternaam.Location = New System.Drawing.Point(824, 165)
         Me.TxtAchternaam.Name = "TxtAchternaam"
         Me.TxtAchternaam.Size = New System.Drawing.Size(179, 30)
         Me.TxtAchternaam.TabIndex = 11
@@ -141,7 +146,7 @@ Partial Class frmNamenbewerken
         'lblAchternaam
         '
         Me.lblAchternaam.AutoSize = true
-        Me.lblAchternaam.Location = New System.Drawing.Point(1078, 129)
+        Me.lblAchternaam.Location = New System.Drawing.Point(682, 165)
         Me.lblAchternaam.Name = "lblAchternaam"
         Me.lblAchternaam.Size = New System.Drawing.Size(111, 24)
         Me.lblAchternaam.TabIndex = 12
@@ -150,7 +155,7 @@ Partial Class frmNamenbewerken
         'lblTussenvoegsel
         '
         Me.lblTussenvoegsel.AutoSize = true
-        Me.lblTussenvoegsel.Location = New System.Drawing.Point(1078, 93)
+        Me.lblTussenvoegsel.Location = New System.Drawing.Point(682, 130)
         Me.lblTussenvoegsel.Name = "lblTussenvoegsel"
         Me.lblTussenvoegsel.Size = New System.Drawing.Size(128, 24)
         Me.lblTussenvoegsel.TabIndex = 13
@@ -159,7 +164,7 @@ Partial Class frmNamenbewerken
         'chkSenioren
         '
         Me.chkSenioren.AutoSize = true
-        Me.chkSenioren.Location = New System.Drawing.Point(1220, 234)
+        Me.chkSenioren.Location = New System.Drawing.Point(824, 275)
         Me.chkSenioren.Name = "chkSenioren"
         Me.chkSenioren.Size = New System.Drawing.Size(101, 28)
         Me.chkSenioren.TabIndex = 14
@@ -169,7 +174,7 @@ Partial Class frmNamenbewerken
         'chkJeugd
         '
         Me.chkJeugd.AutoSize = true
-        Me.chkJeugd.Location = New System.Drawing.Point(1220, 270)
+        Me.chkJeugd.Location = New System.Drawing.Point(824, 305)
         Me.chkJeugd.Name = "chkJeugd"
         Me.chkJeugd.Size = New System.Drawing.Size(79, 28)
         Me.chkJeugd.TabIndex = 15
@@ -179,7 +184,7 @@ Partial Class frmNamenbewerken
         'chkWinter
         '
         Me.chkWinter.AutoSize = true
-        Me.chkWinter.Location = New System.Drawing.Point(1220, 306)
+        Me.chkWinter.Location = New System.Drawing.Point(824, 335)
         Me.chkWinter.Name = "chkWinter"
         Me.chkWinter.Size = New System.Drawing.Size(135, 28)
         Me.chkWinter.TabIndex = 16
@@ -189,7 +194,7 @@ Partial Class frmNamenbewerken
         'chkKoppelvissen
         '
         Me.chkKoppelvissen.AutoSize = true
-        Me.chkKoppelvissen.Location = New System.Drawing.Point(1220, 341)
+        Me.chkKoppelvissen.Location = New System.Drawing.Point(824, 365)
         Me.chkKoppelvissen.Name = "chkKoppelvissen"
         Me.chkKoppelvissen.Size = New System.Drawing.Size(137, 28)
         Me.chkKoppelvissen.TabIndex = 17
@@ -199,45 +204,45 @@ Partial Class frmNamenbewerken
         'chkVerwijderd
         '
         Me.chkVerwijderd.AutoSize = true
-        Me.chkVerwijderd.Location = New System.Drawing.Point(1220, 377)
+        Me.chkVerwijderd.Location = New System.Drawing.Point(824, 395)
         Me.chkVerwijderd.Name = "chkVerwijderd"
-        Me.chkVerwijderd.Size = New System.Drawing.Size(122, 28)
+        Me.chkVerwijderd.Size = New System.Drawing.Size(111, 28)
         Me.chkVerwijderd.TabIndex = 18
-        Me.chkVerwijderd.Text = "Verwijderd"
+        Me.chkVerwijderd.Text = "Verwijder"
         Me.chkVerwijderd.UseVisualStyleBackColor = true
         '
-        'Label1
+        'lblVolledigeNaam
         '
-        Me.Label1.AutoSize = true
-        Me.Label1.Location = New System.Drawing.Point(1078, 165)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(140, 24)
-        Me.Label1.TabIndex = 20
-        Me.Label1.Text = "Volledige naam"
+        Me.lblVolledigeNaam.AutoSize = true
+        Me.lblVolledigeNaam.Location = New System.Drawing.Point(682, 200)
+        Me.lblVolledigeNaam.Name = "lblVolledigeNaam"
+        Me.lblVolledigeNaam.Size = New System.Drawing.Size(140, 24)
+        Me.lblVolledigeNaam.TabIndex = 20
+        Me.lblVolledigeNaam.Text = "Volledige naam"
         '
         'txtVolledigeNaam
         '
         Me.txtVolledigeNaam.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.txtVolledigeNaam.Enabled = false
-        Me.txtVolledigeNaam.Location = New System.Drawing.Point(1220, 162)
+        Me.txtVolledigeNaam.Location = New System.Drawing.Point(824, 200)
         Me.txtVolledigeNaam.Name = "txtVolledigeNaam"
         Me.txtVolledigeNaam.ReadOnly = true
-        Me.txtVolledigeNaam.Size = New System.Drawing.Size(179, 30)
+        Me.txtVolledigeNaam.Size = New System.Drawing.Size(276, 30)
         Me.txtVolledigeNaam.TabIndex = 19
         '
         'picFotoDeelnemer
         '
         Me.picFotoDeelnemer.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.picFotoDeelnemer.Location = New System.Drawing.Point(1224, 606)
+        Me.picFotoDeelnemer.Enabled = false
+        Me.picFotoDeelnemer.Location = New System.Drawing.Point(824, 594)
         Me.picFotoDeelnemer.Name = "picFotoDeelnemer"
-        Me.picFotoDeelnemer.Size = New System.Drawing.Size(156, 171)
+        Me.picFotoDeelnemer.Size = New System.Drawing.Size(159, 172)
         Me.picFotoDeelnemer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.picFotoDeelnemer.TabIndex = 211
         Me.picFotoDeelnemer.TabStop = false
         '
         'btnWijzigfoto
         '
-        Me.btnWijzigfoto.Location = New System.Drawing.Point(1221, 566)
+        Me.btnWijzigfoto.Location = New System.Drawing.Point(824, 550)
         Me.btnWijzigfoto.Name = "btnWijzigfoto"
         Me.btnWijzigfoto.Size = New System.Drawing.Size(160, 35)
         Me.btnWijzigfoto.TabIndex = 212
@@ -246,35 +251,38 @@ Partial Class frmNamenbewerken
         '
         'txtNaamAfbeelding
         '
-        Me.txtNaamAfbeelding.Location = New System.Drawing.Point(1082, 783)
+        Me.txtNaamAfbeelding.Enabled = false
+        Me.txtNaamAfbeelding.Location = New System.Drawing.Point(824, 774)
         Me.txtNaamAfbeelding.Name = "txtNaamAfbeelding"
         Me.txtNaamAfbeelding.ReadOnly = true
-        Me.txtNaamAfbeelding.Size = New System.Drawing.Size(298, 30)
+        Me.txtNaamAfbeelding.Size = New System.Drawing.Size(393, 30)
         Me.txtNaamAfbeelding.TabIndex = 213
         '
         'btnJokeren
         '
-        Me.btnJokeren.Location = New System.Drawing.Point(344, 12)
+        Me.btnJokeren.Location = New System.Drawing.Point(261, 12)
         Me.btnJokeren.Name = "btnJokeren"
-        Me.btnJokeren.Size = New System.Drawing.Size(160, 35)
+        Me.btnJokeren.Size = New System.Drawing.Size(110, 35)
         Me.btnJokeren.TabIndex = 214
         Me.btnJokeren.Text = "Jokeren"
         Me.btnJokeren.UseVisualStyleBackColor = true
         '
         'btnKlaverjassen
         '
-        Me.btnKlaverjassen.Location = New System.Drawing.Point(178, 12)
+        Me.btnKlaverjassen.Location = New System.Drawing.Point(129, 12)
         Me.btnKlaverjassen.Name = "btnKlaverjassen"
-        Me.btnKlaverjassen.Size = New System.Drawing.Size(160, 35)
+        Me.btnKlaverjassen.Size = New System.Drawing.Size(126, 35)
         Me.btnKlaverjassen.TabIndex = 215
         Me.btnKlaverjassen.Text = "Klaverjassen"
         Me.btnKlaverjassen.UseVisualStyleBackColor = true
         '
         'btnVissen
         '
+        Me.btnVissen.Font = New System.Drawing.Font("Trebuchet MS", 14.25!)
+        Me.btnVissen.ForeColor = System.Drawing.Color.Black
         Me.btnVissen.Location = New System.Drawing.Point(12, 12)
         Me.btnVissen.Name = "btnVissen"
-        Me.btnVissen.Size = New System.Drawing.Size(160, 35)
+        Me.btnVissen.Size = New System.Drawing.Size(111, 35)
         Me.btnVissen.TabIndex = 216
         Me.btnVissen.Text = "Vissen"
         Me.btnVissen.UseVisualStyleBackColor = true
@@ -282,22 +290,13 @@ Partial Class frmNamenbewerken
         'lblVissen
         '
         Me.lblVissen.AutoSize = true
-        Me.lblVissen.Location = New System.Drawing.Point(1216, 17)
+        Me.lblVissen.Font = New System.Drawing.Font("Trebuchet MS", 36!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblVissen.ForeColor = System.Drawing.Color.DarkRed
+        Me.lblVissen.Location = New System.Drawing.Point(813, -4)
         Me.lblVissen.Name = "lblVissen"
-        Me.lblVissen.Size = New System.Drawing.Size(62, 24)
+        Me.lblVissen.Size = New System.Drawing.Size(158, 61)
         Me.lblVissen.TabIndex = 217
         Me.lblVissen.Text = "Vissen"
-        '
-        'chkVerwijderdtonen
-        '
-        Me.chkVerwijderdtonen.AutoSize = true
-        Me.chkVerwijderdtonen.Location = New System.Drawing.Point(510, 16)
-        Me.chkVerwijderdtonen.Name = "chkVerwijderdtonen"
-        Me.chkVerwijderdtonen.Size = New System.Drawing.Size(176, 28)
-        Me.chkVerwijderdtonen.TabIndex = 218
-        Me.chkVerwijderdtonen.Text = "Verwijderd tonen"
-        Me.chkVerwijderdtonen.UseVisualStyleBackColor = true
-        Me.chkVerwijderdtonen.Visible = false
         '
         'dgvKlaverjassen
         '
@@ -305,7 +304,7 @@ Partial Class frmNamenbewerken
         Me.dgvKlaverjassen.AllowUserToDeleteRows = false
         Me.dgvKlaverjassen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvKlaverjassen.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvKlaverjassen.Location = New System.Drawing.Point(865, 436)
+        Me.dgvKlaverjassen.Location = New System.Drawing.Point(129, 235)
         Me.dgvKlaverjassen.MultiSelect = false
         Me.dgvKlaverjassen.Name = "dgvKlaverjassen"
         Me.dgvKlaverjassen.RowHeadersVisible = false
@@ -320,7 +319,7 @@ Partial Class frmNamenbewerken
         Me.dgvJokeren.AllowUserToDeleteRows = false
         Me.dgvJokeren.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvJokeren.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvJokeren.Location = New System.Drawing.Point(865, 43)
+        Me.dgvJokeren.Location = New System.Drawing.Point(185, 275)
         Me.dgvJokeren.MultiSelect = false
         Me.dgvJokeren.Name = "dgvJokeren"
         Me.dgvJokeren.RowHeadersVisible = false
@@ -329,14 +328,73 @@ Partial Class frmNamenbewerken
         Me.dgvJokeren.TabIndex = 220
         Me.dgvJokeren.Visible = false
         '
+        'txtZoeken
+        '
+        Me.txtZoeken.Location = New System.Drawing.Point(377, 15)
+        Me.txtZoeken.Name = "txtZoeken"
+        Me.txtZoeken.Size = New System.Drawing.Size(96, 30)
+        Me.txtZoeken.TabIndex = 222
+        '
+        'chkVerwijderdeleden
+        '
+        Me.chkVerwijderdeleden.AutoSize = true
+        Me.chkVerwijderdeleden.Location = New System.Drawing.Point(620, 19)
+        Me.chkVerwijderdeleden.Name = "chkVerwijderdeleden"
+        Me.chkVerwijderdeleden.Size = New System.Drawing.Size(132, 28)
+        Me.chkVerwijderdeleden.TabIndex = 224
+        Me.chkVerwijderdeleden.Text = "Verwijderde"
+        Me.chkVerwijderdeleden.UseVisualStyleBackColor = true
+        '
+        'cboSerie
+        '
+        Me.cboSerie.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSerie.FormattingEnabled = true
+        Me.cboSerie.Location = New System.Drawing.Point(479, 14)
+        Me.cboSerie.Name = "cboSerie"
+        Me.cboSerie.Size = New System.Drawing.Size(135, 32)
+        Me.cboSerie.TabIndex = 225
+        Me.cboSerie.Visible = false
+        '
+        'lblTotaal
+        '
+        Me.lblTotaal.AutoSize = true
+        Me.lblTotaal.Location = New System.Drawing.Point(682, 60)
+        Me.lblTotaal.Name = "lblTotaal"
+        Me.lblTotaal.Size = New System.Drawing.Size(63, 24)
+        Me.lblTotaal.TabIndex = 227
+        Me.lblTotaal.Text = "Totaal"
+        '
+        'txtTotaal
+        '
+        Me.txtTotaal.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.txtTotaal.Location = New System.Drawing.Point(824, 60)
+        Me.txtTotaal.Name = "txtTotaal"
+        Me.txtTotaal.ReadOnly = true
+        Me.txtTotaal.Size = New System.Drawing.Size(59, 30)
+        Me.txtTotaal.TabIndex = 228
+        '
+        'btnVerwijderdHeleNaam
+        '
+        Me.btnVerwijderdHeleNaam.Location = New System.Drawing.Point(989, 731)
+        Me.btnVerwijderdHeleNaam.Name = "btnVerwijderdHeleNaam"
+        Me.btnVerwijderdHeleNaam.Size = New System.Drawing.Size(228, 35)
+        Me.btnVerwijderdHeleNaam.TabIndex = 229
+        Me.btnVerwijderdHeleNaam.Text = "Verwijder hele naam"
+        Me.btnVerwijderdHeleNaam.UseVisualStyleBackColor = true
+        '
         'frmNamenbewerken
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10!, 24!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1442, 835)
+        Me.ClientSize = New System.Drawing.Size(1222, 835)
+        Me.Controls.Add(Me.btnVerwijderdHeleNaam)
+        Me.Controls.Add(Me.txtTotaal)
+        Me.Controls.Add(Me.lblTotaal)
+        Me.Controls.Add(Me.cboSerie)
+        Me.Controls.Add(Me.chkVerwijderdeleden)
+        Me.Controls.Add(Me.txtZoeken)
         Me.Controls.Add(Me.dgvJokeren)
         Me.Controls.Add(Me.dgvKlaverjassen)
-        Me.Controls.Add(Me.chkVerwijderdtonen)
         Me.Controls.Add(Me.lblVissen)
         Me.Controls.Add(Me.btnVissen)
         Me.Controls.Add(Me.btnKlaverjassen)
@@ -344,7 +402,7 @@ Partial Class frmNamenbewerken
         Me.Controls.Add(Me.txtNaamAfbeelding)
         Me.Controls.Add(Me.btnWijzigfoto)
         Me.Controls.Add(Me.picFotoDeelnemer)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblVolledigeNaam)
         Me.Controls.Add(Me.txtVolledigeNaam)
         Me.Controls.Add(Me.chkVerwijderd)
         Me.Controls.Add(Me.chkKoppelvissen)
@@ -368,7 +426,8 @@ Partial Class frmNamenbewerken
         Me.MaximizeBox = false
         Me.MinimizeBox = false
         Me.Name = "frmNamenbewerken"
-        Me.Text = "frmNamenbewerken"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "  "
         CType(Me.dgvnamen,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picFotoDeelnemer,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dgvKlaverjassen,System.ComponentModel.ISupportInitialize).EndInit
@@ -394,7 +453,7 @@ End Sub
     Friend WithEvents chkWinter As CheckBox
     Friend WithEvents chkKoppelvissen As CheckBox
     Friend WithEvents chkVerwijderd As CheckBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblVolledigeNaam As Label
     Friend WithEvents txtVolledigeNaam As TextBox
     Friend WithEvents picFotoDeelnemer As PictureBox
     Friend WithEvents btnWijzigfoto As Button
@@ -404,7 +463,12 @@ End Sub
     Friend WithEvents btnKlaverjassen As Button
     Friend WithEvents btnVissen As Button
     Friend WithEvents lblVissen As Label
-    Friend WithEvents chkVerwijderdtonen As CheckBox
     Friend WithEvents dgvKlaverjassen As DataGridView
     Friend WithEvents dgvJokeren As DataGridView
+    Friend WithEvents txtZoeken As TextBox
+    Friend WithEvents chkVerwijderdeleden As CheckBox
+    Friend WithEvents cboSerie As ComboBox
+    Friend WithEvents lblTotaal As Label
+    Friend WithEvents txtTotaal As TextBox
+    Friend WithEvents btnVerwijderdHeleNaam As Button
 End Class

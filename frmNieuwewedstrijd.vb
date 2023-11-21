@@ -26,17 +26,37 @@ Public Class FrmNieuwewedstrijd
             txtNieuwWeerAlgemeen.text = Datum.Weer
             txtNieuwVerhaal.text = Datum.Verhaal
             Else 
-                FrmMain.dgvnamen.Enabled=false
+            FrmMain.dgvnamen.Enabled=false
+            txtNieuwLocatievissen.Text=""
+            txtNieuwLuchtdruk.Text=""
+            txtNieuwTemperatuur.Text=""
+            txtNieuwVerhaal.Text=""
+            txtNieuwWeerAlgemeen.Text=""
+            txtNieuwWindsnelheid.Text=""
+            frmMain.lblVerhaal.Text=""
+            frmMain.lblLuchtdrukMB.Text=""
+            frmMain.lblWeeralgemeen.Text=""
+            frmMain.lblWind.Text=""
+            frmMain.lblWindsnelheid.Text=""
+            frmMain.lblDatum.Text=""
+            frmMain.lblVerhaal.Text=""
+            frmMain.lblLuchtdrukMB.Text=""
+            frmMain.lblWeeralgemeen.Text=""
+            frmMain.lblWind.Text=""
+            frmMain.lblWindsnelheid.Text=""
+            frmMain.lblTemperatuur.Text=""
+
         End If
 
     End Sub
 
-    Private Sub btnSluiten_Click(sender As Object, e As EventArgs) Handles btnNieuwSluiten.Click
-        Close()
-    End Sub
+     Private Sub btnSluiten_Click(sender As Object, e As EventArgs) Handles btnNieuwSluiten.Click
+                Close()
+        
+     End Sub
 
     Private Sub btnOpslaan_Click(sender As Object, e As EventArgs) Handles btnNieuwOpslaan.Click
-
+        frmMain.picfoto.Visible=True
         'Serie.Id = 6
         'Eerst controleren of datum icm serie bestaat in DeRuisvoorn.Agenda
 

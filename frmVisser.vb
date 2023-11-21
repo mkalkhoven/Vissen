@@ -54,7 +54,7 @@ Public Class FrmVisser
         
         Dim sql = $"SELECT '' AS [Pl], n.Naam, k.* FROM Namen n JOIN {tabelnaam} k ON n.NaamID = k.Deelnemerid ORDER BY k.Totaalgewicht DESC"
         Dim dt = ModDatabase.Selecteer(sql)
-
+        Try
         dgvVisser.DataSource = dt
         dgvVisser.Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvVisser.Columns(0).Width = 50
@@ -69,7 +69,11 @@ Public Class FrmVisser
         dgvVisser.Columns(5).DefaultCellStyle.Format = "N0"
         dgvVisser.Columns(5).Width = 35
         dgvVisser.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Catch ex As Exception
+
+        End Try
         
+
         For Each col As DataGridViewColumn In dgvVisser.Columns
             If col.HeaderText.Contains("_") Then
                 col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

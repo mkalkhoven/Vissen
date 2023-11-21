@@ -58,6 +58,7 @@ Partial Class frmMain
         Me.btnWijzigverhaal = New System.Windows.Forms.Button()
         Me.lblDatum = New System.Windows.Forms.Label()
         Me.gbNaamGewichtEtc = New System.Windows.Forms.GroupBox()
+        Me.btnDeelnemersVerwijderen = New System.Windows.Forms.Button()
         Me.btnOpslaan = New System.Windows.Forms.Button()
         Me.txtNaam1 = New System.Windows.Forms.TextBox()
         Me.txtGewichtTotaal = New System.Windows.Forms.TextBox()
@@ -73,7 +74,7 @@ Partial Class frmMain
         Me.VerwijderenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblMelding = New System.Windows.Forms.Label()
         Me.btnKlassement = New System.Windows.Forms.Button()
-        Me.btnVisser = New System.Windows.Forms.Button()
+        Me.btnKoningsVisser = New System.Windows.Forms.Button()
         Me.btnLoting = New System.Windows.Forms.Button()
         Me.btnfotoopslaan = New System.Windows.Forms.Button()
         Me.picfoto = New System.Windows.Forms.PictureBox()
@@ -411,6 +412,7 @@ Partial Class frmMain
         '
         'gbNaamGewichtEtc
         '
+        Me.gbNaamGewichtEtc.Controls.Add(Me.btnDeelnemersVerwijderen)
         Me.gbNaamGewichtEtc.Controls.Add(Me.btnOpslaan)
         Me.gbNaamGewichtEtc.Controls.Add(Me.txtNaam1)
         Me.gbNaamGewichtEtc.Controls.Add(Me.txtGewichtTotaal)
@@ -431,6 +433,16 @@ Partial Class frmMain
         Me.gbNaamGewichtEtc.TabIndex = 171
         Me.gbNaamGewichtEtc.TabStop = false
         Me.gbNaamGewichtEtc.Visible = false
+        '
+        'btnDeelnemersVerwijderen
+        '
+        Me.btnDeelnemersVerwijderen.Location = New System.Drawing.Point(5, 113)
+        Me.btnDeelnemersVerwijderen.Name = "btnDeelnemersVerwijderen"
+        Me.btnDeelnemersVerwijderen.Size = New System.Drawing.Size(205, 33)
+        Me.btnDeelnemersVerwijderen.TabIndex = 195
+        Me.btnDeelnemersVerwijderen.Text = "Verwijder deelnemers"
+        Me.btnDeelnemersVerwijderen.UseVisualStyleBackColor = true
+        Me.btnDeelnemersVerwijderen.Visible = false
         '
         'btnOpslaan
         '
@@ -472,11 +484,11 @@ Partial Class frmMain
         'lblGewichtTotaal
         '
         Me.lblGewichtTotaal.AutoSize = true
-        Me.lblGewichtTotaal.Location = New System.Drawing.Point(200, 117)
+        Me.lblGewichtTotaal.Location = New System.Drawing.Point(249, 117)
         Me.lblGewichtTotaal.Name = "lblGewichtTotaal"
-        Me.lblGewichtTotaal.Size = New System.Drawing.Size(138, 24)
+        Me.lblGewichtTotaal.Size = New System.Drawing.Size(86, 24)
         Me.lblGewichtTotaal.TabIndex = 180
-        Me.lblGewichtTotaal.Text = "Gewicht totaal"
+        Me.lblGewichtTotaal.Text = "Gewicht "
         '
         'LblNaam1
         '
@@ -563,15 +575,14 @@ Partial Class frmMain
         Me.btnKlassement.Text = "Klassement"
         Me.btnKlassement.UseVisualStyleBackColor = true
         '
-        'btnVisser
+        'btnKoningsVisser
         '
-        Me.btnVisser.Location = New System.Drawing.Point(699, 674)
-        Me.btnVisser.Name = "btnVisser"
-        Me.btnVisser.Size = New System.Drawing.Size(131, 33)
-        Me.btnVisser.TabIndex = 184
-        Me.btnVisser.Text = "Visser"
-        Me.btnVisser.UseVisualStyleBackColor = true
-        Me.btnVisser.Visible = false
+        Me.btnKoningsVisser.Location = New System.Drawing.Point(699, 674)
+        Me.btnKoningsVisser.Name = "btnKoningsVisser"
+        Me.btnKoningsVisser.Size = New System.Drawing.Size(131, 33)
+        Me.btnKoningsVisser.TabIndex = 184
+        Me.btnKoningsVisser.Text = "Koningsvisser"
+        Me.btnKoningsVisser.UseVisualStyleBackColor = true
         '
         'btnLoting
         '
@@ -597,10 +608,11 @@ Partial Class frmMain
         Me.picfoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.picfoto.Location = New System.Drawing.Point(0, 0)
         Me.picfoto.Name = "picfoto"
-        Me.picfoto.Size = New System.Drawing.Size(617, 904)
+        Me.picfoto.Size = New System.Drawing.Size(600, 496)
         Me.picfoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picfoto.TabIndex = 189
         Me.picfoto.TabStop = false
+        Me.picfoto.Visible = false
         '
         'txtfoto
         '
@@ -636,7 +648,7 @@ Partial Class frmMain
         Me.lblSleep.Name = "lblSleep"
         Me.lblSleep.Size = New System.Drawing.Size(617, 24)
         Me.lblSleep.TabIndex = 193
-        Me.lblSleep.Text = "Sleep een foto in het vak hieronder of klik erop"
+        Me.lblSleep.Text = "Tik op scherm en opend een foto "
         Me.lblSleep.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.lblSleep.Visible = false
         '
@@ -662,7 +674,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.txtfoto)
         Me.Controls.Add(Me.btnfotoopslaan)
         Me.Controls.Add(Me.btnLoting)
-        Me.Controls.Add(Me.btnVisser)
+        Me.Controls.Add(Me.btnKoningsVisser)
         Me.Controls.Add(Me.btnKlassement)
         Me.Controls.Add(Me.lblMelding)
         Me.Controls.Add(Me.gbNaamGewichtEtc)
@@ -746,7 +758,7 @@ End Sub
     Friend WithEvents VerwijderenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblMelding As Label
     Friend WithEvents btnKlassement As Button
-    Friend WithEvents btnVisser As Button
+    Friend WithEvents btnKoningsVisser As Button
     Friend WithEvents btnLoting As Button
     Friend WithEvents btnfotoopslaan As Button
     Friend WithEvents picfoto As PictureBox
@@ -756,4 +768,5 @@ End Sub
     Friend WithEvents lblSleep As Label
     Friend WithEvents btnVerwijderwedstrijd As Button
     Friend WithEvents btnNamen As Button
+    Friend WithEvents btnDeelnemersVerwijderen As Button
 End Class
